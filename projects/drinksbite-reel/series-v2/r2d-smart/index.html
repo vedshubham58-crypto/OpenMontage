@@ -47,10 +47,16 @@
       .row .txt { display: block; font-family: var(--display); font-size: 56px; line-height: 1.02; margin-top: 8px; white-space: nowrap; }
 
       /* PAYOFF */
-      #p-photo { position: absolute; left: -40px; top: -40px; width: 1160px; height: 2000px; object-fit: cover; display: block; filter: brightness(0.62) saturate(0.95); }
-      #p-shade { background: linear-gradient(180deg, rgba(14,14,14,0.2) 0%, rgba(14,14,14,0) 40%, rgba(14,14,14,0.85) 72%, rgba(14,14,14,0.95) 100%); }
-      #p-text { position: absolute; left: 90px; top: 1300px; font-family: var(--display); font-size: 116px; line-height: 0.95; }
-      #p-rule { position: absolute; left: 90px; top: 1260px; width: 120px; height: 3px; background: var(--mustard); }
+      #p-pat { position: absolute; inset: -100px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.16; }
+      #p-glow { background: radial-gradient(ellipse 45% 30% at 50% 36%, rgba(247,183,51,0.16) 0%, rgba(247,183,51,0) 70%); }
+      #glass { position: absolute; left: 330px; top: 330px; width: 420px; height: 720px; overflow: visible; }
+      #glass .g { fill: none; stroke: #F7B733; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      #glass .b { fill: none; stroke: #F7B733; stroke-width: 3; }
+      #p-floor { position: absolute; left: 190px; top: 1052px; width: 700px; height: 2px; background: rgba(245,240,234,0.22); }
+      #p-puff { position: absolute; left: 760px; top: 918px; width: 136px; height: 136px; display: block; }
+      #p-puff-sh { position: absolute; left: 744px; top: 1040px; width: 170px; height: 26px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 70%); }
+      #p-text { position: absolute; left: 0; right: 0; top: 1195px; text-align: center; font-family: var(--display); font-size: 100px; line-height: 0.95; }
+      #p-rule { position: absolute; left: 480px; top: 1150px; width: 120px; height: 3px; background: var(--mustard); }
 
       /* END SLATE (shared) */
       #sl-bg { background: radial-gradient(ellipse 70% 40% at 50% 8%, rgba(245,240,234,0.08) 0%, rgba(245,240,234,0) 70%), var(--ink); }
@@ -102,10 +108,19 @@
 
       <!-- PAYOFF 6.4–9.05 -->
       <section id="cP" class="clip" style="z-index: 3" data-start="6.4" data-duration="2.65" data-track-index="2">
-        <img id="p-photo" src="assets/pour-whiskey.jpg" alt="" />
-        <div class="fill" id="p-shade"></div>
+        <div class="fill" style="background: var(--ink)"></div><div id="p-pat"></div>
+        <div class="fill" id="p-glow"></div>
+        <svg id="glass" viewBox="0 0 420 720">
+          <path class="g" id="gl-body" d="M40 20 L 380 20 L 340 700 L 80 700 Z" />
+          <path class="g" id="gl-base" d="M96 650 L 324 650" />
+          <path class="g" id="gl-liq" d="M58 300 C 140 286, 280 314, 362 300" />
+          <g id="bubbles"></g>
+        </svg>
+        <div id="p-floor"></div>
+        <div id="p-puff-sh"></div>
+        <img id="p-puff" src="assets/puff0.png" alt="" />
         <div id="p-rule"></div>
-        <div id="p-text"><span class="mask"><span class="ln">Smart pours</span></span><span class="mask"><span class="ln">deserve</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">smarter bites.</span></span></div>
+        <div id="p-text"><span class="mask"><span class="ln">Smart pours deserve</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">smarter bites.</span></span></div>
       </section>
 
       <!-- END SLATE 9.0–12 -->
@@ -171,9 +186,30 @@
       tl.to(["#cS .row", "#s-kick"], { opacity: 0, duration: 0.25 }, 6.2);
 
       /* ---------- PAYOFF ---------- */
-      tl.fromTo("#p-photo", { scale: 1.12 }, { scale: 1.02, duration: 2.65, ease: "power1.out" }, 6.4);
-      tl.fromTo("#p-rule", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 6.7);
-      up("#p-text .ln", 6.75, 0.2, 0.7);
+      // the pack's own line-art glass draws itself; bubbles rise; a puff lands beside it
+      ["#gl-body", "#gl-base", "#gl-liq"].forEach((g, i) => tl.fromTo(g, { strokeDasharray: 2000, strokeDashoffset: 2000 }, { strokeDashoffset: 0, duration: i === 0 ? 0.75 : 0.4, ease: "power2.inOut" }, 6.42 + i * 0.25));
+      tl.fromTo("#p-floor", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "expo.out" }, 6.5);
+      tl.fromTo("#glass", { scale: 0.97 }, { scale: 1.02, duration: 2.65, ease: "none" }, 6.4);
+      (function () {
+        const g = document.getElementById("bubbles"), NS = "http://www.w3.org/2000/svg";
+        let a = 7; const r = () => { a = (a * 9301 + 49297) % 233280; return a / 233280; };
+        for (let i = 0; i < 22; i++) {
+          const c = document.createElementNS(NS, "circle"); const rad = 5 + r() * 11;
+          const x = 110 + r() * 200; c.setAttribute("cx", x.toFixed(1)); c.setAttribute("cy", "620"); c.setAttribute("r", rad.toFixed(1));
+          c.setAttribute("class", "b"); g.appendChild(c);
+          const t0 = 6.95 + r() * 1.6;
+          const d = 0.9 + r() * 0.5, h = 230 + r() * 70;
+          tl.fromTo(c, { y: 0 }, { y: -h, duration: d, ease: "none" }, t0);
+          tl.fromTo(c, { opacity: 0 }, { opacity: 1, duration: 0.15 }, t0);
+          tl.to(c, { opacity: 0, duration: 0.25 }, t0 + d - 0.25);
+        }
+      })();
+      tl.fromTo("#p-puff", { y: -700, rotation: -50 }, { y: 0, rotation: 0, duration: 0.42, ease: "power2.in" }, 6.95);
+      tl.fromTo("#p-puff-sh", { opacity: 0, scaleX: 0.3 }, { opacity: 1, scaleX: 1, duration: 0.42, ease: "power2.in" }, 6.95);
+      tl.to("#p-puff", { scaleY: 0.82, scaleX: 1.08, duration: 0.06, transformOrigin: "50% 100%" }, 7.37);
+      tl.to("#p-puff", { scaleY: 1, scaleX: 1, duration: 0.3, ease: "power2.out", transformOrigin: "50% 100%" }, 7.43);
+      tl.fromTo("#p-rule", { scaleX: 0, transformOrigin: "50% 50%" }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 7.35);
+      up("#p-text .ln", 7.45, 0.2, 0.7);
 
       /* ---------- END SLATE ---------- */
       tl.fromTo("#sl-stage", { scale: 1.0 }, { scale: 1.03, duration: 3.0, ease: "none" }, 9.0);
