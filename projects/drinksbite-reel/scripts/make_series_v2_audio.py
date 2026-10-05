@@ -96,4 +96,17 @@ def r2c():
     m.add(whoosh(0.5,0.6),6.15); m.add(clink(),6.85)
     slate(m,9.0); m.save('series-v2/r2c.wav')
 
+def r2d():
+    m=Mix(12.0)
+    for t0,ch in ((0.0,[110,138.6,164.8]),(3.0,[98,123.5,146.8]),(6.4,[87.3,110,130.8])):
+        m.add(pad(ch+[c*2 for c in ch],3.4,0.05),t0)
+    for tt in np.arange(0.0,9.0,0.8): m.add(kick(0.45),tt)
+    m.add(whoosh(0.4,0.5),0.05); m.add(boom(0.45),0.55)                # line draws, pack rises
+    m.add(chime(0.07),1.2)                                              # light sweep
+    m.add(tick(),1.65,0.8); m.add(tick(),1.95,0.8)                      # callouts
+    m.add(whoosh(0.7,0.7),2.85)                                         # glide to spec
+    for tt in (3.5,4.1,4.7): m.add(tick(),tt,0.8); m.add(pluck([659.3],0.4,0.04),tt+0.12)
+    m.add(whoosh(0.5,0.6),6.15); m.add(clink(),6.85)
+    slate(m,9.0); m.save('series-v2/r2d.wav')
+
 for f in sys.argv[1:]: globals()[f](); print("ok", f)
