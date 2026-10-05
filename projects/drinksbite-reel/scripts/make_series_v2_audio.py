@@ -83,4 +83,17 @@ def r2b():
     m.add(clink(),8.5)
     slate(m,9.0); m.save('series-v2/r2b.wav')
 
+def r2c():
+    # calm and confident: warm pad, soft heartbeat pulse, minimal ticks
+    m=Mix(12.0)
+    for t0,ch in ((0.0,[110,138.6,164.8]),(3.0,[98,123.5,146.8]),(6.4,[87.3,110,130.8])):
+        m.add(pad(ch+[c*2 for c in ch],3.4,0.05),t0)
+    for tt in np.arange(0.0,9.0,0.8): m.add(kick(0.45),tt)
+    for k,tt in enumerate((0.15,0.47)): m.add(pluck([440,554.4] if k==0 else [493.9,659.3],0.6,0.05),tt)
+    m.add(tick(),1.25,0.7); m.add(tick(),1.7,0.6); m.add(crunch(0.25,0.5),1.95)
+    m.add(whoosh(0.5,0.6),2.75)
+    for tt in (3.4,4.0,4.6): m.add(tick(),tt,0.8); m.add(pluck([659.3],0.4,0.04),tt+0.12)
+    m.add(whoosh(0.5,0.6),6.15); m.add(clink(),6.85)
+    slate(m,9.0); m.save('series-v2/r2c.wav')
+
 for f in sys.argv[1:]: globals()[f](); print("ok", f)
