@@ -41,9 +41,9 @@
 
       .eyebrow { position: absolute; left: 0; right: 0; top: 236px; text-align: center; font-family: var(--label); font-size: 24px; letter-spacing: 14px; }
       .head { position: absolute; left: 0; right: 0; top: 284px; text-align: center; font-family: var(--display); font-size: 100px; line-height: 0.98; }
-      .foot { position: absolute; left: 0; right: 0; top: 1478px; text-align: center; }
-      .foot b { display: block; font-family: var(--flavour); font-weight: normal; font-size: 56px; line-height: 1; letter-spacing: 1px; }
-      .foot i { display: block; font-style: normal; font-family: var(--label); font-size: 22px; letter-spacing: 12px; margin-top: 16px; color: rgba(245,240,234,0.5); }
+      .foot { position: absolute; left: 0; right: 0; top: 1440px; text-align: center; }
+      .foot b { display: block; font-family: var(--flavour); font-weight: normal; font-size: 84px; line-height: 1; letter-spacing: 1px; }
+      .foot i { display: block; font-style: normal; font-family: var(--label); font-size: 26px; letter-spacing: 12px; margin-top: 20px; color: rgba(245,240,234,0.55); }
 
       /* end slate (shared) */
       #sl-bg { background: radial-gradient(ellipse 70% 40% at 50% 8%, rgba(245,240,234,0.08) 0%, rgba(245,240,234,0) 70%), var(--ink); }
@@ -109,9 +109,9 @@
       /* ---------- build the three centred product pairs (deterministic) ---------- */
       const C = 1180, ST = 470;
       const PAIRS = [
-        { n: "beer",    glass: [277, 729, 231, 451], sh: 469, pack: [552, 822, 250, 358], glow: "rgba(247,183,51,0.20)" },
-        { n: "whiskey", glass: [291, 947, 203, 233], sh: 687, pack: [538, 825, 250, 355], glow: "rgba(138,91,170,0.30)" },
-        { n: "rum",     glass: [284, 894, 218, 286], sh: 634, pack: [546, 835, 250, 345], glow: "rgba(102,153,51,0.30)" },
+        { n: "beer",    glass: [256, 632, 280, 548], sh: 570, pack: [525, 693, 340, 487], glow: "rgba(247,183,51,0.20)" },
+        { n: "whiskey", glass: [273, 897, 246, 283], sh: 835, pack: [508, 698, 340, 482], glow: "rgba(138,91,170,0.30)" },
+        { n: "rum",     glass: [264, 832, 265, 348], sh: 770, pack: [518, 711, 340, 469], glow: "rgba(102,153,51,0.30)" },
       ];
       const cam = document.getElementById("cam");
       const el = (tag, cls, id, css, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (id) e.id = id; e.style.cssText = css; if (html) e.innerHTML = html; cam.appendChild(e); return e; };

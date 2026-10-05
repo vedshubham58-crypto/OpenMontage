@@ -42,9 +42,9 @@
 
       .eyebrow { position: absolute; left: 0; right: 0; top: 236px; text-align: center; font-family: var(--label); font-size: 24px; letter-spacing: 14px; }
       .head { position: absolute; left: 0; right: 0; top: 284px; text-align: center; font-family: var(--display); font-size: 100px; line-height: 0.98; }
-      .foot { position: absolute; left: 0; right: 0; top: 1478px; text-align: center; }
-      .foot b { display: block; font-family: var(--flavour); font-weight: normal; font-size: 56px; line-height: 1; letter-spacing: 1px; }
-      .foot i { display: block; font-style: normal; font-family: var(--label); font-size: 22px; letter-spacing: 12px; margin-top: 16px; color: rgba(245,240,234,0.5); }
+      .foot { position: absolute; left: 0; right: 0; top: 1440px; text-align: center; }
+      .foot b { display: block; font-family: var(--flavour); font-weight: normal; font-size: 84px; line-height: 1; letter-spacing: 1px; }
+      .foot i { display: block; font-style: normal; font-family: var(--label); font-size: 26px; letter-spacing: 12px; margin-top: 20px; color: rgba(245,240,234,0.55); }
       .note { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--label); font-size: 22px; letter-spacing: 12px; color: rgba(245,240,234,0.55); }
       /* tri-colour rule: the three SKUs, always in equal measure */
       .tri { position: absolute; left: 50%; width: 198px; height: 4px; margin-left: -99px; display: flex; gap: 6px; }
@@ -225,9 +225,9 @@
       /* PAIRS: centred glass + pack on a 3240px camera rail */
       const C = 1180, ST = 470, cam = document.getElementById("cam");
       const PAIRS = [
-        { n: "beer",    glass: [277, 729, 231, 451], sh: 469, pack: [552, 822, 250, 358], glow: "rgba(247,183,51,0.20)" },
-        { n: "whiskey", glass: [291, 947, 203, 233], sh: 687, pack: [538, 825, 250, 355], glow: "rgba(138,91,170,0.30)" },
-        { n: "rum",     glass: [284, 894, 218, 286], sh: 634, pack: [546, 835, 250, 345], glow: "rgba(102,153,51,0.30)" },
+        { n: "beer",    glass: [256, 632, 280, 548], sh: 570, pack: [525, 693, 340, 487], glow: "rgba(247,183,51,0.20)" },
+        { n: "whiskey", glass: [273, 897, 246, 283], sh: 835, pack: [508, 698, 340, 482], glow: "rgba(138,91,170,0.30)" },
+        { n: "rum",     glass: [264, 832, 265, 348], sh: 770, pack: [518, 711, 340, 469], glow: "rgba(102,153,51,0.30)" },
       ];
       PAIRS.forEach((p, i) => {
         const o = i * 1080, k = i + 1, [gx, gy, gw, gh] = p.glass, [px, py, pw, ph] = p.pack;
