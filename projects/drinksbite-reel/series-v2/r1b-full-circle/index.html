@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>DrinksBite — Full Circle (brand-system cut)</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Aprilio Hope"; src: url("assets/aprilio.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+      :root {
+        --ink: #171717; --deep: #111111; --cream: #f5f0ea; --mustard: #f7b733; --purple-lt: #b48fd0; --green-lt: #8cc152;
+        --display: "Geometr706 BlkCn", "Arial Narrow", sans-serif; --label: "Berlin Sans FB", sans-serif;
+        --flavour: "Bernard MT Condensed", serif; --body: "Aprilio Hope", sans-serif;
+      }
+      html, body { margin: 0; padding: 0; background: var(--deep); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: var(--cream); text-transform: uppercase; }
+      .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+      .fill { position: absolute; inset: 0; }
+      .mask { display: block; overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+      .ln { display: block; }
+      .pat { position: absolute; inset: -100px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.08; }
+      .spot { background: radial-gradient(ellipse 60% 38% at 50% 0%, rgba(245,240,234,0.07) 0%, rgba(245,240,234,0) 70%); }
+
+      /* HOOK (kept) */
+      .disc { position: absolute; left: 230px; top: 650px; width: 620px; height: 620px; display: block; }
+      #hook-word { position: absolute; left: 0; right: 0; top: 330px; height: 200px; text-align: center; }
+      .hw { position: absolute; left: 0; right: 0; top: 0; font-family: var(--display); font-size: 190px; line-height: 1; opacity: 0; }
+      #hook-line { position: absolute; left: 0; right: 0; top: 1390px; text-align: center; font-family: var(--display); font-size: 104px; line-height: 1; opacity: 0; }
+
+      /* STAGE: centred brand system */
+      .unit { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+      .counter { position: absolute; left: 200px; top: 1180px; width: 680px; height: 2px;
+        background: linear-gradient(90deg, rgba(245,240,234,0) 0%, rgba(245,240,234,0.35) 20%, rgba(245,240,234,0.35) 80%, rgba(245,240,234,0) 100%); }
+      .glow { position: absolute; border-radius: 50%; }
+      .ls { position: absolute; overflow: hidden; -webkit-mask-image: linear-gradient(to top, transparent 0px, black 70px, black 55%, transparent 100%); mask-image: linear-gradient(to top, transparent 0px, black 70px, black 55%, transparent 100%); }
+      .ls .flow { position: absolute; left: 0; top: 0; }
+      .ls .flow img { position: absolute; left: 0; display: block; }
+      .lg { position: absolute; overflow: hidden; }
+      .lg img { position: absolute; left: 0; top: 0; display: block; }
+      .pk { position: absolute; display: block; height: auto; }
+      .refl { position: absolute; left: 0; top: 1182px; width: 1080px; height: 300px; overflow: hidden;
+        -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 80%); mask-image: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 80%); }
+      .refl img { position: absolute; top: 0; display: block; transform: scaleY(-1); transform-origin: 50% 0%; }
+      .eyebrow { position: absolute; left: 0; right: 0; top: 236px; text-align: center; font-family: var(--label); font-size: 24px; letter-spacing: 14px; }
+      .head { position: absolute; left: 0; right: 0; top: 284px; text-align: center; font-family: var(--display); font-size: 100px; line-height: 0.98; }
+      .foot { position: absolute; left: 0; right: 0; top: 1478px; text-align: center; }
+      .foot b { display: block; font-family: var(--flavour); font-weight: normal; font-size: 56px; line-height: 1; letter-spacing: 1px; }
+      .foot i { display: block; font-style: normal; font-family: var(--label); font-size: 22px; letter-spacing: 12px; margin-top: 16px; color: rgba(245,240,234,0.5); }
+
+      /* END SLATE (shared) */
+      #sl-bg { background: radial-gradient(ellipse 70% 40% at 50% 8%, rgba(245,240,234,0.08) 0%, rgba(245,240,234,0) 70%), var(--ink); }
+      #sl-pat { position: absolute; inset: -100px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.2; }
+      #sl-stage { position: absolute; inset: 0; }
+      #sl-logo { position: absolute; left: 50%; top: 300px; width: 340px; height: 331px; margin-left: -170px; display: block; }
+      #sl-rule { position: absolute; left: 470px; top: 700px; width: 140px; height: 3px; background: var(--mustard); }
+      #sl-floor { position: absolute; left: 0; right: 0; top: 1420px; height: 500px; background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 50%); }
+      #sl-row { position: absolute; left: 0; top: 0; width: 1080px; height: 1430px; overflow: hidden; }
+      .sl-pk { position: absolute; display: block; height: auto; }
+      .sl-sh { position: absolute; top: 1404px; height: 46px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 70%); }
+      #sl-tag { position: absolute; left: 0; right: 0; top: 1500px; text-align: center; font-family: var(--label); font-size: 40px; letter-spacing: 16px; }
+      #sl-handle { position: absolute; left: 0; right: 0; top: 1570px; text-align: center; font-family: var(--label); font-size: 30px; letter-spacing: 4px; color: rgba(245,240,234,0.55); text-transform: none; }
+      #grain { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; background-image: url("assets/grain.png"); background-size: 512px 512px; opacity: 0.05; mix-blend-mode: overlay; }
+      #vig { background: radial-gradient(ellipse 85% 70% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="12" data-fps="30">
+
+      <!-- HOOK 0–2.45 (kept): circles match-cut on the beat -->
+      <section id="cH" class="clip" style="z-index: 1" data-start="0" data-duration="2.45" data-track-index="1">
+        <div class="fill" style="background: var(--deep)"></div><div class="pat"></div><div class="fill spot"></div>
+        <img class="disc" id="d0" src="assets/puff0.png" alt="" style="left: 410px; top: 830px; width: 260px; height: 260px" />
+        <img class="disc" id="d1" src="assets/disc-beer.png" alt="" />
+        <img class="disc" id="d2" src="assets/disc-whiskey.png" alt="" />
+        <img class="disc" id="d3" src="assets/disc-rum.png" alt="" />
+        <div id="hook-word">
+          <div class="hw" id="w0">One</div><div class="hw" id="w1">Puff.</div>
+          <div class="hw" id="w2" style="color: var(--mustard)">Three</div><div class="hw" id="w3" style="color: var(--mustard)">Moods.</div>
+        </div>
+        <div id="hook-line"><span style="color: var(--cream)">Which one</span> <span style="color: var(--mustard)">are you?</span></div>
+      </section>
+
+      <!-- STAGE 2.4–9.05 -->
+      <section id="cS" class="clip" style="z-index: 2" data-start="2.4" data-duration="6.65" data-track-index="2">
+        <div class="fill" style="background: var(--deep)"></div><div class="pat"></div><div class="fill spot"></div>
+        <div id="units"></div>
+
+        <div class="eyebrow" id="e1" style="color: var(--mustard)">01 — For beer</div>
+        <div class="head" id="h1"><span class="mask"><span class="ln">Sharp.</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">Herby.</span></span></div>
+        <div class="foot" id="f1"><b style="color: var(--mustard)">Cheddar &amp; Herbs</b><i>Jowar puffs · 35 g</i></div>
+
+        <div class="eyebrow" id="e2" style="color: var(--purple-lt)">02 — For whiskey</div>
+        <div class="head" id="h2"><span class="mask"><span class="ln">Deep.</span></span><span class="mask"><span class="ln" style="color: var(--purple-lt)">Toasty.</span></span></div>
+        <div class="foot" id="f2"><b style="color: var(--purple-lt)">Toasted Sesame Umami</b><i>Jowar puffs · 35 g</i></div>
+
+        <div class="eyebrow" id="e3" style="color: var(--green-lt)">03 — For rum</div>
+        <div class="head" id="h3"><span class="mask"><span class="ln">Warm.</span></span><span class="mask"><span class="ln" style="color: var(--green-lt)">Tropical.</span></span></div>
+        <div class="foot" id="f3"><b style="color: var(--green-lt)">Coconut &amp; Spices</b><i>Jowar puffs · 35 g</i></div>
+      </section>
+
+      <!-- END SLATE 9.0–12 -->
+      <section id="cE" class="clip" style="z-index: 3" data-start="9.0" data-duration="3.0" data-track-index="1">
+        <div class="fill" id="sl-bg"></div><div id="sl-pat"></div>
+        <div id="sl-stage">
+          <img id="sl-logo" src="assets/logo.svg" alt="DrinksBite" />
+          <div id="sl-rule"></div>
+          <div id="sl-floor"></div>
+          <div class="sl-sh" id="ss1" style="left: 80px; width: 320px"></div>
+          <div class="sl-sh" id="ss2" style="left: 360px; width: 360px"></div>
+          <div class="sl-sh" id="ss3" style="left: 680px; width: 320px"></div>
+          <div id="sl-row">
+            <img class="sl-pk" id="sp-w" src="assets/pack-whiskey.png" alt="" style="left: 95px; top: 1002px; width: 300px" />
+            <img class="sl-pk" id="sp-r" src="assets/pack-rum.png" alt="" style="left: 685px; top: 1016px; width: 300px" />
+            <img class="sl-pk" id="sp-b" src="assets/pack-beer.png" alt="" style="left: 370px; top: 942px; width: 340px" />
+          </div>
+          <div id="sl-tag">Pair · Sip · Repeat</div>
+          <div id="sl-handle">@drinksbite_official</div>
+        </div>
+      </section>
+
+      <section id="fx" class="clip" style="z-index: 20" data-start="0" data-duration="12" data-track-index="6"><div class="fill" id="vig"></div><div id="grain"></div></section>
+      <audio id="bgm" src="assets/soundtrack.wav" data-start="0" data-duration="12" data-track-index="10" data-volume="1"></audio>
+    </div>
+
+    <script>
+      /* ---------- build the three centred product units ---------- */
+      const ST = 470;
+      const PAIRS = [
+        { n: "beer",    glass: [277, 729, 231, 451], sh: 469, pack: [552, 822, 250, 358], glow: "rgba(247,183,51,0.20)" },
+        { n: "whiskey", glass: [291, 947, 203, 233], sh: 687, pack: [538, 825, 250, 355], glow: "rgba(138,91,170,0.30)" },
+        { n: "rum",     glass: [284, 894, 218, 286], sh: 634, pack: [546, 835, 250, 345], glow: "rgba(102,153,51,0.30)" },
+      ];
+      const holder = document.getElementById("units");
+      PAIRS.forEach((p, i) => {
+        const k = i + 1, [gx, gy, gw, gh] = p.glass, [px, py, pw, ph] = p.pack, cH = gy - ST;
+        const u = document.createElement("div"); u.className = "unit"; u.id = "u" + k;
+        u.innerHTML =
+          `<div class="glow" style="left:${gx - 120}px;top:${gy - 120}px;width:${gw + 240}px;height:${gh + 200}px;background:radial-gradient(ellipse at 50% 60%, ${p.glow} 0%, rgba(0,0,0,0) 70%)"></div>` +
+          `<div class="counter"></div>` +
+          `<div class="ls" style="left:${gx}px;top:${ST}px;width:${gw}px;height:${cH}px"><div class="flow" id="fl${k}"><img src="assets/la-stream-${p.n}.png" style="top:${cH - p.sh}px;width:${gw}px;height:${p.sh}px" alt=""/><img src="assets/la-stream-${p.n}.png" style="top:${cH}px;width:${gw}px;height:${p.sh}px" alt=""/></div></div>` +
+          `<div class="lg" id="lg${k}" style="left:${gx}px;top:${gy}px;width:${gw}px;height:${gh}px"><img id="lgi${k}" src="assets/la-glass-${p.n}.png" style="width:${gw}px;height:${gh}px" alt=""/></div>` +
+          `<img class="pk" id="pk${k}" src="assets/pack-${p.n}.png" style="left:${px}px;top:${py}px;width:${pw}px" alt=""/>` +
+          `<div class="refl"><img src="assets/la-glass-${p.n}.png" style="left:${gx}px;width:${gw}px;height:${gh}px" alt=""/><img src="assets/pack-${p.n}.png" style="left:${px}px;width:${pw}px;height:${ph}px" alt=""/></div>`;
+        holder.appendChild(u);
+      });
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      for (let k = 0, f = 0; f < 12; k++, f += 1 / 12) tl.set("#grain", { x: ((k * 137) % 200) - 100, y: ((k * 89) % 200) - 100 }, f);
+
+      /* ---------- HOOK (unchanged choreography) ---------- */
+      const cuts = [["#d0", "#w0", 0.0], ["#d1", "#w1", 0.3], ["#d2", "#w2", 0.6], ["#d3", "#w3", 0.9]];
+      cuts.forEach(([d, w, t], i) => {
+        tl.set(d, { opacity: 1 }, t);
+        tl.fromTo(d, { scale: 1.08, rotation: i * 25 }, { scale: 1.0, rotation: i * 25 + 12, duration: 0.3, ease: "power2.out" }, t);
+        if (i < 3) tl.set(d, { opacity: 0 }, t + 0.3);
+        tl.set(w, { opacity: 1 }, t);
+        if (i < 3) tl.set(w, { opacity: 0 }, t + 0.3);
+      });
+      tl.set(["#d1", "#d2", "#d3"], { opacity: 0 }, 0);
+      tl.set(["#d1", "#d2"], { opacity: 1 }, 1.2);
+      tl.set("#w3", { opacity: 0 }, 1.2);
+      tl.fromTo("#d2", { x: 0, scale: 1 }, { x: -340, scale: 0.48, duration: 0.45, ease: "power3.inOut" }, 1.2);
+      tl.fromTo("#d1", { x: 0, scale: 1 }, { x: 0, scale: 0.48, duration: 0.45, ease: "power3.inOut" }, 1.2);
+      tl.to("#d3", { x: 340, scale: 0.48, duration: 0.45, ease: "power3.inOut" }, 1.2);
+      tl.fromTo("#hook-line", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 1.45);
+      tl.to(["#d1", "#d2", "#d3"], { rotation: "+=30", duration: 0.8, ease: "none" }, 1.65);
+      tl.to("#d1", { scale: 4.5, duration: 0.35, ease: "power3.in" }, 2.1);
+      tl.to(["#d2", "#d3", "#hook-line"], { opacity: 0, duration: 0.15 }, 2.1);
+
+      /* ---------- STAGE: units truck right-to-left through centre ---------- */
+      const T = [2.4, 4.6, 6.8];
+      tl.fromTo("#cS", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 2.4);
+      PAIRS.forEach((p, i) => tl.fromTo("#fl" + (i + 1), { y: 0 }, { y: -p.sh * 0.9, duration: 6.7, ease: "none" }, 2.4));
+      ["#u1", "#u2", "#u3"].forEach((u, i) => {
+        const t = T[i], k = i + 1;
+        if (i === 0) {
+          tl.fromTo(u, { x: 0, opacity: 0, scale: 1.04 }, { x: 0, opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" }, t);
+        } else {
+          tl.fromTo(u, { x: 1100, opacity: 1 }, { x: 0, duration: 0.7, ease: "power3.inOut" }, t - 0.35);
+        }
+        tl.fromTo("#lg" + k, { yPercent: 100 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, t);
+        tl.fromTo("#lgi" + k, { yPercent: -100 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, t);
+        tl.fromTo("#pk" + k, { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, t + 0.2);
+        tl.to(u, { x: -30, duration: 1.5, ease: "none" }, t + 0.4);
+        if (i < 2) tl.to(u, { x: -1150, duration: 0.7, ease: "power3.inOut" }, T[i + 1] - 0.35);
+        // type
+        tl.fromTo("#e" + k, { opacity: 0 }, { opacity: 1, duration: 0.45 }, t + 0.1);
+        tl.fromTo("#h" + k + " .ln", { yPercent: 115 }, { yPercent: 0, duration: 0.6, stagger: 0.08, ease: "expo.out" }, t + 0.15);
+        tl.fromTo("#f" + k, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, t + 0.45);
+        if (i < 2) {
+          const o = T[i + 1] - 0.4;
+          tl.to("#h" + k + " .ln", { yPercent: -115, duration: 0.3, stagger: 0.04, ease: "power3.in" }, o);
+          tl.to(["#e" + k, "#f" + k], { opacity: 0, duration: 0.25 }, o);
+        }
+      });
+      tl.to("#cS", { opacity: 0, duration: 0.15 }, 8.9);
+
+      /* ---------- END SLATE ---------- */
+      tl.fromTo("#sl-stage", { scale: 1.0 }, { scale: 1.03, duration: 3.0, ease: "none" }, 9.0);
+      tl.fromTo("#sl-logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 9.05);
+      tl.fromTo("#sl-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "expo.out" }, 9.4);
+      [["#sp-w", "#ss1", 9.35], ["#sp-b", "#ss2", 9.47], ["#sp-r", "#ss3", 9.59]].forEach(([p, s, t]) => {
+        tl.fromTo(p, { y: 520 }, { y: 0, duration: 0.6, ease: "power3.out" }, t);
+        tl.fromTo(s, { opacity: 0, scaleX: 0.4 }, { opacity: 1, scaleX: 1, duration: 0.5, ease: "power3.out" }, t + 0.25);
+      });
+      tl.fromTo("#sl-tag", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 10.0);
+      tl.fromTo("#sl-handle", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 10.25);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
