@@ -1,0 +1,100 @@
+{
+  "version": "1.0",
+  "project_id": "drinksbite-reel",
+  "decisions": [
+    {
+      "decision_id": "d1",
+      "category": "render_runtime_selection",
+      "subject": "Composition runtime",
+      "choice": "hyperframes",
+      "options_considered": [
+        {
+          "option": "hyperframes",
+          "chosen": true
+        },
+        {
+          "option": "remotion",
+          "rejected_because": "runtime not available on this machine (remotion-composer node_modules not installed)"
+        },
+        {
+          "option": "ffmpeg",
+          "rejected_because": "no kinetic typography / GSAP motion"
+        }
+      ],
+      "reason": "Product promo with kinetic type; only available runtime",
+      "timestamp": "2026-10-05T03:41:18.755647+00:00"
+    },
+    {
+      "decision_id": "d2",
+      "category": "composition_mode",
+      "subject": "Authoring mode",
+      "choice": "atelier",
+      "options_considered": [
+        {
+          "option": "atelier",
+          "chosen": true
+        },
+        {
+          "option": "templated",
+          "rejected_because": "hero brand piece"
+        }
+      ],
+      "reason": "Hand-authored brand reel using only supplied DrinksBite assets",
+      "timestamp": "2026-10-05T03:41:18.755647+00:00"
+    },
+    {
+      "decision_id": "d3",
+      "category": "asset_source",
+      "subject": "Visual assets",
+      "choice": "existing DrinksBite brand assets (user-approved 'own photos' path)",
+      "options_considered": [
+        {
+          "option": "user media",
+          "chosen": true
+        },
+        {
+          "option": "AI image/video generation",
+          "rejected_because": "no provider keys configured"
+        }
+      ],
+      "reason": "User chose own media; pulled from the DrinksBite website artifact",
+      "timestamp": "2026-10-05T03:41:18.755647+00:00"
+    },
+    {
+      "decision_id": "d4",
+      "category": "music_selection",
+      "subject": "Soundtrack",
+      "choice": "original procedural 120 BPM groove + pop/crunch/clink SFX (scripts/make_soundtrack.py)",
+      "options_considered": [
+        {
+          "option": "procedural original",
+          "chosen": true
+        },
+        {
+          "option": "AI music generation",
+          "rejected_because": "no music provider configured"
+        }
+      ],
+      "reason": "Licence-clean, beat-locked to the cuts",
+      "timestamp": "2026-10-05T03:41:18.755647+00:00"
+    },
+    {
+      "decision_id": "d5",
+      "category": "narration",
+      "subject": "Voiceover",
+      "choice": "none",
+      "options_considered": [
+        {
+          "option": "none",
+          "chosen": true
+        },
+        {
+          "option": "TTS",
+          "rejected_because": "no TTS provider configured"
+        }
+      ],
+      "reason": "Text-led reel works muted",
+      "timestamp": "2026-10-05T03:41:18.755647+00:00"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "project_id": "drinksbite-reel",
+  "title": "DrinksBite 15s Promo Reel",
+  "format": {
+    "aspect": "9:16",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "duration_s": 15
+  },
+  "brand": {
+    "name": "DrinksBite",
+    "company": "Crunch Theory Pvt Ltd, Pune",
+    "product": "Jowar puffs, popped not fried — India's first drink-pairing chakna",
+    "tagline": "Pair. Sip. Repeat.",
+    "price": "₹35 / 35 g",
+    "url": "drinksbite.com",
+    "palette": {
+      "bg": "#171717",
+      "cream": "#F5F0EA",
+      "beer": "#F7B733",
+      "rum": "#669933",
+      "whiskey": "#8A5BAA"
+    },
+    "skus": [
+      {
+        "flavour": "Cheddar & Herbs",
+        "pairs_with": "Beer"
+      },
+      {
+        "flavour": "Coconut & Spices",
+        "pairs_with": "Rum"
+      },
+      {
+        "flavour": "Toasted Sesame Umami",
+        "pairs_with": "Whiskey"
+      }
+    ]
+  },
+  "sources": [
+    "Claude artifact 'DrinksBite — Pair. Sip. Repeat.' (pack shots, pours, bowls, logo, fonts, pattern)",
+    "Drive: DrinksBite_Packaging_Copy_v2",
+    "Drive: DrinksBite_Blinkit_Product_Details"
+  ],
+  "scenes": [
+    {
+      "t": "0-3.0",
+      "beat": "Hook: YOUR / DRINK / NEEDS A / BITE. slams on the beat, bowl rises"
+    },
+    {
+      "t": "3.0-5.5",
+      "beat": "Beer x Cheddar & Herbs"
+    },
+    {
+      "t": "5.5-8.0",
+      "beat": "Rum x Coconut & Spices"
+    },
+    {
+      "t": "8.0-10.5",
+      "beat": "Whiskey x Toasted Sesame Umami"
+    },
+    {
+      "t": "10.5-12.5",
+      "beat": "Three-pack line-up, PAIR. SIP. REPEAT."
+    },
+    {
+      "t": "12.5-15",
+      "beat": "End card: logo, ₹35 / 35 g, drinksbite.com, no-alcohol line"
+    }
+  ],
+  "render": "renders/final.mp4"
+}

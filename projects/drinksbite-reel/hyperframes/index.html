@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>DrinksBite — Pair. Sip. Repeat. (15s reel)</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Aprilio Hope"; src: url("assets/aprilio.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+
+      /* Brand sheet palette — do not eyeball. */
+      :root {
+        --bg: #171717;
+        --card: #2a2a2a;
+        --cream: #f5f0ea;
+        --beer: #f7b733;
+        --rum: #669933;
+        --whiskey: #8a5baa;
+        --display: "Geometr706 BlkCn", "Arial Narrow", sans-serif;
+        --label: "Berlin Sans FB", sans-serif;
+        --flavour: "Bernard MT Condensed", serif;
+        --body: "Aprilio Hope", sans-serif;
+      }
+      html, body { margin: 0; padding: 0; background: var(--bg); }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        color: var(--cream);
+      }
+      .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+      .fill { position: absolute; inset: 0; }
+      .center-col {
+        position: absolute; inset: 0; box-sizing: border-box;
+        display: flex; flex-direction: column; align-items: center;
+      }
+
+      /* ---------- persistent backdrop ---------- */
+      #bg-fill { background: var(--bg); }
+      #bg-pattern {
+        position: absolute; left: -800px; top: -800px; width: 2680px; height: 3520px;
+        background-image: url("assets/pattern.png");
+        background-size: 378px 195px;
+        opacity: 0.55;
+      }
+      #bg-vignette {
+        background: radial-gradient(ellipse 80% 60% at 50% 45%, rgba(23,23,23,0) 0%, rgba(10,10,10,0.75) 100%);
+      }
+
+      /* ---------- S1 hook ---------- */
+      #s1 .center-col { padding-top: 170px; }
+      .hook-word {
+        display: block; font-family: var(--display); font-size: 230px; line-height: 0.92;
+        letter-spacing: 2px; text-transform: uppercase; text-align: center; white-space: nowrap;
+      }
+      #w4 { color: var(--beer); font-size: 300px; }
+      #bowl-disc {
+        position: absolute; left: 240px; top: 1250px; width: 600px; height: 600px;
+        border-radius: 50%; overflow: hidden;
+        box-shadow: 0 40px 90px rgba(0,0,0,0.7);
+      }
+      #bowl-disc img { width: 100%; height: 100%; display: block; }
+      #hook-sub {
+        position: absolute; left: 0; right: 0; top: 1130px; text-align: center;
+        font-family: var(--label); font-size: 46px; letter-spacing: 4px; text-transform: uppercase;
+      }
+      #hook-sub b { color: var(--beer); font-weight: normal; }
+
+      /* ---------- pairing scenes ---------- */
+      .pour { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      .pour-shade {
+        background:
+          linear-gradient(180deg, rgba(23,23,23,0.92) 0%, rgba(23,23,23,0.35) 26%, rgba(23,23,23,0.25) 45%, rgba(23,23,23,0.85) 70%, rgba(23,23,23,1) 100%);
+      }
+      .pair-label {
+        position: absolute; left: 0; right: 0; top: 250px; text-align: center;
+        font-family: var(--label); font-size: 48px; letter-spacing: 8px; text-transform: uppercase;
+      }
+      .pair-word-wrap { position: absolute; left: 0; right: 0; top: 300px; height: 330px; overflow: hidden; }
+      .pair-word {
+        display: block; width: 1080px; text-align: center; font-family: var(--display);
+        font-size: 330px; line-height: 1; text-transform: uppercase;
+      }
+      .pack {
+        position: absolute; left: 270px; top: 700px; width: 540px; height: auto; display: block;
+        filter: drop-shadow(0 50px 60px rgba(0,0,0,0.75));
+      }
+      .chip {
+        position: absolute; left: 140px; width: 800px; top: 1500px; height: 104px; box-sizing: border-box;
+        border-radius: 52px; display: flex; align-items: center; justify-content: center;
+        font-family: var(--flavour); font-size: 60px; color: #171717; letter-spacing: 1px; text-transform: uppercase;
+      }
+      .tick { position: absolute; left: 0; right: 0; top: 1640px; text-align: center; font-family: var(--label); font-size: 38px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.9; }
+
+      /* ---------- wipes ---------- */
+      .wipe { position: absolute; left: -100px; top: 0; width: 1280px; height: 1920px; }
+
+      /* ---------- S5 line-up ---------- */
+      #s5-top {
+        position: absolute; left: 0; right: 0; top: 260px; text-align: center;
+        font-family: var(--label); font-size: 46px; letter-spacing: 5px; text-transform: uppercase;
+      }
+      #s5-top b { font-weight: normal; color: var(--beer); }
+      .lp { position: absolute; top: 600px; width: 360px; height: auto; display: block; filter: drop-shadow(0 40px 50px rgba(0,0,0,0.8)); }
+      #lp-rum { left: 80px; }
+      #lp-whiskey { left: 640px; }
+      #lp-beer { left: 330px; top: 540px; width: 420px; }
+      #tagline {
+        position: absolute; left: 0; right: 0; top: 1260px; display: flex; justify-content: center; gap: 26px;
+        font-family: var(--display); font-size: 140px; line-height: 1; text-transform: uppercase;
+      }
+      #tagline span { display: block; }
+      #t1 { color: var(--beer); } #t2 { color: var(--rum); } #t3 { color: var(--whiskey); }
+
+      /* ---------- S6 end card ---------- */
+      #s6 .center-col { padding-top: 330px; }
+      #end-kicker { font-family: var(--label); font-size: 44px; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 50px; }
+      #end-logo { width: auto; height: 560px; display: block; }
+      #end-rule { width: 520px; height: 8px; margin: 60px 0 50px; display: flex; }
+      #end-rule i { display: block; flex: 1; height: 8px; }
+      #end-price { font-family: var(--display); font-size: 120px; line-height: 1; }
+      #end-price small { font-family: var(--label); font-size: 48px; letter-spacing: 4px; margin-left: 18px; vertical-align: middle; }
+      #end-url { margin-top: 46px; font-family: var(--label); font-size: 56px; letter-spacing: 3px; color: var(--beer); }
+      #end-legal { position: absolute; left: 0; right: 0; top: 1600px; text-align: center; font-family: var(--body); font-size: 30px; opacity: 0.6; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="15" data-fps="30">
+
+      <!-- persistent backdrop -->
+      <section id="bg" class="clip" data-start="0" data-duration="15" data-track-index="0">
+        <div id="bg-fill" class="fill"></div>
+        <div id="bg-pattern"></div>
+        <div id="bg-vignette" class="fill"></div>
+      </section>
+
+      <!-- S1 hook 0–3.0 -->
+      <section id="s1" class="clip" data-start="0" data-duration="3.0" data-track-index="1">
+        <div id="bowl-disc"><img id="bowl-img" src="assets/bowl-beer.jpg" alt="" /></div>
+        <div class="center-col" id="hook-stack">
+          <span class="hook-word" id="w1">Your</span>
+          <span class="hook-word" id="w2">drink</span>
+          <span class="hook-word" id="w3">needs a</span>
+          <span class="hook-word" id="w4">bite.</span>
+        </div>
+        <div id="hook-sub">India's first <b>drink-pairing chakna</b></div>
+      </section>
+
+      <!-- S2 beer 3.0–5.5 -->
+      <section id="s2" class="clip" data-start="3.0" data-duration="2.5" data-track-index="1">
+        <img id="s2-pour" class="pour" src="assets/pour-beer.jpg" alt="" />
+        <div class="fill pour-shade"></div>
+        <div class="pair-label" id="s2-label">Best paired with</div>
+        <div class="pair-word-wrap"><span class="pair-word" id="s2-word" style="color: var(--beer)">Beer</span></div>
+        <img id="s2-pack" class="pack" src="assets/pack-beer.png" alt="" />
+        <div class="chip" id="s2-chip" style="background: var(--beer)">Cheddar &amp; Herbs</div>
+        <div class="tick" id="s2-tick">Herby · Tangy · A lil smoky</div>
+      </section>
+
+      <!-- S3 rum 5.5–8.0 -->
+      <section id="s3" class="clip" data-start="5.5" data-duration="2.5" data-track-index="1">
+        <img id="s3-pour" class="pour" src="assets/pour-rum.jpg" alt="" />
+        <div class="fill pour-shade"></div>
+        <div class="pair-label" id="s3-label">Best paired with</div>
+        <div class="pair-word-wrap"><span class="pair-word" id="s3-word" style="color: var(--rum)">Rum</span></div>
+        <img id="s3-pack" class="pack" src="assets/pack-rum.png" alt="" />
+        <div class="chip" id="s3-chip" style="background: var(--rum)">Coconut &amp; Spices</div>
+        <div class="tick" id="s3-tick">Kolhapur jaggery · Kokum · Warm spice</div>
+      </section>
+
+      <!-- S4 whiskey 8.0–10.5 -->
+      <section id="s4" class="clip" data-start="8.0" data-duration="2.5" data-track-index="1">
+        <img id="s4-pour" class="pour" src="assets/pour-whiskey.jpg" alt="" />
+        <div class="fill pour-shade"></div>
+        <div class="pair-label" id="s4-label">Best paired with</div>
+        <div class="pair-word-wrap"><span class="pair-word" id="s4-word" style="color: var(--whiskey); font-size: 250px; line-height: 1.32">Whiskey</span></div>
+        <img id="s4-pack" class="pack" src="assets/pack-whiskey.png" alt="" />
+        <div class="chip" id="s4-chip" style="background: var(--whiskey); color: var(--cream)">Toasted Sesame Umami</div>
+        <div class="tick" id="s4-tick">Sesame · Dark coffee · Deep umami</div>
+      </section>
+
+      <!-- S5 line-up 10.5–12.5 -->
+      <section id="s5" class="clip" data-start="10.5" data-duration="2.0" data-track-index="1">
+        <div id="s5-top">Jowar puffs · <b>Popped, not fried</b></div>
+        <img id="lp-rum" class="lp" src="assets/pack-rum.png" alt="" />
+        <img id="lp-whiskey" class="lp" src="assets/pack-whiskey.png" alt="" />
+        <img id="lp-beer" class="lp" src="assets/pack-beer.png" alt="" />
+        <div id="tagline"><span id="t1">Pair.</span><span id="t2">Sip.</span><span id="t3">Repeat.</span></div>
+      </section>
+
+      <!-- S6 end card 12.5–15 -->
+      <section id="s6" class="clip" data-start="12.5" data-duration="2.5" data-track-index="1">
+        <div class="center-col">
+          <div id="end-kicker">India's first drink-pairing chakna</div>
+          <img id="end-logo" src="assets/logo.svg" alt="DrinksBite" />
+          <div id="end-rule"><i style="background: var(--beer)"></i><i style="background: var(--rum)"></i><i style="background: var(--whiskey)"></i></div>
+          <div id="end-price">₹35<small>35 g pack</small></div>
+          <div id="end-url">drinksbite.com</div>
+        </div>
+        <div id="end-legal">A snack, not a drink — contains no alcohol.</div>
+      </section>
+
+      <!-- colour wipes over each cut -->
+      <section id="wp1" class="clip" data-start="2.8" data-duration="0.4" data-track-index="5"><div class="wipe" id="wipe1" style="background: var(--beer)"></div></section>
+      <section id="wp2" class="clip" data-start="5.3" data-duration="0.4" data-track-index="5"><div class="wipe" id="wipe2" style="background: var(--rum)"></div></section>
+      <section id="wp3" class="clip" data-start="7.8" data-duration="0.4" data-track-index="5"><div class="wipe" id="wipe3" style="background: var(--whiskey)"></div></section>
+      <section id="wp4" class="clip" data-start="10.3" data-duration="0.4" data-track-index="5"><div class="wipe" id="wipe4" style="background: var(--cream)"></div></section>
+
+      <audio id="bgm" src="assets/soundtrack.wav" data-start="0" data-duration="15" data-track-index="10" data-volume="1"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      /* backdrop drift: whole 15 s, slow diagonal */
+      tl.fromTo("#bg-pattern", { x: 0, y: 0 }, { x: 378, y: 390, duration: 15, ease: "none" }, 0);
+
+      /* ---- S1 hook: words slam on the beat (0, .5, 1.0, 1.5) ---- */
+      const slam = (sel, t, from) => tl.fromTo(sel, { scale: from, opacity: 0, y: 40 }, { scale: 1, opacity: 1, y: 0, duration: 0.32, ease: "back.out(2.2)" }, t);
+      slam("#w1", 0.05, 1.8);
+      slam("#w2", 0.5, 1.8);
+      slam("#w3", 1.0, 1.8);
+      tl.fromTo("#w4", { scale: 2.6, opacity: 0, rotation: -6 }, { scale: 1, opacity: 1, rotation: -3, duration: 0.38, ease: "back.out(2.6)" }, 1.5);
+      tl.fromTo("#hook-stack", { x: 0 }, { x: 14, duration: 0.05, repeat: 5, yoyo: true, ease: "none" }, 1.52);
+      tl.fromTo("#bowl-disc", { y: 760, rotation: -40 }, { y: 0, rotation: 0, duration: 0.7, ease: "power3.out" }, 1.55);
+      tl.fromTo("#bowl-img", { rotation: 0 }, { rotation: 35, duration: 1.45, ease: "none" }, 1.55);
+      tl.fromTo("#hook-sub", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 2.0);
+      tl.to("#hook-stack", { scale: 1.08, duration: 1.0, ease: "power1.in" }, 2.0);
+
+      /* ---- wipes: sweep up through frame across each cut ---- */
+      ["#wipe1", "#wipe2", "#wipe3", "#wipe4"].forEach((sel, i) => {
+        const t = 2.8 + i * 2.5;
+        tl.fromTo(sel, { y: 1920, rotation: -4 }, { y: 0, duration: 0.2, ease: "power3.in" }, t);
+        tl.to(sel, { y: -2000, duration: 0.2, ease: "power3.out" }, t + 0.2);
+      });
+
+      /* ---- pairing scenes ---- */
+      function pairing(n, t0) {
+        const p = "#s" + n;
+        tl.fromTo(p + "-pour", { scale: 1.16 }, { scale: 1.0, duration: 2.5, ease: "power1.out" }, t0);
+        tl.fromTo(p + "-label", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, t0 + 0.1);
+        tl.fromTo(p + "-word", { y: 340 }, { y: 0, duration: 0.42, ease: "expo.out" }, t0 + 0.15);
+        tl.fromTo(p + "-pack", { y: 1300, rotation: 14, scale: 0.9 }, { y: 0, rotation: -4, scale: 1, duration: 0.55, ease: "back.out(1.5)" }, t0);
+        tl.to(p + "-pack", { rotation: 2, y: -18, duration: 1.7, ease: "sine.inOut" }, t0 + 0.55);
+        tl.fromTo(p + "-chip", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.35, ease: "back.out(1.8)" }, t0 + 0.5);
+        tl.fromTo(p + "-tick", { opacity: 0, y: 20 }, { opacity: 0.9, y: 0, duration: 0.35, ease: "power2.out" }, t0 + 0.75);
+      }
+      pairing(2, 3.0);
+      pairing(3, 5.5);
+      pairing(4, 8.0);
+
+      /* ---- S5 line-up: packs pop in on 10.5 / 10.75 / 11.0 ---- */
+      tl.fromTo("#s5-top", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 }, 10.55);
+      tl.fromTo("#lp-rum", { x: -700, rotation: -30 }, { x: 0, rotation: -10, duration: 0.45, ease: "back.out(1.6)" }, 10.5);
+      tl.fromTo("#lp-whiskey", { x: 700, rotation: 30 }, { x: 0, rotation: 10, duration: 0.45, ease: "back.out(1.6)" }, 10.75);
+      tl.fromTo("#lp-beer", { y: 1400, scale: 0.8 }, { y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 11.0);
+      tl.fromTo("#t1", { y: 200, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "back.out(2)" }, 11.5);
+      tl.fromTo("#t2", { y: 200, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "back.out(2)" }, 11.75);
+      tl.fromTo("#t3", { y: 200, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "back.out(2)" }, 12.0);
+      tl.to(["#lp-rum", "#lp-whiskey", "#lp-beer"], { y: "-=24", duration: 1.0, ease: "sine.inOut" }, 11.5);
+
+      /* ---- S6 end card ---- */
+      tl.fromTo("#end-kicker", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 12.6);
+      tl.fromTo("#end-logo", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 12.5);
+      tl.fromTo("#end-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power3.out" }, 12.9);
+      tl.fromTo("#end-price", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 13.1);
+      tl.fromTo("#end-url", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 13.3);
+      tl.fromTo("#end-legal", { opacity: 0 }, { opacity: 0.6, duration: 0.4 }, 13.5);
+      tl.to("#end-logo", { scale: 1.04, duration: 1.4, ease: "sine.inOut" }, 13.0);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
