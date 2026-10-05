@@ -61,4 +61,26 @@ def r3():
     m.add(whoosh(0.5,0.8),9.05)
     slate(m,9.5); m.save('series-v2/r3.wav')
 
-for f in sys.argv[1:]: globals()[f](); print('ok', f)
+
+def squeak(d=0.25):
+    # felt-marker stroke: band-passed noise with a slight pitch sweep
+    n=int(d*SR); t=np.arange(n)/SR; x=rng.standard_normal(n)
+    x=lp(x,2600)-lp(x,900); return x*np.sin(np.pi*t/d)*0.9
+
+def r2b():
+    m=Mix(12.0); t=np.arange(m.N)/SR
+    drone=np.sin(2*np.pi*41.2*t)*0.08; m.L+=drone; m.R+=drone
+    m.add(hit(1.0),0.08)                                         # "wait."
+    for k in range(17): m.add(tick(),0.32+k*0.042,0.55)          # typing
+    m.add(squeak(0.4),0.7); m.add(squeak(0.22),0.95,0.8)         # circle + arrow
+    m.add(crunch(0.4,1.0),1.5); m.add(boom(0.5),1.5)
+    m.add(squeak(0.25),1.82,1.1); m.add(thud(0.9),2.06); m.add(crunch(0.15,0.4),2.07)
+    for i,tt in enumerate(np.arange(1.5,9.0,0.55)):
+        m.add(kick(0.6),tt); m.add(hat(),tt+0.275,0.4)
+    for tt in (2.9,4.2,5.5,6.8):
+        m.add(whoosh(0.3,0.6),tt-0.1); m.add(squeak(0.3),tt+0.5,0.9); m.add(thud(0.6),tt+0.9)
+    for k,tt in enumerate((8.1,8.25,8.4)): m.add(whoosh(0.25,0.5),tt-0.05,1,(k-1)*0.5)
+    m.add(clink(),8.5)
+    slate(m,9.0); m.save('series-v2/r2b.wav')
+
+for f in sys.argv[1:]: globals()[f](); print("ok", f)

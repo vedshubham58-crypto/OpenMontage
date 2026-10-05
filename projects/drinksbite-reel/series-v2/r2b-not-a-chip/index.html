@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>DrinksBite — Not a Chip (gen z cut)</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Aprilio Hope"; src: url("assets/aprilio.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+      :root {
+        --ink: #171717; --deep: #0e0e0e; --cream: #f5f0ea; --mustard: #f7b733; --green: #669933; --purple: #8a5baa;
+        --purple-lt: #b48fd0; --green-lt: #8cc152;
+        --display: "Geometr706 BlkCn", "Arial Narrow", sans-serif; --label: "Berlin Sans FB", sans-serif;
+        --flavour: "Bernard MT Condensed", serif; --body: "Aprilio Hope", sans-serif;
+      }
+      html, body { margin: 0; padding: 0; background: var(--deep); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: var(--cream); }
+      .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+      .fill { position: absolute; inset: 0; }
+      .mask { display: block; overflow: hidden; }
+      .ln { display: block; }
+      .ch { display: inline-block; }
+      .ch.sp { width: 0.22em; }
+      .scrib { position: absolute; overflow: visible; }
+      .scrib path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .pat { position: absolute; inset: -100px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.22; }
+
+      /* HOOK */
+      #hk-wrap { position: absolute; left: 40px; top: 820px; width: 1000px; height: 1000px; }
+      #hk-wrap img { position: absolute; inset: 0; width: 1000px; height: 1000px; display: block; }
+      #hk-shade { background: linear-gradient(180deg, rgba(14,14,14,1) 0%, rgba(14,14,14,0.9) 34%, rgba(14,14,14,0) 58%, rgba(14,14,14,0.55) 100%); }
+      #wait { position: absolute; left: 90px; top: 210px; font-family: var(--display); font-size: 270px; line-height: 0.9; color: var(--mustard); }
+      #q { position: absolute; left: 96px; top: 470px; font-family: var(--display); font-size: 116px; line-height: 1; color: var(--cream); white-space: nowrap; }
+      #cursor { display: inline-block; width: 10px; height: 100px; background: var(--mustard); margin-left: 8px; vertical-align: -10px; }
+
+      /* ANSWER */
+      #a1 { position: absolute; left: 0; right: 0; top: 520px; text-align: center; font-family: var(--display); font-size: 140px; line-height: 1; }
+      #a2 { position: absolute; left: 0; right: 0; top: 660px; text-align: center; font-family: var(--display); font-size: 260px; line-height: 1; color: rgba(245,240,234,0.92); }
+      #a3 { position: absolute; left: 0; right: 0; top: 930px; text-align: center; font-family: var(--display); font-size: 300px; line-height: 1; color: var(--mustard); }
+      #a4 { position: absolute; left: 0; right: 0; top: 1260px; text-align: center; font-family: var(--label); font-size: 36px; letter-spacing: 6px; color: rgba(245,240,234,0.7); }
+
+      /* POINTERS */
+      .cl-glow { position: absolute; inset: 0; opacity: 0; }
+      .cl-disc { position: absolute; left: 90px; top: 1460px; width: 900px; height: 900px; display: block; filter: brightness(0.5) saturate(0.9); }
+      #cl-fade { position: absolute; left: 0; right: 0; top: 1400px; height: 300px; background: linear-gradient(180deg, #171717 0%, rgba(23,23,23,0) 100%); }
+      #badge { position: absolute; left: 400px; top: 300px; width: 280px; height: 280px; }
+      #badge svg.ringsvg { position: absolute; inset: 0; width: 280px; height: 280px; }
+      .ico { position: absolute; left: 85px; top: 85px; width: 110px; height: 110px; opacity: 0; }
+      .pq { position: absolute; left: 0; right: 0; top: 650px; text-align: center; font-family: var(--display); font-size: 120px; line-height: 1; color: var(--cream); }
+      .pa { position: absolute; left: 40px; right: 40px; top: 790px; text-align: center; font-family: var(--display); line-height: 0.92; }
+      .pa .ln { display: block; }
+      .pa .mask, .pq .mask { padding-bottom: 0.16em; margin-bottom: -0.16em; }
+      .pf { position: absolute; left: 0; right: 0; top: 1220px; text-align: center; font-family: var(--label); font-size: 30px; letter-spacing: 8px; text-transform: uppercase; color: rgba(245,240,234,0.62); }
+      #sticker { position: absolute; left: 700px; top: 300px; width: 210px; height: 92px; border-radius: 46px; background: var(--mustard); color: var(--ink);
+        display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--display); font-size: 54px; box-shadow: 0 10px 0 rgba(0,0,0,0.35); opacity: 0; }
+      #sticker svg { width: 38px; height: 38px; display: block; }
+      #cl-num { position: absolute; left: 90px; top: 330px; font-family: var(--label); font-size: 28px; letter-spacing: 10px; color: rgba(245,240,234,0.5); }
+
+      /* PAIRING */
+      .strip { position: absolute; top: 380px; width: 340px; height: 1000px; overflow: hidden; }
+      .strip img { position: absolute; left: -200px; top: -200px; width: 740px; height: 1316px; object-fit: cover; display: block; }
+      #pair-t { position: absolute; left: 0; right: 0; top: 1440px; text-align: center; font-family: var(--display); font-size: 120px; line-height: 1; }
+
+      /* END SLATE */
+      #sl-bg { background: radial-gradient(ellipse 70% 40% at 50% 8%, rgba(245,240,234,0.08) 0%, rgba(245,240,234,0) 70%), var(--ink); }
+      #sl-pat { position: absolute; inset: -100px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.2; }
+      #sl-stage { position: absolute; inset: 0; }
+      #sl-logo { position: absolute; left: 50%; top: 300px; width: 340px; height: 331px; margin-left: -170px; display: block; }
+      #sl-rule { position: absolute; left: 470px; top: 700px; width: 140px; height: 3px; background: var(--mustard); }
+      #sl-floor { position: absolute; left: 0; right: 0; top: 1420px; height: 500px; background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 50%); }
+      #sl-row { position: absolute; left: 0; top: 0; width: 1080px; height: 1430px; overflow: hidden; }
+      .sl-pk { position: absolute; display: block; height: auto; }
+      .sl-sh { position: absolute; top: 1404px; height: 46px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 70%); }
+      #sl-tag { position: absolute; left: 0; right: 0; top: 1500px; text-align: center; font-family: var(--label); font-size: 40px; letter-spacing: 16px; text-transform: uppercase; }
+      #sl-handle { position: absolute; left: 0; right: 0; top: 1570px; text-align: center; font-family: var(--label); font-size: 30px; letter-spacing: 4px; color: rgba(245,240,234,0.55); }
+      #grain { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; background-image: url("assets/grain.png"); background-size: 512px 512px; opacity: 0.05; mix-blend-mode: overlay; }
+      #vig { background: radial-gradient(ellipse 85% 70% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="12" data-fps="30">
+
+      <!-- HOOK 0–1.5 -->
+      <section id="cH" class="clip" style="z-index: 1" data-start="0" data-duration="1.5" data-track-index="1">
+        <div class="fill" style="background: var(--deep)"></div>
+        <div id="hk-wrap">
+          <img src="assets/bowl-whiskey.jpg" alt="" />
+          <svg class="scrib" id="hk-circle" viewBox="0 0 1000 1000" style="left: 0; top: 0; width: 1000px; height: 1000px">
+            <path class="draw" d="M590 330 C 520 300, 400 320, 372 400 C 345 485, 420 560, 510 548 C 600 536, 650 470, 628 400 C 610 345, 540 318, 470 335" stroke="#F7B733" stroke-width="12" />
+          </svg>
+        </div>
+        <div class="fill" id="hk-shade"></div>
+        <svg class="scrib" id="hk-arrow" viewBox="0 0 400 300" style="left: 600px; top: 600px; width: 400px; height: 300px">
+          <path class="draw" d="M330 30 C 300 120, 230 200, 120 250" stroke="#F7B733" stroke-width="11" />
+          <path class="draw" d="M150 205 L 112 254 L 172 262" stroke="#F7B733" stroke-width="11" />
+        </svg>
+        <div id="wait">wait.</div>
+        <div id="q"><span class="type" id="qt">this isn't a chip?</span><i id="cursor"></i></div>
+      </section>
+
+      <!-- ANSWER 1.5–2.95 -->
+      <section id="cA" class="clip" style="z-index: 2" data-start="1.5" data-duration="1.45" data-track-index="2">
+        <div class="fill" style="background: var(--deep)"></div><div class="pat" style="opacity: 0.14"></div>
+        <div id="a1"><span class="mask"><span class="ln">it's not</span></span></div>
+        <div id="a2"><span class="mask"><span class="ln">fried.</span></span></div>
+        <svg class="scrib" id="strike" viewBox="0 0 700 200" style="left: 190px; top: 700px; width: 700px; height: 200px">
+          <path class="draw" d="M30 120 C 180 60, 330 150, 480 80 S 640 70, 680 95" stroke="#F7B733" stroke-width="16" />
+          <path class="draw" d="M60 150 C 220 90, 380 170, 520 110 S 650 105, 670 120" stroke="#F7B733" stroke-width="12" />
+        </svg>
+        <div id="a3"><span id="a3w" style="display: inline-block">popped.</span></div>
+        <div id="a4">jowar puffs. not baked either.</div>
+      </section>
+
+      <!-- POINTERS 2.9–8.15 -->
+      <section id="cK" class="clip" style="z-index: 3" data-start="2.9" data-duration="5.25" data-track-index="1">
+        <div class="fill" style="background: var(--ink)"></div><div class="pat"></div>
+        <div class="cl-glow" id="g1" style="background: radial-gradient(ellipse 60% 35% at 50% 25%, rgba(247,183,51,0.22) 0%, rgba(247,183,51,0) 70%)"></div>
+        <div class="cl-glow" id="g2" style="background: radial-gradient(ellipse 60% 35% at 50% 25%, rgba(138,91,170,0.30) 0%, rgba(138,91,170,0) 70%)"></div>
+        <div class="cl-glow" id="g3" style="background: radial-gradient(ellipse 60% 35% at 50% 25%, rgba(102,153,51,0.30) 0%, rgba(102,153,51,0) 70%)"></div>
+        <img class="cl-disc" id="cd-beer" src="assets/disc-beer.png" alt="" /><img class="cl-disc" id="cd-whiskey" src="assets/disc-whiskey.png" alt="" style="opacity: 0" /><img class="cl-disc" id="cd-rum" src="assets/disc-rum.png" alt="" style="opacity: 0" />
+        <div id="cl-fade"></div>
+        <div id="cl-num"><span id="n1">01 / 04</span></div>
+        <div id="badge">
+          <svg class="ringsvg" viewBox="0 0 280 280">
+            <circle cx="140" cy="140" r="130" fill="none" stroke="rgba(245,240,234,0.12)" stroke-width="2" />
+            <circle id="ring" cx="140" cy="140" r="130" fill="none" stroke="#F7B733" stroke-width="6" stroke-linecap="round" transform="rotate(-90 140 140)" />
+          </svg>
+          <svg class="ico" id="i1" viewBox="0 0 40 40" fill="none" stroke="#F5F0EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5c6 8 10 13 10 19a10 10 0 0 1-20 0c0-6 4-11 10-19z"/><path d="M6 34L34 6"/></svg>
+          <svg class="ico" id="i2" viewBox="0 0 40 40" fill="none" stroke="#F5F0EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="9" width="17" height="17" rx="2"/><path d="M31 8v24M25 26l6 6 6-6"/></svg>
+          <svg class="ico" id="i3" viewBox="0 0 40 40" fill="none" stroke="#F5F0EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 35V6"/><path d="M10 7h20l-5 6 5 6H10"/><path d="M4 4l32 32"/></svg>
+          <svg class="ico" id="i4" viewBox="0 0 40 40" fill="none" stroke="#F5F0EA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v8M36 16v8M9 11v18M31 11v18M14 8v24M26 8v24M14 20h12"/></svg>
+        </div>
+        <div id="sticker"><svg viewBox="0 0 40 40" fill="none" stroke="#171717" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21l8 8 16-17"/></svg>facts.</div>
+
+        <div class="pq" id="q1"><span class="mask"><span class="ln">palm oil?</span></span></div>
+        <div class="pa" id="p1" style="font-size: 270px; color: var(--mustard)"><span class="mask"><span class="ln">ghosted.</span></span></div>
+        <svg class="scrib" id="u1" viewBox="0 0 800 80" style="left: 160px; top: 1060px; width: 800px; height: 80px"><path class="draw" d="M20 50 C 200 20, 420 70, 600 35 S 760 40, 780 48" stroke="#F7B733" stroke-width="12" /></svg>
+        <div class="pf" id="f1">no palm oil · not a single drop</div>
+
+        <div class="pq" id="q2"><span class="mask"><span class="ln">sugar?</span></span></div>
+        <div class="pa" id="p2" style="font-size: 200px; color: var(--purple-lt)"><span class="mask"><span class="ln">barely</span></span><span class="mask"><span class="ln">knows her.</span></span></div>
+        <svg class="scrib" id="u2" viewBox="0 0 800 80" style="left: 140px; top: 1180px; width: 800px; height: 80px"><path class="draw" d="M20 45 C 220 70, 400 20, 600 50 S 760 30, 780 40" stroke="#B48FD0" stroke-width="12" /></svg>
+        <div class="pf" id="f2" style="top: 1270px">low in sugar · under 1 g per 100 g</div>
+
+        <div class="pq" id="q3"><span class="mask"><span class="ln">trans fat?</span></span></div>
+        <div class="pa" id="p3" style="font-size: 200px; color: var(--green-lt)"><span class="mask"><span class="ln">zero</span></span><span class="mask"><span class="ln">red flags.</span></span></div>
+        <svg class="scrib" id="u3" viewBox="0 0 800 80" style="left: 140px; top: 1180px; width: 800px; height: 80px"><path class="draw" d="M20 50 C 200 25, 420 65, 600 40 S 760 45, 780 50" stroke="#8CC152" stroke-width="12" /></svg>
+        <div class="pf" id="f3" style="top: 1270px">trans fat free</div>
+
+        <div class="pq" id="q4"><span class="mask"><span class="ln">protein?</span></span></div>
+        <div class="pa" id="p4" style="font-size: 200px; color: var(--mustard)"><span class="mask"><span class="ln">lowkey,</span></span><span class="mask"><span class="ln">yes.</span></span></div>
+        <svg class="scrib" id="u4" viewBox="0 0 800 80" style="left: 140px; top: 1180px; width: 800px; height: 80px"><path class="draw" d="M20 40 C 220 65, 400 25, 600 52 S 760 35, 780 44" stroke="#F7B733" stroke-width="12" /></svg>
+        <div class="pf" id="f4" style="top: 1270px">source of protein · 9–10 g per 100 g</div>
+      </section>
+
+      <!-- PAIRING 8.1–9.05 -->
+      <section id="cP" class="clip" style="z-index: 7" data-start="8.1" data-duration="0.95" data-track-index="2">
+        <div class="fill" style="background: var(--deep)"></div>
+        <div class="strip" id="st1" style="left: 0px"><img src="assets/pour-beer.jpg" alt="" /></div>
+        <div class="strip" id="st2" style="left: 370px"><img src="assets/pour-whiskey.jpg" alt="" /></div>
+        <div class="strip" id="st3" style="left: 740px"><img src="assets/pour-rum.jpg" alt="" /></div>
+        <div id="pair-t"><span style="color: var(--cream)">your drink's new </span><span style="color: var(--mustard)">bestie.</span></div>
+      </section>
+
+      <!-- END SLATE 9.0–12 -->
+      <section id="cE" class="clip" style="z-index: 8" data-start="9.0" data-duration="3.0" data-track-index="1">
+        <div class="fill" id="sl-bg"></div><div id="sl-pat"></div>
+        <div id="sl-stage">
+          <img id="sl-logo" src="assets/logo.svg" alt="DrinksBite" />
+          <div id="sl-rule"></div>
+          <div id="sl-floor"></div>
+          <div class="sl-sh" id="ss1" style="left: 80px; width: 320px"></div>
+          <div class="sl-sh" id="ss2" style="left: 360px; width: 360px"></div>
+          <div class="sl-sh" id="ss3" style="left: 680px; width: 320px"></div>
+          <div id="sl-row">
+            <img class="sl-pk" id="sp-w" src="assets/pack-whiskey.png" alt="" style="left: 95px; top: 1002px; width: 300px" />
+            <img class="sl-pk" id="sp-r" src="assets/pack-rum.png" alt="" style="left: 685px; top: 1016px; width: 300px" />
+            <img class="sl-pk" id="sp-b" src="assets/pack-beer.png" alt="" style="left: 370px; top: 942px; width: 340px" />
+          </div>
+          <div id="sl-tag">Pair · Sip · Repeat</div>
+          <div id="sl-handle">@drinksbite_official</div>
+        </div>
+      </section>
+
+      <section id="fx" class="clip" style="z-index: 20" data-start="0" data-duration="12" data-track-index="6"><div class="fill" id="vig"></div><div id="grain"></div></section>
+      <audio id="bgm" src="assets/soundtrack.wav" data-start="0" data-duration="12" data-track-index="10" data-volume="1"></audio>
+    </div>
+
+    <script>
+      document.querySelectorAll(".type").forEach((el) => {
+        const t = el.textContent; el.textContent = "";
+        for (const c of t) { const s = document.createElement("span"); s.className = c === " " ? "ch sp" : "ch"; if (c !== " ") s.textContent = c; el.appendChild(s); }
+      });
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      for (let k = 0, f = 0; f < 12; k++, f += 1 / 12) tl.set("#grain", { x: ((k * 137) % 200) - 100, y: ((k * 89) % 200) - 100 }, f);
+      /* marker strokes draw on like a pen */
+      const draw = (sel, t, d = 0.3, st = 0.08) => tl.fromTo(sel + " .draw", { strokeDasharray: 1400, strokeDashoffset: 1400 }, { strokeDashoffset: 0, duration: d, stagger: st, ease: "power2.out" }, t);
+
+      /* ---------- HOOK ---------- */
+      tl.fromTo("#hk-wrap", { scale: 1.0, rotation: 0 }, { scale: 1.12, rotation: 6, duration: 1.5, ease: "none" }, 0);
+      tl.fromTo("#wait", { scale: 1.8, opacity: 0, rotation: -6 }, { scale: 1, opacity: 1, rotation: -3, duration: 0.18, ease: "power4.out" }, 0.08);
+      tl.fromTo("#cH", { x: 0 }, { x: 10, duration: 0.03, repeat: 3, yoyo: true, ease: "none" }, 0.26);
+      tl.fromTo("#qt .ch", { opacity: 0 }, { opacity: 1, duration: 0.01, stagger: 0.042 }, 0.32);
+      for (let k = 0; k < 6; k++) tl.set("#cursor", { opacity: k % 2 ? 1 : 0 }, 1.05 + k * 0.08);
+      draw("#hk-circle", 0.7, 0.4);
+      draw("#hk-arrow", 0.95, 0.22, 0.12);
+
+      /* ---------- ANSWER: fried gets scribbled out, popped slaps on ---------- */
+      tl.fromTo("#a1 .ln", { yPercent: 110 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, 1.5);
+      tl.fromTo("#a2 .ln", { yPercent: 110 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, 1.56);
+      draw("#strike", 1.82, 0.22, 0.06);
+      tl.to("#a2", { opacity: 0.45, duration: 0.2 }, 1.95);
+      tl.fromTo("#a3w", { scale: 2.2, rotation: -14, opacity: 0 }, { scale: 1, rotation: -5, opacity: 1, duration: 0.2, ease: "power4.out" }, 2.06);
+      tl.fromTo("#cA", { y: 0 }, { y: 10, duration: 0.03, repeat: 3, yoyo: true, ease: "none" }, 2.26);
+      tl.fromTo("#a4", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 2.35);
+
+      /* ---------- POINTERS ---------- */
+      const RC = 2 * Math.PI * 130;
+      const P = [[2.9, "#F7B733", "#g1", "beer"], [4.2, "#B48FD0", "#g2", "whiskey"], [5.5, "#8CC152", "#g3", "rum"], [6.8, "#F7B733", "#g1", "beer"]];
+      tl.fromTo("#ring", { strokeDasharray: RC, strokeDashoffset: RC }, { strokeDashoffset: 0, duration: 0.5, ease: "power3.inOut" }, 2.9);
+      tl.fromTo(".cl-disc", { rotation: 0, y: 40 }, { rotation: 70, y: 0, duration: 5.25, ease: "none" }, 2.9);
+      tl.fromTo("#cl-num", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 3.0);
+      P.forEach(([t, col, glow, disc], i) => {
+        const n = i + 1;
+        if (i > 0) {
+          const prev = P[i - 1];
+          tl.to(["#q" + i + " .ln", "#p" + i + " .ln"], { yPercent: -150, duration: 0.22, stagger: 0.02, ease: "power3.in" }, t - 0.22);
+          tl.to(["#f" + i, "#u" + i], { opacity: 0, duration: 0.18 }, t - 0.2);
+          tl.to("#i" + i, { opacity: 0, scale: 0.6, rotation: 40, duration: 0.2, ease: "power2.in" }, t - 0.2);
+          tl.to("#sticker", { opacity: 0, scale: 0.6, duration: 0.15 }, t - 0.18);
+          if (prev[2] !== glow) tl.to(prev[2], { opacity: 0, duration: 0.35 }, t - 0.1);
+          tl.to("#ring", { stroke: col, duration: 0.3 }, t - 0.05);
+          tl.fromTo("#badge", { rotation: 0 }, { rotation: 360, duration: 0.6, ease: "power3.inOut", immediateRender: false }, t - 0.2);
+          tl.set("#n1", { textContent: "0" + n + " / 04" }, t);
+          tl.fromTo("#n1", { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, t);
+          tl.set("#cd-" + prev[3], { opacity: 0 }, t);
+          tl.set("#cd-" + disc, { opacity: 1 }, t);
+        }
+        tl.to(glow, { opacity: 1, duration: 0.5 }, t);
+        tl.fromTo("#i" + n, { opacity: 0, scale: 0.6, rotation: -40 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.4, ease: "back.out(1.8)" }, t + 0.1);
+        tl.fromTo("#q" + n + " .ln", { yPercent: 130 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, t + 0.02);
+        tl.fromTo("#p" + n + " .ln", { yPercent: 130, rotation: 4 }, { yPercent: 0, rotation: 0, duration: 0.45, stagger: 0.07, ease: "expo.out" }, t + 0.24);
+        draw("#u" + n, t + 0.5, 0.3);
+        tl.fromTo("#f" + n, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, t + 0.6);
+        tl.fromTo("#sticker", { opacity: 0, scale: 1.8, rotation: -20 }, { opacity: 1, scale: 1, rotation: 8, duration: 0.18, ease: "power4.in", immediateRender: false }, t + 0.72);
+      });
+      tl.to(["#q4 .ln", "#p4 .ln"], { yPercent: -150, duration: 0.25, stagger: 0.03, ease: "power3.in" }, 7.9);
+      tl.to(["#f4", "#u4", "#sticker"], { opacity: 0, duration: 0.2 }, 7.9);
+
+      /* ---------- PAIRING ---------- */
+      [["#st1", 8.1], ["#st2", 8.25], ["#st3", 8.4]].forEach(([s, t]) => tl.fromTo(s, { yPercent: 105 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, t));
+      tl.fromTo("#pair-t span", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.12, ease: "power3.out" }, 8.42);
+
+      /* ---------- END SLATE ---------- */
+      tl.fromTo("#sl-stage", { scale: 1.0 }, { scale: 1.03, duration: 3.0, ease: "none" }, 9.0);
+      tl.fromTo("#sl-logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 9.05);
+      tl.fromTo("#sl-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "expo.out" }, 9.4);
+      [["#sp-w", "#ss1", 9.35], ["#sp-b", "#ss2", 9.47], ["#sp-r", "#ss3", 9.59]].forEach(([p, s, t]) => {
+        tl.fromTo(p, { y: 520 }, { y: 0, duration: 0.6, ease: "power3.out" }, t);
+        tl.fromTo(s, { opacity: 0, scaleX: 0.4 }, { opacity: 1, scaleX: 1, duration: 0.5, ease: "power3.out" }, t + 0.25);
+      });
+      tl.fromTo("#sl-tag", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 10.0);
+      tl.fromTo("#sl-handle", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 10.25);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
