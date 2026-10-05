@@ -109,4 +109,20 @@ def r2d():
     m.add(whoosh(0.5,0.6),6.15); m.add(clink(),6.85)
     slate(m,9.0); m.save('series-v2/r2d.wav')
 
+def r3b():
+    m=Mix(12.5)
+    for t0,ch in ((0.0,[110,138.6,164.8]),(2.95,[98,123.5,146.8]),(5.75,[87.3,110,130.8])):
+        m.add(pad(ch+[c*2 for c in ch],3.6,0.05),t0)
+    b=0.6
+    for i,tt in enumerate(np.arange(0,9.3,b/2)):
+        if i%2==0: m.add(kick(0.5),tt)
+        if i%4==2: m.add(snare(),tt,0.3)
+        m.add(hat(),tt+b/4,0.3)
+    m.add(whoosh(0.35,0.5),1.25); m.add(crunch(0.35,1.0),1.62); m.add(thud(0.6),1.62)
+    m.add(thud(0.7),2.25); m.add(clink(),2.3)
+    for tt in (2.95,5.75): m.add(whoosh(0.7,1.0),tt)
+    for tt in (3.9,6.7): m.add(thud(0.8),tt); m.add(crunch(0.15,0.4),tt+0.02)
+    m.add(whoosh(0.5,0.8),9.05)
+    slate(m,9.5); m.save('series-v2/r3b.wav')
+
 for f in sys.argv[1:]: globals()[f](); print("ok", f)
