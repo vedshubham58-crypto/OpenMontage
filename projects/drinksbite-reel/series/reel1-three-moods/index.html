@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>DrinksBite — Three Moods</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Aprilio Hope"; src: url("assets/aprilio.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+      :root {
+        --ink: #171717; --cream: #f5f0ea; --mustard: #f7b733; --green: #669933; --purple: #8a5baa;
+        --display: "Geometr706 BlkCn", "Arial Narrow", sans-serif; --label: "Berlin Sans FB", sans-serif;
+        --flavour: "Bernard MT Condensed", serif; --body: "Aprilio Hope", sans-serif;
+      }
+      html, body { margin: 0; padding: 0; background: var(--ink); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+      .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+      .scene { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+      .field { position: absolute; inset: 0; }
+      .parts { position: absolute; inset: 0; }
+      .pt { position: absolute; display: block; }
+      .pk { position: absolute; display: block; height: auto; }
+      .big { position: absolute; left: 70px; right: 70px; top: 230px; font-family: var(--display); font-size: 200px; line-height: 0.88; text-transform: uppercase; }
+      .big .w { display: block; }
+      .tag { position: absolute; left: 0; right: 0; top: 1500px; text-align: center; }
+      .tag b { display: block; font-family: var(--flavour); font-weight: normal; font-size: 80px; line-height: 1; text-transform: uppercase; }
+      .tag i { display: block; font-style: normal; font-family: var(--label); font-size: 38px; letter-spacing: 8px; text-transform: uppercase; margin-top: 12px; }
+
+      /* split finale */
+      .band { position: absolute; left: -300px; width: 1680px; height: 700px; box-sizing: border-box; border-bottom: 12px solid var(--cream); }
+      .lab { position: absolute; width: 470px; }
+      .lab b { display: block; font-family: var(--flavour); font-weight: normal; font-size: 74px; line-height: 0.95; text-transform: uppercase; }
+      .lab i { display: block; font-style: normal; font-family: var(--label); font-size: 32px; letter-spacing: 6px; text-transform: uppercase; margin-top: 10px; }
+
+      /* end card */
+      #end-bg { position: absolute; inset: 0; background: var(--ink); }
+      #end-pat { position: absolute; inset: -200px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.35; }
+      #end-logo { position: absolute; left: 50%; top: 560px; width: 420px; height: 408px; margin-left: -210px; display: block; }
+      #end-tag { position: absolute; left: 0; right: 0; top: 1060px; display: flex; justify-content: center; gap: 24px; font-family: var(--display); font-size: 120px; text-transform: uppercase; }
+      #end-tag span { display: block; }
+      #end-handle { position: absolute; left: 0; right: 0; top: 1240px; text-align: center; font-family: var(--label); font-size: 40px; letter-spacing: 3px; color: var(--cream); }
+      #grain { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; background-image: url("assets/grain.png"); background-size: 512px 512px; opacity: 0.06; mix-blend-mode: overlay; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="11" data-fps="30">
+
+      <!-- 1. HERBY CRUNCH — mustard -->
+      <section id="c1" class="clip" style="z-index: 1" data-start="0" data-duration="2.0" data-track-index="1"><div class="scene" id="s1">
+        <div class="field" style="background: radial-gradient(circle at 50% 52%, #ffd57e 0%, #f7b733 46%, #d68f17 100%)"></div>
+        <div class="parts" id="pa1"></div>
+        <img class="pk" id="pk1" src="assets/pack-beer.png" alt="" style="left: 300px; top: 640px; width: 480px; filter: drop-shadow(0 40px 46px rgba(80,40,0,0.45))" />
+        <div class="parts" id="pf1"></div>
+        <div class="big" id="bg1" style="color: var(--ink); text-align: left"><span class="w">Herby</span><span class="w">crunch</span></div>
+        <div class="tag" id="tg1" style="color: var(--ink)"><b>Cheddar &amp; Herbs</b><i>Made for beer</i></div>
+      </div></section>
+
+      <!-- 2. TOASTY UMAMI — purple -->
+      <section id="c2" class="clip" style="z-index: 2" data-start="1.7" data-duration="2.3" data-track-index="2"><div class="scene" id="s2">
+        <div class="field" style="background: radial-gradient(circle at 50% 52%, #b994d6 0%, #8a5baa 48%, #59346f 100%)"></div>
+        <div class="parts" id="pa2"></div>
+        <img class="pk" id="pk2" src="assets/pack-whiskey.png" alt="" style="left: 300px; top: 640px; width: 480px; filter: drop-shadow(0 40px 46px rgba(30,0,40,0.5))" />
+        <div class="parts" id="pf2"></div>
+        <div class="big" id="bg2" style="color: var(--cream); text-align: right; text-shadow: 0 8px 0 rgba(23,23,23,0.35)"><span class="w">Toasty</span><span class="w">umami</span></div>
+        <div class="tag" id="tg2" style="color: var(--cream)"><b>Toasted Sesame Umami</b><i>Made for whiskey</i></div>
+      </div></section>
+
+      <!-- 3. TROPICAL HEAT — green -->
+      <section id="c3" class="clip" style="z-index: 3" data-start="3.7" data-duration="2.3" data-track-index="1"><div class="scene" id="s3">
+        <div class="field" style="background: radial-gradient(circle at 50% 52%, #a2d066 0%, #669933 48%, #3f6a1b 100%)"></div>
+        <div class="parts" id="pa3"></div>
+        <img class="pk" id="pk3" src="assets/pack-rum.png" alt="" style="left: 300px; top: 650px; width: 480px; filter: drop-shadow(0 40px 46px rgba(10,30,0,0.5))" />
+        <div class="parts" id="pf3"></div>
+        <div class="big" id="bg3" style="color: var(--cream); text-align: left; text-shadow: 0 8px 0 rgba(23,23,23,0.35)"><span class="w">Tropical</span><span class="w">heat</span></div>
+        <div class="tag" id="tg3" style="color: var(--cream)"><b>Coconut &amp; Spices</b><i>Made for rum</i></div>
+      </div></section>
+
+      <!-- 4. diagonal tri-split -->
+      <section id="c4" class="clip" style="z-index: 4" data-start="5.7" data-duration="3.7" data-track-index="2"><div class="scene" id="s4">
+        <div class="field" style="background: var(--ink)"></div>
+        <div id="tilt" style="position: absolute; inset: 0">
+          <div class="band" id="bd3" style="top: 1150px; height: 1100px; background: radial-gradient(circle at 60% 40%, #9ccc63 0%, #669933 55%, #44701f 100%); border-bottom: 0"></div>
+          <div class="band" id="bd2" style="top: 520px; background: radial-gradient(circle at 40% 50%, #b48fd0 0%, #8a5baa 55%, #5e3a7a 100%)"></div>
+          <div class="band" id="bd1" style="top: -140px; background: radial-gradient(circle at 60% 60%, #ffd27a 0%, #f7b733 55%, #d9921a 100%)"></div>
+          <div class="parts" id="pa4"></div>
+          <img class="pk" id="sp1" src="assets/pack-beer.png" alt="" style="left: 600px; top: 120px; width: 330px; filter: drop-shadow(0 30px 34px rgba(0,0,0,0.4))" />
+          <img class="pk" id="sp2" src="assets/pack-whiskey.png" alt="" style="left: 140px; top: 720px; width: 330px; filter: drop-shadow(0 30px 34px rgba(0,0,0,0.45))" />
+          <img class="pk" id="sp3" src="assets/pack-rum.png" alt="" style="left: 600px; top: 1290px; width: 330px; filter: drop-shadow(0 30px 34px rgba(0,0,0,0.45))" />
+          <div class="lab" id="lb1" style="left: 90px; top: 300px; color: var(--ink)"><b>Cheddar &amp; Herbs</b><i>Beer</i></div>
+          <div class="lab" id="lb2" style="left: 540px; top: 930px; text-align: right; color: var(--cream)"><b>Toasted Sesame Umami</b><i>Whiskey</i></div>
+          <div class="lab" id="lb3" style="left: 90px; top: 1480px; color: var(--cream)"><b>Coconut &amp; Spices</b><i>Rum</i></div>
+        </div>
+      </div></section>
+
+      <!-- 5. end card -->
+      <section id="c5" class="clip" style="z-index: 5" data-start="9.1" data-duration="1.9" data-track-index="1"><div class="scene" id="s5">
+        <div id="end-bg"></div><div id="end-pat"></div>
+        <img id="end-logo" src="assets/logo.svg" alt="DrinksBite" />
+        <div id="end-tag"><span style="color: var(--mustard)">Pair.</span><span style="color: #a77cc8">Sip.</span><span style="color: #7fb446">Repeat.</span></div>
+        <div id="end-handle">@drinksbite_official</div>
+      </div></section>
+
+      <section id="fx" class="clip" style="z-index: 20" data-start="0" data-duration="11" data-track-index="6"><div id="grain"></div></section>
+      <audio id="bgm" src="assets/soundtrack.wav" data-start="0" data-duration="11" data-track-index="10" data-volume="1"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      function prng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+      const PUFFS = ["puff0", "puff1", "puff2", "puff4", "puff5", "puff6"];
+
+      /* particle factory: kind = puff | herb | crumb | seed | shave | dust */
+      function makePart(box, kind, r, opts) {
+        let el;
+        if (kind === "puff") {
+          el = document.createElement("img"); el.src = "assets/" + PUFFS[Math.floor(r() * PUFFS.length)] + ".png";
+          const s = opts.size; el.style.width = s + "px"; el.style.height = s + "px";
+          if (opts.blur) el.style.filter = "blur(" + opts.blur + "px)";
+        } else {
+          el = document.createElement("i");
+          if (kind === "herb") { const w = 22 + r() * 26; el.style.width = w + "px"; el.style.height = (w * 0.45) + "px"; el.style.background = r() > 0.5 ? "#3d6b1f" : "#58862b"; el.style.borderRadius = "0 100% 0 100%"; }
+          if (kind === "crumb") { const w = 14 + r() * 22; el.style.width = w + "px"; el.style.height = w + "px"; el.style.background = r() > 0.5 ? "#f39a2b" : "#ffcf4a"; el.style.borderRadius = "4px"; }
+          if (kind === "seed") { const w = 14 + r() * 12; el.style.width = w + "px"; el.style.height = (w * 0.55) + "px"; el.style.background = r() > 0.35 ? "#f4e9d2" : "#141414"; el.style.borderRadius = "50% 50% 50% 50% / 60% 60% 40% 40%"; }
+          if (kind === "shave") { const w = 30 + r() * 40; el.style.width = w + "px"; el.style.height = (w * 0.5) + "px"; el.style.borderTop = "6px solid #fbf6ec"; el.style.borderRadius = "50% 50% 0 0"; el.style.boxSizing = "border-box"; }
+          if (kind === "dust") { const w = 6 + r() * 10; el.style.width = w + "px"; el.style.height = w + "px"; el.style.background = r() > 0.5 ? "#8b4a1c" : "#c0612b"; el.style.borderRadius = "50%"; }
+        }
+        el.className = "pt";
+        box.appendChild(el);
+        return el;
+      }
+      /* scatter particles avoiding the pack column, float them for the scene */
+      function scatter(boxId, kinds, count, t0, dur, seed, front) {
+        const box = document.getElementById(boxId), r = prng(seed);
+        for (let i = 0; i < count; i++) {
+          const kind = kinds[i % kinds.length];
+          const opts = {};
+          if (kind === "puff") { opts.size = front ? 170 + r() * 120 : 60 + r() * 90; opts.blur = front ? 5 : (r() > 0.5 ? 1.5 : 0); }
+          const el = makePart(box, kind, r, opts);
+          let x = r() * 1000 - 20, y = 120 + r() * 1650;
+          if (x > 230 && x < 820 && y > 560 && y < 1400) x = x < 525 ? x - 260 : x + 260;
+          if (front) { x = r() > 0.5 ? -90 + r() * 110 : 930 + r() * 110; y = 700 + r() * 600; }
+          el.style.left = x + "px"; el.style.top = y + "px";
+          const dx = (r() - 0.5) * 160, dy = -60 - r() * 160, rot = (r() - 0.5) * 300;
+          tl.fromTo(el, { x: 0, y: 0, rotation: r() * 360, scale: front ? 0.9 : 0.8 },
+            { x: dx, y: dy, rotation: "+=" + rot, scale: front ? 1.25 : 1.05, duration: dur, ease: "sine.out" }, t0);
+        }
+      }
+
+      /* whip-slide entry: scene skids in from the right with a skew */
+      function whipIn(sceneSel, t, prevSel) {
+        tl.fromTo(sceneSel, { x: 1300, skewX: -16 }, { x: 0, skewX: 0, duration: 0.32, ease: "expo.out" }, t);
+        if (prevSel) tl.to(prevSel, { x: -420, skewX: 8, duration: 0.32, ease: "expo.out" }, t);
+      }
+      /* pack hero: pop in, then float with gentle sway */
+      function packFloat(sel, t0, dur) {
+        tl.fromTo(sel, { scale: 0.6, rotation: -14, y: 120, opacity: 0 }, { scale: 1, rotation: -3, y: 0, opacity: 1, duration: 0.45, ease: "back.out(1.8)" }, t0);
+        tl.to(sel, { y: -26, rotation: 3, scale: 1.04, duration: dur - 0.45, ease: "sine.inOut" }, t0 + 0.45);
+      }
+      function bigText(id, t0) {
+        tl.fromTo("#" + id + " .w", { scale: 0.3, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.36, stagger: 0.12, ease: "back.out(2.4)", transformOrigin: "50% 60%" }, t0);
+      }
+      function tag(id, t0) { tl.fromTo("#" + id, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, t0); }
+
+      /* grain on twos */
+      for (let k = 0, f = 0; f < 11; k++, f += 1 / 15) tl.set("#grain", { x: ((k * 137) % 200) - 100, y: ((k * 89) % 200) - 100 }, f);
+
+      /* 1 */
+      scatter("pa1", ["puff", "herb", "crumb", "herb", "crumb"], 22, 0, 2.3, 1, false);
+      scatter("pf1", ["puff", "herb"], 4, 0, 2.3, 2, true);
+      packFloat("#pk1", 0.0, 2.3);
+      bigText("bg1", 0.12);
+      tag("tg1", 0.45);
+
+      /* 2 */
+      whipIn("#s2", 1.7, "#s1");
+      scatter("pa2", ["puff", "seed", "seed", "seed"], 30, 1.7, 2.6, 3, false);
+      scatter("pf2", ["puff", "seed"], 4, 1.7, 2.6, 4, true);
+      packFloat("#pk2", 1.78, 2.3);
+      bigText("bg2", 1.85);
+      tag("tg2", 2.1);
+
+      /* 3 */
+      whipIn("#s3", 3.7, "#s2");
+      scatter("pa3", ["puff", "shave", "dust", "shave", "dust"], 28, 3.7, 2.6, 5, false);
+      scatter("pf3", ["puff", "shave"], 4, 3.7, 2.6, 6, true);
+      packFloat("#pk3", 3.78, 2.3);
+      bigText("bg3", 3.85);
+      tag("tg3", 4.1);
+
+      /* 4: tri-split — bands rotate in on the diagonal, packs pop on the beats */
+      whipIn("#s4", 5.7, "#s3");
+      tl.fromTo("#bd1", { x: 1700, rotation: -12 }, { x: 0, rotation: -12, duration: 0.4, ease: "expo.out" }, 5.85);
+      tl.fromTo("#bd2", { x: -1700, rotation: -12 }, { x: 0, rotation: -12, duration: 0.4, ease: "expo.out" }, 6.05);
+      tl.fromTo("#bd3", { x: 1700, rotation: -12 }, { x: 0, rotation: -12, duration: 0.4, ease: "expo.out" }, 6.25);
+      [["#sp1", 6.05, -8], ["#sp2", 6.3, 8], ["#sp3", 6.55, -8]].forEach(([s, t, r]) => {
+        tl.fromTo(s, { scale: 0.2, rotation: r * 3, opacity: 0 }, { scale: 1, rotation: r, opacity: 1, duration: 0.45, ease: "back.out(2)" }, t);
+        tl.to(s, { y: -22, rotation: r * 0.4, duration: 2.6, ease: "sine.inOut" }, t + 0.45);
+      });
+      [["#lb1", 6.2, -60], ["#lb2", 6.45, 60], ["#lb3", 6.7, -60]].forEach(([s, t, dx]) => {
+        tl.fromTo(s, { x: dx, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, t);
+      });
+      scatter("pa4", ["puff", "seed", "herb", "shave"], 16, 5.9, 3.5, 7, false);
+      tl.fromTo("#tilt", { rotation: 0, scale: 1 }, { rotation: -2, scale: 1.04, duration: 3.4, ease: "sine.inOut" }, 6.0);
+
+      /* 5: end card */
+      whipIn("#s5", 9.1, "#s4");
+      tl.fromTo("#end-logo", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 9.3);
+      tl.fromTo("#end-tag span", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, stagger: 0.12, ease: "back.out(2)" }, 9.6);
+      tl.fromTo("#end-handle", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 10.0);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

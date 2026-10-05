@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>DrinksBite — Pick Your Pour</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Aprilio Hope"; src: url("assets/aprilio.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+      :root {
+        --ink: #171717; --cream: #f5f0ea; --mustard: #f7b733; --green: #669933; --purple: #8a5baa;
+        --display: "Geometr706 BlkCn", "Arial Narrow", sans-serif; --label: "Berlin Sans FB", sans-serif;
+        --flavour: "Bernard MT Condensed", serif; --body: "Aprilio Hope", sans-serif;
+      }
+      html, body { margin: 0; padding: 0; background: var(--ink); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: var(--cream); }
+      .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+      .scene { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+      .fill { position: absolute; inset: 0; }
+      .pat { position: absolute; inset: -200px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.3; }
+
+      /* hook */
+      .hook { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--display); text-transform: uppercase; line-height: 1; }
+      .hook span { display: block; }
+
+      /* pairing scenes */
+      .photo-wrap { position: absolute; left: 0; top: 0; width: 1080px; height: 1080px; overflow: hidden; }
+      .photo { position: absolute; left: -10px; top: 0; width: 1100px; height: 1080px; object-fit: cover; display: block; }
+      .photo-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(23,23,23,0.55) 0%, rgba(23,23,23,0) 30%); }
+      .cut { position: absolute; left: -100px; width: 1280px; height: 14px; background: var(--cream); }
+      .pk { position: absolute; display: block; height: auto; }
+      .q { position: absolute; font-family: var(--display); font-size: 190px; line-height: 0.9; text-transform: uppercase; }
+      .a { position: absolute; font-family: var(--flavour); font-size: 74px; line-height: 0.95; text-transform: uppercase; }
+      .a small { display: block; font-family: var(--label); font-size: 34px; letter-spacing: 7px; margin-bottom: 14px; }
+      .drink-chip { position: absolute; top: 230px; left: 70px; padding: 14px 30px; border-radius: 40px; background: rgba(23,23,23,0.7);
+        font-family: var(--label); font-size: 34px; letter-spacing: 6px; text-transform: uppercase; }
+
+      /* tri-split */
+      #tri-top { position: absolute; left: 0; right: 0; top: 190px; text-align: center; font-family: var(--display); font-size: 150px; line-height: 1; text-transform: uppercase; }
+      .col { position: absolute; top: 400px; width: 360px; height: 1120px; overflow: hidden; }
+      .col .cp { position: absolute; left: 0; top: 0; width: 360px; height: 520px; object-fit: cover; display: block; }
+      .col .cf { position: absolute; left: 0; top: 520px; width: 360px; height: 600px; }
+      .col .cpk { position: absolute; left: 40px; top: 590px; width: 280px; height: auto; display: block; filter: drop-shadow(0 24px 26px rgba(0,0,0,0.45)); }
+      .col .cl { position: absolute; left: 0; right: 0; top: 1030px; text-align: center; font-family: var(--label); font-size: 34px; letter-spacing: 6px; text-transform: uppercase; }
+      .vline { position: absolute; top: 400px; width: 8px; height: 1120px; background: var(--cream); margin-left: -4px; }
+      #tri-handle { position: absolute; left: 0; right: 0; top: 1580px; text-align: center; font-family: var(--label); font-size: 40px; letter-spacing: 3px; }
+      #grain { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; background-image: url("assets/grain.png"); background-size: 512px 512px; opacity: 0.06; mix-blend-mode: overlay; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="12" data-fps="30">
+
+      <!-- hook 0–1.5 -->
+      <section id="c0" class="clip" style="z-index: 1" data-start="0" data-duration="1.75" data-track-index="1"><div class="scene" id="s0">
+        <div class="fill" style="background: var(--ink)"></div><div class="pat"></div>
+        <div class="hook" style="top: 520px">
+          <span id="h1" style="font-size: 190px">What are</span>
+          <span id="h2" style="font-size: 190px">you pouring</span>
+          <span id="h3" style="font-size: 260px; color: var(--mustard)">tonight?</span>
+        </div>
+      </div></section>
+
+      <!-- beer 1.5–4.0 -->
+      <section id="c1" class="clip" style="z-index: 2" data-start="1.5" data-duration="2.75" data-track-index="2"><div class="scene" id="s1">
+        <div class="fill" style="background: radial-gradient(circle at 50% 75%, #ffd27a 0%, #f7b733 45%, #d9921a 100%)"></div>
+        <div class="photo-wrap" id="pw1" style="clip-path: polygon(0 0,100% 0,100% 86%,0 100%)"><img class="photo" id="ph1" src="assets/pourL-beer.jpg" alt="" /><div class="photo-shade"></div></div>
+        <div class="cut" id="ct1" style="top: 1000px; transform: rotate(-7deg)"></div>
+        <div class="drink-chip" id="dc1">Pouring a beer?</div>
+        <img class="pk" id="pk1" src="assets/pack-beer.png" alt="" style="left: 600px; top: 1080px; width: 400px; filter: drop-shadow(0 30px 36px rgba(80,40,0,0.45))" />
+        <div class="q" id="q1" style="left: 70px; top: 1170px; color: var(--ink)">Beer?</div>
+        <div class="a" id="a1" style="left: 70px; top: 1370px; color: var(--ink)"><small>Grab</small>Cheddar<br />&amp; Herbs</div>
+      </div></section>
+
+      <!-- whiskey 4.0–6.5 -->
+      <section id="c2" class="clip" style="z-index: 3" data-start="4.0" data-duration="2.75" data-track-index="1"><div class="scene" id="s2">
+        <div class="fill" style="background: radial-gradient(circle at 50% 75%, #b994d6 0%, #8a5baa 45%, #5e3a7a 100%)"></div>
+        <div class="photo-wrap" id="pw2" style="clip-path: polygon(0 0,100% 0,100% 100%,0 86%)"><img class="photo" id="ph2" src="assets/pourL-whiskey.jpg" alt="" /><div class="photo-shade"></div></div>
+        <div class="cut" id="ct2" style="top: 1000px; transform: rotate(7deg)"></div>
+        <div class="drink-chip" id="dc2" style="left: auto; right: 70px">Pouring a whiskey?</div>
+        <img class="pk" id="pk2" src="assets/pack-whiskey.png" alt="" style="left: 50px; top: 1100px; width: 350px; filter: drop-shadow(0 30px 36px rgba(30,0,40,0.5))" />
+        <div class="q" id="q2" style="right: 70px; top: 1185px; font-size: 150px; text-align: right; color: var(--cream)">Whiskey?</div>
+        <div class="a" id="a2" style="right: 70px; top: 1370px; text-align: right; color: var(--cream)"><small>Grab</small>Toasted Sesame<br />Umami</div>
+      </div></section>
+
+      <!-- rum 6.5–9.0 -->
+      <section id="c3" class="clip" style="z-index: 4" data-start="6.5" data-duration="2.75" data-track-index="2"><div class="scene" id="s3">
+        <div class="fill" style="background: radial-gradient(circle at 50% 75%, #9ccc63 0%, #669933 45%, #44701f 100%)"></div>
+        <div class="photo-wrap" id="pw3" style="clip-path: polygon(0 0,100% 0,100% 86%,0 100%)"><img class="photo" id="ph3" src="assets/pourL-rum.jpg" alt="" /><div class="photo-shade"></div></div>
+        <div class="cut" id="ct3" style="top: 1000px; transform: rotate(-7deg)"></div>
+        <div class="drink-chip" id="dc3">Pouring a rum?</div>
+        <img class="pk" id="pk3" src="assets/pack-rum.png" alt="" style="left: 600px; top: 1090px; width: 400px; filter: drop-shadow(0 30px 36px rgba(10,30,0,0.5))" />
+        <div class="q" id="q3" style="left: 70px; top: 1170px; color: var(--cream)">Rum?</div>
+        <div class="a" id="a3" style="left: 70px; top: 1370px; color: var(--cream)"><small>Grab</small>Coconut<br />&amp; Spices</div>
+      </div></section>
+
+      <!-- tri-split 9.0–12 -->
+      <section id="c4" class="clip" style="z-index: 5" data-start="9.0" data-duration="3.0" data-track-index="1"><div class="scene" id="s4">
+        <div class="fill" style="background: var(--ink)"></div><div class="pat"></div>
+        <div id="tri-top"><span style="color: var(--cream)">Pick your </span><span style="color: var(--mustard)">pour.</span></div>
+        <div class="col" id="k1" style="left: 0px">
+          <img class="cp" src="assets/pourL-beer.jpg" alt="" style="object-position: 46% 50%" />
+          <div class="cf" style="background: var(--mustard)"></div>
+          <img class="cpk" src="assets/pack-beer.png" alt="" />
+          <div class="cl" style="color: var(--ink)">Beer</div>
+        </div>
+        <div class="col" id="k2" style="left: 360px">
+          <img class="cp" src="assets/pourL-whiskey.jpg" alt="" style="object-position: 48% 50%" />
+          <div class="cf" style="background: var(--purple)"></div>
+          <img class="cpk" src="assets/pack-whiskey.png" alt="" />
+          <div class="cl">Whiskey</div>
+        </div>
+        <div class="col" id="k3" style="left: 720px">
+          <img class="cp" src="assets/pourL-rum.jpg" alt="" style="object-position: 50% 50%" />
+          <div class="cf" style="background: var(--green)"></div>
+          <img class="cpk" src="assets/pack-rum.png" alt="" />
+          <div class="cl">Rum</div>
+        </div>
+        <div class="vline" id="v1" style="left: 360px"></div><div class="vline" id="v2" style="left: 720px"></div>
+        <div id="tri-handle">@drinksbite_official · drinksbite.com</div>
+      </div></section>
+
+      <section id="fx" class="clip" style="z-index: 20" data-start="0" data-duration="12" data-track-index="6"><div id="grain"></div></section>
+      <audio id="bgm" src="assets/soundtrack.wav" data-start="0" data-duration="12" data-track-index="10" data-volume="1"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      for (let k = 0, f = 0; f < 12; k++, f += 1 / 15) tl.set("#grain", { x: ((k * 137) % 200) - 100, y: ((k * 89) % 200) - 100 }, f);
+
+      /* hook: one line per kick */
+      [["#h1", 0.2], ["#h2", 0.5], ["#h3", 0.8]].forEach(([s, t], i) => {
+        tl.fromTo(s, { scale: i === 2 ? 2.2 : 1.7, opacity: 0, rotation: i === 2 ? -6 : 0 }, { scale: 1, opacity: 1, rotation: i === 2 ? -3 : 0, duration: 0.25, ease: "power4.out" }, t);
+      });
+      tl.fromTo("#s0", { x: 0 }, { x: 12, duration: 0.04, repeat: 3, yoyo: true, ease: "none" }, 0.82);
+
+      function whipIn(sceneSel, t, prevSel, dir) {
+        tl.fromTo(sceneSel, { x: 1300 * dir, skewX: -14 * dir }, { x: 0, skewX: 0, duration: 0.34, ease: "expo.out" }, t);
+        if (prevSel) tl.to(prevSel, { x: -420 * dir, skewX: 8 * dir, duration: 0.34, ease: "expo.out" }, t);
+      }
+      function pairing(n, t0, dir, prev) {
+        const s = "#s" + n;
+        whipIn(s, t0, prev, dir);
+        tl.fromTo("#ph" + n, { scale: 1.18 }, { scale: 1.02, duration: 2.5, ease: "power2.out" }, t0);
+        tl.fromTo("#dc" + n, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, t0 + 0.3);
+        tl.fromTo("#ct" + n, { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "expo.out" }, t0 + 0.15);
+        tl.fromTo("#q" + n, { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "power4.out" }, t0 + 0.35);
+        // pack lands on the crunch (t0 + 0.5)
+        tl.fromTo("#pk" + n, { y: 900, rotation: 18 * dir }, { y: 0, rotation: -5 * dir, duration: 0.3, ease: "power3.in" }, t0 + 0.2);
+        tl.to("#pk" + n, { scaleX: 1.06, scaleY: 0.93, duration: 0.08, transformOrigin: "50% 100%" }, t0 + 0.5);
+        tl.to("#pk" + n, { scaleX: 1, scaleY: 1, duration: 0.4, ease: "elastic.out(1.1,0.45)", transformOrigin: "50% 100%" }, t0 + 0.58);
+        tl.to("#pk" + n, { y: -20, rotation: 2 * dir, duration: 1.5, ease: "sine.inOut" }, t0 + 1.0);
+        tl.fromTo("#a" + n, { opacity: 0, x: -40 * dir }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, t0 + 0.6);
+      }
+      pairing(1, 1.5, 1, "#s0");
+      pairing(2, 4.0, -1, "#s1");
+      pairing(3, 6.5, 1, "#s2");
+
+      /* tri-split: columns rise on the pops */
+      whipIn("#s4", 9.0, "#s3", -1);
+      [["#k1", 9.15], ["#k2", 9.35], ["#k3", 9.55]].forEach(([s, t]) => {
+        tl.fromTo(s, { yPercent: 100 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, t);
+        tl.fromTo(s + " .cpk", { scale: 0.4, rotation: -14 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2)" }, t + 0.12);
+        tl.to(s + " .cpk", { y: -16, duration: 2.0, ease: "sine.inOut" }, t + 0.6);
+      });
+      tl.fromTo(["#v1", "#v2"], { scaleY: 0 }, { scaleY: 1, duration: 0.4, ease: "expo.out" }, 9.7);
+      tl.fromTo("#tri-top span", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, stagger: 0.15, ease: "back.out(2)" }, 9.85);
+      tl.fromTo("#tri-handle", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 10.3);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
