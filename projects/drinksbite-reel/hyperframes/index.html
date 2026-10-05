@@ -126,6 +126,10 @@
       #end-price small { font-family: var(--label); font-size: 48px; letter-spacing: 4px; margin-left: 18px; vertical-align: middle; }
       #end-url { margin-top: 46px; font-family: var(--label); font-size: 56px; letter-spacing: 3px; color: var(--beer); }
       #end-legal { position: absolute; left: 0; right: 0; top: 1600px; text-align: center; font-family: var(--body); font-size: 30px; opacity: 0.6; }
+      /* fizz rings — pack motif, as on @drinksbite_official */
+      .fizz { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+      .ring { position: absolute; display: block; border-radius: 50%; box-sizing: border-box; }
+      .hard-shadow { text-shadow: 8px 8px 0 #000, 4px 4px 0 #000; }
     </style>
   </head>
   <body>
@@ -140,12 +144,13 @@
 
       <!-- S1 hook 0–3.0 -->
       <section id="s1" class="clip" data-start="0" data-duration="3.0" data-track-index="1">
+        <div class="fizz" id="fz1"></div>
         <div id="bowl-disc"><img id="bowl-img" src="assets/bowl-beer.jpg" alt="" /></div>
         <div class="center-col" id="hook-stack">
-          <span class="hook-word" id="w1">Your</span>
-          <span class="hook-word" id="w2">drink</span>
-          <span class="hook-word" id="w3">needs a</span>
-          <span class="hook-word" id="w4">bite.</span>
+          <span class="hook-word hard-shadow" id="w1">Your</span>
+          <span class="hook-word hard-shadow" id="w2">drink</span>
+          <span class="hook-word hard-shadow" id="w3">needs a</span>
+          <span class="hook-word hard-shadow" id="w4">bite.</span>
         </div>
         <div id="hook-sub">India's first <b>drink-pairing chakna</b></div>
       </section>
@@ -154,8 +159,9 @@
       <section id="s2" class="clip" data-start="3.0" data-duration="2.5" data-track-index="1">
         <img id="s2-pour" class="pour" src="assets/pour-beer.jpg" alt="" />
         <div class="fill pour-shade"></div>
+        <div class="fizz" id="fz2"></div>
         <div class="pair-label" id="s2-label">Best paired with</div>
-        <div class="pair-word-wrap"><span class="pair-word" id="s2-word" style="color: var(--beer)">Beer</span></div>
+        <div class="pair-word-wrap"><span class="pair-word hard-shadow" id="s2-word" style="color: var(--beer)">Beer</span></div>
         <img id="s2-pack" class="pack" src="assets/pack-beer.png" alt="" />
         <div class="chip" id="s2-chip" style="background: var(--beer)">Cheddar &amp; Herbs</div>
         <div class="tick" id="s2-tick">Herby · Tangy · A lil smoky</div>
@@ -165,8 +171,9 @@
       <section id="s3" class="clip" data-start="5.5" data-duration="2.5" data-track-index="1">
         <img id="s3-pour" class="pour" src="assets/pour-rum.jpg" alt="" />
         <div class="fill pour-shade"></div>
+        <div class="fizz" id="fz3"></div>
         <div class="pair-label" id="s3-label">Best paired with</div>
-        <div class="pair-word-wrap"><span class="pair-word" id="s3-word" style="color: var(--rum)">Rum</span></div>
+        <div class="pair-word-wrap"><span class="pair-word hard-shadow" id="s3-word" style="color: var(--rum)">Rum</span></div>
         <img id="s3-pack" class="pack" src="assets/pack-rum.png" alt="" />
         <div class="chip" id="s3-chip" style="background: var(--rum)">Coconut &amp; Spices</div>
         <div class="tick" id="s3-tick">Kolhapur jaggery · Kokum · Warm spice</div>
@@ -176,8 +183,9 @@
       <section id="s4" class="clip" data-start="8.0" data-duration="2.5" data-track-index="1">
         <img id="s4-pour" class="pour" src="assets/pour-whiskey.jpg" alt="" />
         <div class="fill pour-shade"></div>
+        <div class="fizz" id="fz4"></div>
         <div class="pair-label" id="s4-label">Best paired with</div>
-        <div class="pair-word-wrap"><span class="pair-word" id="s4-word" style="color: var(--whiskey); font-size: 250px; line-height: 1.32">Whiskey</span></div>
+        <div class="pair-word-wrap"><span class="pair-word hard-shadow" id="s4-word" style="color: var(--whiskey); font-size: 250px; line-height: 1.32">Whiskey</span></div>
         <img id="s4-pack" class="pack" src="assets/pack-whiskey.png" alt="" />
         <div class="chip" id="s4-chip" style="background: var(--whiskey); color: var(--cream)">Toasted Sesame Umami</div>
         <div class="tick" id="s4-tick">Sesame · Dark coffee · Deep umami</div>
@@ -185,11 +193,12 @@
 
       <!-- S5 line-up 10.5–12.5 -->
       <section id="s5" class="clip" data-start="10.5" data-duration="2.0" data-track-index="1">
+        <div class="fizz" id="fz5"></div>
         <div id="s5-top">Jowar puffs · <b>Popped, not fried</b></div>
         <img id="lp-rum" class="lp" src="assets/pack-rum.png" alt="" />
         <img id="lp-whiskey" class="lp" src="assets/pack-whiskey.png" alt="" />
         <img id="lp-beer" class="lp" src="assets/pack-beer.png" alt="" />
-        <div id="tagline"><span id="t1">Pair.</span><span id="t2">Sip.</span><span id="t3">Repeat.</span></div>
+        <div id="tagline" class="hard-shadow"><span id="t1">Pair.</span><span id="t2">Sip.</span><span id="t3">Repeat.</span></div>
       </section>
 
       <!-- S6 end card 12.5–15 -->
@@ -272,6 +281,29 @@
       tl.fromTo("#end-url", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 13.3);
       tl.fromTo("#end-legal", { opacity: 0 }, { opacity: 0.6, duration: 0.4 }, 13.5);
       tl.to("#end-logo", { scale: 1.04, duration: 1.4, ease: "sine.inOut" }, 13.0);
+
+      /* ---- fizz rings: seeded, deterministic ---- */
+      function prng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+      function fizz(id, colors, t0, dur, count, seed) {
+        const box = document.getElementById(id), r = prng(seed);
+        for (let i = 0; i < count; i++) {
+          const el = document.createElement("i");
+          const d = 14 + Math.floor(r() * 46);
+          el.className = "ring";
+          el.style.width = d + "px"; el.style.height = d + "px";
+          el.style.left = Math.floor(r() * 1040) + "px"; el.style.top = "1960px";
+          el.style.border = Math.max(3, Math.round(d / 9)) + "px solid " + colors[i % colors.length];
+          box.appendChild(el);
+          const rise = 900 + r() * 1300, start = t0 + r() * dur * 0.5;
+          tl.fromTo(el, { y: 0, x: 0, opacity: 0 }, { y: -rise, x: (r() - 0.5) * 120, opacity: 0.85, duration: Math.max(0.6, t0 + dur - start), ease: "power1.out" }, start);
+        }
+      }
+      const C = { beer: "#F7B733", rum: "#669933", whiskey: "#8A5BAA" };
+      fizz("fz1", [C.beer], 1.5, 1.5, 22, 11);
+      fizz("fz2", [C.beer], 3.0, 2.5, 18, 22);
+      fizz("fz3", [C.rum], 5.5, 2.5, 18, 33);
+      fizz("fz4", [C.whiskey], 8.0, 2.5, 18, 44);
+      fizz("fz5", [C.beer, C.rum, C.whiskey], 10.5, 2.0, 30, 55);
 
       window.__timelines["main"] = tl;
     </script>
