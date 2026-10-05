@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>DrinksBite — Brand Intro Film</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Aprilio Hope"; src: url("assets/aprilio.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+      :root {
+        --ink: #171717; --deep: #111111; --cream: #f5f0ea; --mustard: #f7b733; --purple-lt: #b48fd0; --green-lt: #8cc152;
+        --display: "Geometr706 BlkCn", "Arial Narrow", sans-serif; --label: "Berlin Sans FB", sans-serif;
+        --flavour: "Bernard MT Condensed", serif;
+      }
+      html, body { margin: 0; padding: 0; background: var(--deep); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: var(--cream); text-transform: uppercase; }
+      .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+      .fill { position: absolute; inset: 0; }
+      .mask { display: block; overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+      .ln { display: block; }
+      .pat { position: absolute; inset: -100px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.08; }
+      .spot { background: radial-gradient(ellipse 60% 38% at 50% 0%, rgba(245,240,234,0.07) 0%, rgba(245,240,234,0) 70%); }
+      .stage { position: absolute; inset: 0; }
+
+      .counter { position: absolute; width: 680px; height: 2px;
+        background: linear-gradient(90deg, rgba(245,240,234,0) 0%, rgba(245,240,234,0.35) 20%, rgba(245,240,234,0.35) 80%, rgba(245,240,234,0) 100%); }
+      .glow { position: absolute; border-radius: 50%; opacity: 0; }
+      .ls { position: absolute; overflow: hidden; -webkit-mask-image: linear-gradient(to top, transparent 0px, black 70px, black 55%, transparent 100%); mask-image: linear-gradient(to top, transparent 0px, black 70px, black 55%, transparent 100%); }
+      .ls .flow { position: absolute; left: 0; top: 0; }
+      .ls .flow img { position: absolute; left: 0; display: block; }
+      .lg { position: absolute; overflow: hidden; }
+      .lg img { position: absolute; left: 0; top: 0; display: block; }
+      .pk { position: absolute; display: block; height: auto; }
+      .refl { position: absolute; height: 300px; overflow: hidden; opacity: 0;
+        -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 80%); mask-image: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 80%); }
+      .refl img { position: absolute; top: 0; display: block; transform: scaleY(-1); transform-origin: 50% 0%; }
+
+      .eyebrow { position: absolute; left: 0; right: 0; top: 236px; text-align: center; font-family: var(--label); font-size: 24px; letter-spacing: 14px; }
+      .head { position: absolute; left: 0; right: 0; top: 284px; text-align: center; font-family: var(--display); font-size: 100px; line-height: 0.98; }
+      .foot { position: absolute; left: 0; right: 0; top: 1478px; text-align: center; }
+      .foot b { display: block; font-family: var(--flavour); font-weight: normal; font-size: 56px; line-height: 1; letter-spacing: 1px; }
+      .foot i { display: block; font-style: normal; font-family: var(--label); font-size: 22px; letter-spacing: 12px; margin-top: 16px; color: rgba(245,240,234,0.5); }
+      .note { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--label); font-size: 22px; letter-spacing: 12px; color: rgba(245,240,234,0.5); }
+
+      /* S2 — macro bowl */
+      #bowl { position: absolute; left: -100px; top: 0; width: 1280px; height: 1920px; transform-origin: 68% 52%; }
+      #bowl-shade { background: linear-gradient(180deg, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.35) 30%, rgba(10,10,10,0) 45%, rgba(10,10,10,0) 70%, rgba(10,10,10,0.85) 100%); }
+      #s2-logo { position: absolute; left: 50%; top: 190px; width: 300px; height: 292px; margin-left: -150px; display: block; }
+      #s2-eb { top: 1716px; color: var(--mustard); }
+      #s2-rule { position: absolute; left: 490px; top: 1676px; width: 100px; height: 3px; background: var(--mustard); }
+
+      /* S3 — hero pack */
+      #hero-wrap { position: absolute; left: 305px; top: 566px; width: 470px; height: 674px; }
+      #hero, #hero-sweep { position: absolute; left: 0; top: 0; width: 470px; height: 674px; }
+      #hero-sweep { -webkit-mask-image: url("assets/pack-beer.png"); -webkit-mask-size: 100% 100%; mask-image: url("assets/pack-beer.png"); mask-size: 100% 100%;
+        background: linear-gradient(105deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0) 65%); background-size: 300% 100%; background-position: 100% 0; mix-blend-mode: screen; }
+      #hero-refl { position: absolute; left: 305px; top: 1242px; width: 470px; height: 300px; overflow: hidden; opacity: 0;
+        -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 75%); mask-image: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 75%); }
+      #hero-refl img { position: absolute; left: 0; top: -674px; width: 470px; height: 674px; transform: scaleY(-1); transform-origin: 50% 100%; }
+
+      /* S4 — puffs */
+      #disc-wrap { position: absolute; left: 110px; top: 540px; width: 860px; height: 860px; }
+      #disc { position: absolute; inset: 0; width: 860px; height: 860px; }
+      #disc-sh { position: absolute; left: 150px; top: 1290px; width: 780px; height: 120px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 70%); }
+      .row { position: absolute; left: 0; right: 0; top: 1478px; text-align: center; }
+      .row b { display: block; font-family: var(--flavour); font-weight: normal; font-size: 64px; line-height: 1; letter-spacing: 1px; color: var(--mustard); }
+      .row i { display: block; font-style: normal; font-family: var(--label); font-size: 22px; letter-spacing: 10px; margin-top: 18px; color: rgba(245,240,234,0.6); }
+      .dots { position: absolute; left: 0; right: 0; top: 1646px; text-align: center; font-size: 0; }
+      .dots span { display: inline-block; width: 30px; height: 3px; margin: 0 6px; background: rgba(245,240,234,0.2); }
+      .dots span i { display: block; height: 3px; background: var(--mustard); transform-origin: 0 50%; transform: scaleX(0); }
+
+      /* TW — twist */
+      #tw-eb { top: 740px; color: var(--mustard); }
+      #tw-head { top: 800px; font-size: 112px; }
+
+      /* pairs */
+      #cam { position: absolute; left: 0; top: 0; width: 3240px; height: 1920px; }
+
+      /* end slate (shared) */
+      #sl-bg { background: radial-gradient(ellipse 70% 40% at 50% 8%, rgba(245,240,234,0.08) 0%, rgba(245,240,234,0) 70%), var(--ink); }
+      #sl-pat { position: absolute; inset: -100px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.2; }
+      #sl-stage { position: absolute; inset: 0; }
+      #sl-logo { position: absolute; left: 50%; top: 300px; width: 340px; height: 331px; margin-left: -170px; display: block; }
+      #sl-rule { position: absolute; left: 470px; top: 700px; width: 140px; height: 3px; background: var(--mustard); }
+      #sl-floor { position: absolute; left: 0; right: 0; top: 1420px; height: 500px; background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 50%); }
+      #sl-row { position: absolute; left: 0; top: 0; width: 1080px; height: 1430px; overflow: hidden; }
+      .sl-pk { position: absolute; display: block; height: auto; }
+      .sl-sh { position: absolute; top: 1404px; height: 46px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 70%); }
+      #sl-tag { position: absolute; left: 0; right: 0; top: 1500px; text-align: center; font-family: var(--label); font-size: 40px; letter-spacing: 16px; }
+      #sl-handle { position: absolute; left: 0; right: 0; top: 1570px; text-align: center; font-family: var(--label); font-size: 30px; letter-spacing: 4px; color: rgba(245,240,234,0.55); text-transform: none; }
+      #sl-price { top: 1680px; font-size: 20px; letter-spacing: 10px; color: rgba(245,240,234,0.35); }
+      #sl-head { top: 330px; }
+
+      #grain { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; background-image: url("assets/grain.png"); background-size: 512px 512px; opacity: 0.05; mix-blend-mode: overlay; }
+      #vig { background: radial-gradient(ellipse 85% 70% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="40" data-fps="30">
+
+      <!-- S1 0–3.2 · HOOK: the three glasses, waiting -->
+      <section id="s1" class="clip" style="z-index: 1" data-start="0" data-duration="3.2" data-track-index="1">
+        <div class="fill" style="background: var(--deep)"></div><div class="pat"></div><div class="fill spot"></div>
+        <div class="stage" id="s1-stage"></div>
+        <div class="head" id="h1a"><span class="mask"><span class="ln">Every good drink</span></span><span class="mask"><span class="ln">needs a wingman.</span></span></div>
+        <div class="note" id="n1" style="top: 1560px">Sound on. Snack ready.</div>
+        <div class="head" id="h1b"><span class="mask"><span class="ln">Yours has been</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">slacking.</span></span></div>
+      </section>
+
+      <!-- S2 3.2–6.2 · MEET YOURS: macro bowl -->
+      <section id="s2" class="clip" style="z-index: 2" data-start="3.2" data-duration="3.0" data-track-index="2">
+        <div class="fill" style="background: #0c0c0e"></div>
+        <img id="bowl" src="assets/bowl-hero.jpg" alt="" />
+        <div class="fill" id="bowl-shade"></div>
+        <div class="head" id="h2" style="top: 300px; font-size: 150px"><span class="mask"><span class="ln">Meet yours.</span></span></div>
+        <img id="s2-logo" src="assets/logo.svg" alt="DrinksBite" />
+        <div id="s2-rule"></div>
+        <div class="eyebrow" id="s2-eb">India's first drink-pairing chakna</div>
+      </section>
+
+      <!-- S3 6.0–11.3 · HERO PACK -->
+      <section id="s3" class="clip" style="z-index: 3" data-start="6.0" data-duration="5.3" data-track-index="3">
+        <div class="fill" style="background: var(--deep)"></div><div class="pat"></div><div class="fill spot"></div>
+        <div class="stage" id="s3-stage">
+          <div class="glow" id="hero-glow" style="left: 190px; top: 520px; width: 700px; height: 820px; background: radial-gradient(ellipse at 50% 60%, rgba(247,183,51,0.22) 0%, rgba(0,0,0,0) 70%)"></div>
+          <div class="counter" style="left: 200px; top: 1240px"></div>
+          <div id="hero-refl"><img id="hero-refl-img" src="assets/pack-beer.png" alt="" /></div>
+          <div id="hero-wrap"><img id="hero" src="assets/pack-beer.png" alt="" /><div id="hero-sweep"></div></div>
+        </div>
+        <div class="head" id="h3a"><span class="mask"><span class="ln">Chakna was always</span></span><span class="mask"><span class="ln">an afterthought.</span></span></div>
+        <div class="head" id="h3b"><span class="mask"><span class="ln">So we made it the</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">main character.</span></span></div>
+        <div class="note" id="n3" style="top: 1500px">Born in Pune · Raised on good company</div>
+      </section>
+
+      <!-- S4 11.0–17.0 · THE PUFF -->
+      <section id="s4" class="clip" style="z-index: 4" data-start="11.0" data-duration="6.0" data-track-index="4">
+        <div class="fill" style="background: var(--deep)"></div><div class="pat"></div><div class="fill spot"></div>
+        <div class="stage" id="s4-stage">
+          <div id="disc-sh"></div>
+          <div id="disc-wrap"><img id="disc" src="assets/disc-beer.png" alt="" /></div>
+        </div>
+        <div class="head" id="h4"><span class="mask"><span class="ln">Small puff.</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">Big personality.</span></span></div>
+        <div class="row" id="r1"><span class="mask"><b>Made with jowar</b></span><i>An ancient grain with a new social life</i></div>
+        <div class="row" id="r2"><span class="mask"><b>Popped, not fried</b></span><i>Light on oil · loud on crunch</i></div>
+        <div class="row" id="r3"><span class="mask"><b>Not baked either</b></span><i>Trans fat free · 35 g of good decisions</i></div>
+        <div class="dots" id="dots"><span><i id="d1"></i></span><span><i id="d2"></i></span><span><i id="d3"></i></span></div>
+      </section>
+
+      <!-- TW 17.0–18.7 · THE TWIST -->
+      <section id="tw" class="clip" style="z-index: 5" data-start="17.0" data-duration="1.7" data-track-index="5">
+        <div class="fill" style="background: var(--deep)"></div><div class="pat"></div>
+        <div class="eyebrow" id="tw-eb">Here's the twist</div>
+        <div class="head" id="tw-head"><span class="mask"><span class="ln">Every bite is</span></span><span class="mask"><span class="ln">seasoned for</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">a drink.</span></span></div>
+      </section>
+
+      <!-- PAIRS 18.5–32.3 -->
+      <section id="pp" class="clip" style="z-index: 6" data-start="18.5" data-duration="13.8" data-track-index="6">
+        <div class="fill" style="background: var(--deep)"></div><div class="pat"></div><div class="fill spot"></div>
+        <div class="stage" id="pp-stage"><div id="cam"></div></div>
+        <div class="eyebrow" id="eA" style="color: var(--mustard)">01 — For beer</div>
+        <div class="head" id="hA"><span class="mask"><span class="ln">Cheesy. Herby.</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">Beer's best friend.</span></span></div>
+        <div class="eyebrow" id="eB" style="color: var(--purple-lt)">02 — For whiskey</div>
+        <div class="head" id="hB"><span class="mask"><span class="ln">Sip slow.</span></span><span class="mask"><span class="ln" style="color: var(--purple-lt)">Crunch loud.</span></span></div>
+        <div class="eyebrow" id="eC" style="color: var(--green-lt)">03 — For rum</div>
+        <div class="head" id="hC"><span class="mask"><span class="ln">Pour it.</span></span><span class="mask"><span class="ln" style="color: var(--green-lt)">Go somewhere warm.</span></span></div>
+        <div class="foot" id="fA"><b style="color: var(--mustard)">Cheddar &amp; Herbs</b><i>Best paired with beer</i></div>
+        <div class="foot" id="fB"><b style="color: var(--purple-lt)">Toasted Sesame Umami</b><i>Best paired with whiskey</i></div>
+        <div class="foot" id="fC"><b style="color: var(--green-lt)">Coconut &amp; Spices</b><i>Best paired with rum</i></div>
+      </section>
+
+      <!-- END 32.0–40.0 -->
+      <section id="cE" class="clip" style="z-index: 7" data-start="32.0" data-duration="8.0" data-track-index="7">
+        <div class="fill" id="sl-bg"></div><div id="sl-pat"></div>
+        <div id="sl-stage">
+          <div class="head" id="sl-head"><span class="mask"><span class="ln">Three drinks.</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">Three bites.</span></span></div>
+          <div class="head" id="sl-head2" style="top: 330px"><span class="mask"><span class="ln">Zero boring</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">evenings.</span></span></div>
+          <img id="sl-logo" src="assets/logo.svg" alt="DrinksBite" />
+          <div id="sl-rule"></div>
+          <div id="sl-floor"></div>
+          <div class="sl-sh" id="ss1" style="left: 80px; width: 320px"></div>
+          <div class="sl-sh" id="ss2" style="left: 360px; width: 360px"></div>
+          <div class="sl-sh" id="ss3" style="left: 680px; width: 320px"></div>
+          <div id="sl-row">
+            <img class="sl-pk" id="sp-w" src="assets/pack-whiskey.png" alt="" style="left: 95px; top: 1002px; width: 300px" />
+            <img class="sl-pk" id="sp-r" src="assets/pack-rum.png" alt="" style="left: 685px; top: 1016px; width: 300px" />
+            <img class="sl-pk" id="sp-b" src="assets/pack-beer.png" alt="" style="left: 370px; top: 942px; width: 340px" />
+          </div>
+          <div id="sl-tag">Pair · Sip · Repeat</div>
+          <div id="sl-handle">@drinksbite_official</div>
+          <div class="note" id="sl-price">Jowar puffs · 35 g · <span style="font-family: 'DejaVu Sans', sans-serif; letter-spacing: 0">₹</span>35</div>
+        </div>
+      </section>
+
+      <section id="fx" class="clip" style="z-index: 20" data-start="0" data-duration="40" data-track-index="9"><div class="fill" id="vig"></div><div id="grain"></div></section>
+      <audio id="bgm" src="assets/soundtrack.wav" data-start="0" data-duration="40" data-track-index="10" data-volume="1"></audio>
+    </div>
+
+    <script>
+      const mk = (parent, tag, cls, id, css, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (id) e.id = id; e.style.cssText = css; if (html) e.innerHTML = html; parent.appendChild(e); return e; };
+      const stream = (parent, id, n, x, top, w, cH, sh) => mk(parent, "div", "ls", "", `left:${x}px;top:${top}px;width:${w}px;height:${cH}px`,
+        `<div class="flow" id="${id}"><img src="assets/la-stream-${n}.png" style="top:${cH - sh}px;width:${w}px;height:${sh}px" alt=""/><img src="assets/la-stream-${n}.png" style="top:${cH}px;width:${w}px;height:${sh}px" alt=""/></div>`);
+
+      /* ---------- S1: three brand glasses on one counter (scale 0.85) ---------- */
+      const s1 = document.getElementById("s1-stage"), B1 = 1380, ST1 = 600;
+      const G1 = [
+        { n: "beer",    x: 84,  w: 280, h: 548, sh: 570, glow: "rgba(247,183,51,0.20)" },
+        { n: "whiskey", x: 424, w: 247, h: 283, sh: 835, glow: "rgba(138,91,170,0.30)" },
+        { n: "rum",     x: 731, w: 265, h: 348, sh: 770, glow: "rgba(102,153,51,0.30)" },
+      ];
+      mk(s1, "div", "counter", "", `left:200px;top:${B1}px`);
+      G1.forEach((g, i) => {
+        const k = i + 1, y = B1 - g.h;
+        mk(s1, "div", "glow", "g1w" + k, `left:${g.x - 100}px;top:${y - 100}px;width:${g.w + 200}px;height:${g.h + 160}px;background:radial-gradient(ellipse at 50% 60%, ${g.glow} 0%, rgba(0,0,0,0) 70%)`);
+        stream(s1, "g1f" + k, g.n, g.x, ST1, g.w, y - ST1, g.sh);
+        mk(s1, "div", "lg", "g1l" + k, `left:${g.x}px;top:${y}px;width:${g.w}px;height:${g.h}px`, `<img id="g1i${k}" src="assets/la-glass-${g.n}.png" style="width:${g.w}px;height:${g.h}px" alt=""/>`);
+      });
+      const r1 = mk(s1, "div", "refl", "g1r", `left:0;top:${B1 + 2}px;width:1080px`, "");
+      G1.forEach((g) => { r1.innerHTML += `<img src="assets/la-glass-${g.n}.png" style="left:${g.x}px;width:${g.w}px;height:${g.h}px" alt=""/>`; });
+
+      /* ---------- PAIRS: centred glass + pack, three across a 3240px camera rail ---------- */
+      const C = 1180, ST = 470, cam = document.getElementById("cam");
+      const PAIRS = [
+        { n: "beer",    glass: [277, 729, 231, 451], sh: 469, pack: [552, 822, 250, 358], glow: "rgba(247,183,51,0.20)" },
+        { n: "whiskey", glass: [291, 947, 203, 233], sh: 687, pack: [538, 825, 250, 355], glow: "rgba(138,91,170,0.30)" },
+        { n: "rum",     glass: [284, 894, 218, 286], sh: 634, pack: [546, 835, 250, 345], glow: "rgba(102,153,51,0.30)" },
+      ];
+      PAIRS.forEach((p, i) => {
+        const o = i * 1080, k = i + 1, [gx, gy, gw, gh] = p.glass, [px, py, pw, ph] = p.pack;
+        mk(cam, "div", "glow", "gw" + k, `left:${o + gx - 120}px;top:${gy - 120}px;width:${gw + 240}px;height:${gh + 200}px;background:radial-gradient(ellipse at 50% 60%, ${p.glow} 0%, rgba(0,0,0,0) 70%)`);
+        mk(cam, "div", "counter", "", `left:${o + 200}px;top:${C}px`);
+        stream(cam, "fl" + k, p.n, o + gx, ST, gw, gy - ST, p.sh);
+        mk(cam, "div", "lg", "lg" + k, `left:${o + gx}px;top:${gy}px;width:${gw}px;height:${gh}px`, `<img id="lgi${k}" src="assets/la-glass-${p.n}.png" style="width:${gw}px;height:${gh}px" alt=""/>`);
+        mk(cam, "img", "pk", "pk" + k, `left:${o + px}px;top:${py}px;width:${pw}px`).src = "assets/pack-" + p.n + ".png";
+        mk(cam, "div", "refl", "rf" + k, `left:${o}px;top:${C + 2}px;width:1080px`,
+          `<img src="assets/la-glass-${p.n}.png" style="left:${gx}px;width:${gw}px;height:${gh}px" alt=""/><img id="rfp${k}" src="assets/pack-${p.n}.png" style="left:${px}px;width:${pw}px;height:${ph}px" alt=""/>`);
+      });
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      for (let k = 0, f = 0; f < 40; k++, f += 1 / 12) tl.set("#grain", { x: ((k * 137) % 200) - 100, y: ((k * 89) % 200) - 100 }, f);
+
+      const up = (sel, t, d = 0.6) => tl.fromTo(sel + " .ln", { yPercent: 115 }, { yPercent: 0, duration: d, stagger: 0.08, ease: "expo.out" }, t);
+      const out = (sel, t) => tl.to(sel + " .ln", { yPercent: -115, duration: 0.3, stagger: 0.04, ease: "power3.in" }, t);
+      const fade = (sel, t, o = 1, d = 0.45) => tl.fromTo(sel, { opacity: o ? 0 : 1 }, { opacity: o, duration: d, ease: "power2.out", immediateRender: !!o }, t);
+      const rise = (lg, img, t, d = 0.8) => {
+        tl.fromTo(lg, { yPercent: 100 }, { yPercent: 0, duration: d, ease: "power3.out" }, t);
+        tl.fromTo(img, { yPercent: -100 }, { yPercent: 0, duration: d, ease: "power3.out" }, t);
+      };
+
+      /* ===== S1 HOOK (0–3.2): glasses rise in a heartbeat rhythm, bubbles waiting ===== */
+      tl.fromTo("#s1-stage", { scale: 1.0 }, { scale: 1.06, duration: 3.2, ease: "none", transformOrigin: "50% 70%" }, 0);
+      G1.forEach((g, i) => {
+        const k = i + 1, t = 0.15 + i * 0.16;
+        rise("#g1l" + k, "#g1i" + k, t);
+        fade("#g1w" + k, t + 0.2, 1, 0.9);
+        tl.fromTo("#g1f" + k, { y: 0 }, { y: -g.sh * 0.5, duration: 3.2, ease: "none" }, 0);
+      });
+      fade("#g1r", 0.6, 1, 0.8);
+      up("#h1a", 0.35, 0.7); fade("#n1", 0.9, 1, 0.5); fade("#n1", 2.7, 0, 0.3);
+      out("#h1a", 1.7); up("#h1b", 1.85);
+      tl.to("#s1-stage", { opacity: 0.35, duration: 0.5, ease: "power2.in" }, 2.7);
+
+      /* ===== S2 MEET YOURS (3.2–6.2): hard cut on the crunch to a real macro ===== */
+      tl.fromTo("#bowl", { scale: 1.18 }, { scale: 1.0, duration: 3.0, ease: "power2.out" }, 3.2);
+      tl.fromTo("#bowl", { x: 30 }, { x: -10, duration: 3.0, ease: "none" }, 3.2);
+      up("#h2", 3.28, 0.5);
+      out("#h2", 4.45);
+      tl.fromTo("#s2-logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 4.6);
+      tl.fromTo("#s2-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "expo.out" }, 4.75);
+      tl.fromTo("#s2-eb", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 4.85);
+
+      /* ===== S3 HERO PACK (6.0–11.3): slow turntable, light sweep ===== */
+      fade("#s3", 6.0, 1, 0.35);
+      tl.fromTo("#s3-stage", { scale: 1.0 }, { scale: 1.05, duration: 5.3, ease: "none", transformOrigin: "50% 60%" }, 6.0);
+      tl.fromTo("#hero-wrap", { y: 90, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 6.05);
+      tl.fromTo("#hero-wrap", { rotationY: -16, transformPerspective: 1400 }, { rotationY: 10, duration: 5.2, ease: "sine.inOut", transformPerspective: 1400 }, 6.05);
+      tl.fromTo("#hero-refl-img", { rotationY: -16, transformPerspective: 1400 }, { rotationY: 10, duration: 5.2, ease: "sine.inOut", transformPerspective: 1400 }, 6.05);
+      fade("#hero-refl", 6.6, 1, 0.8);
+      fade("#hero-glow", 6.4, 1, 1.0);
+      tl.fromTo("#hero-sweep", { backgroundPosition: "100% 0" }, { backgroundPosition: "0% 0", duration: 1.2, ease: "power2.inOut" }, 6.8);
+      tl.to("#hero-sweep", { backgroundPosition: "100% 0", duration: 0.01 }, 8.2);
+      tl.fromTo("#hero-sweep", { backgroundPosition: "100% 0" }, { backgroundPosition: "0% 0", duration: 1.0, ease: "power2.inOut", immediateRender: false }, 8.3);
+      up("#h3a", 6.3);
+      out("#h3a", 8.05); up("#h3b", 8.3);
+      fade("#n3", 8.8);
+      out("#h3b", 10.75); fade("#n3", 10.75, 0, 0.25);
+      tl.to("#hero-wrap", { scale: 1.12, opacity: 0, duration: 0.5, ease: "power2.in" }, 10.8);
+      fade("#hero-refl", 10.8, 0, 0.3);
+
+      /* ===== S4 THE PUFF (11.0–17.0): macro pull-back on the real bowl, slow spin ===== */
+      fade("#s4", 11.0, 1, 0.3);
+      tl.fromTo("#disc-wrap", { scale: 2.1 }, { scale: 1.0, duration: 1.4, ease: "power3.inOut" }, 11.0);
+      tl.fromTo("#disc", { rotation: -10 }, { rotation: 22, duration: 6.0, ease: "none" }, 11.0);
+      tl.fromTo("#disc-sh", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 11.9);
+      tl.fromTo("#s4-stage", { y: 0 }, { y: -20, duration: 6.0, ease: "none" }, 11.0);
+      up("#h4", 11.5);
+      [["#r1", "#d1", 11.8], ["#r2", "#d2", 13.2], ["#r3", "#d3", 14.6]].forEach(([r, d, t], i) => {
+        tl.fromTo(r + " b", { yPercent: 115 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, t);
+        tl.fromTo(r + " i", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, t + 0.12);
+        tl.fromTo(d, { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "none" }, t);
+        const e = i < 2 ? t + 1.25 : 16.55;
+        tl.to(r + " b", { yPercent: -115, duration: 0.25, ease: "power3.in" }, e);
+        tl.to(r + " i", { opacity: 0, duration: 0.2 }, e);
+      });
+      fade("#dots", 11.8, 1, 0.4);
+      out("#h4", 16.55); fade("#dots", 16.55, 0, 0.25);
+      tl.to("#s4-stage", { opacity: 0, duration: 0.35, ease: "power2.in" }, 16.6);
+
+      /* ===== TW THE TWIST (17.0–18.7): music drops, one idea on screen ===== */
+      fade("#tw-eb", 17.05, 1, 0.4);
+      up("#tw-head", 17.15, 0.65);
+      out("#tw-head", 18.2); fade("#tw-eb", 18.2, 0, 0.25);
+
+      /* ===== PAIRS (18.5–32.3) ===== */
+      fade("#pp", 18.5, 1, 0.3);
+      tl.set("#cam", { x: 20 }, 18.5);
+      tl.to("#cam", { x: -20, duration: 4.1, ease: "none" }, 18.5);
+      [[22.6, 1], [27.1, 2]].forEach(([t, i]) => {
+        tl.to("#cam", { x: -1080 * i + 20, duration: 0.8, ease: "power3.inOut" }, t);
+        tl.to("#cam", { x: -1080 * i - 20, duration: i === 1 ? 3.7 : 4.4, ease: "none" }, t + 0.8);
+      });
+      PAIRS.forEach((p, i) => tl.fromTo("#fl" + (i + 1), { y: 0 }, { y: -p.sh * 0.9, duration: 13.8, ease: "none" }, 18.5));
+      const arrive = (k, t) => {
+        rise("#lg" + k, "#lgi" + k, t);
+        tl.fromTo("#gw" + k, { opacity: 0 }, { opacity: 1, duration: 0.9 }, t + 0.2);
+        tl.fromTo("#rf" + k, { opacity: 0 }, { opacity: 1, duration: 0.8 }, t + 0.4);
+      };
+      const setDown = (k, t) => {
+        tl.fromTo("#pk" + k, { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, t);
+        tl.fromTo("#rfp" + k, { opacity: 0 }, { opacity: 1, duration: 0.45 }, t);
+      };
+      [["A", 1, 18.55, 22.45], ["B", 2, 23.1, 26.95], ["C", 3, 27.6, 31.65]].forEach(([s, k, t, e]) => {
+        arrive(k, t); fade("#e" + s, t + 0.2); up("#h" + s, t + 0.25); setDown(k, t + 0.35); fade("#f" + s, t + 0.75);
+        out("#h" + s, e); fade("#f" + s, e, 0, 0.25); fade("#e" + s, e, 0, 0.25);
+      });
+      tl.to("#pp-stage", { opacity: 0, duration: 0.4, ease: "power2.in" }, 31.75);
+
+      /* ===== END (32.0–40.0) ===== */
+      fade("#cE", 32.0, 1, 0.3);
+      tl.fromTo("#sl-stage", { scale: 1.0 }, { scale: 1.035, duration: 8.0, ease: "none" }, 32.0);
+      [["#sp-w", "#ss1", 32.15], ["#sp-b", "#ss2", 32.27], ["#sp-r", "#ss3", 32.39]].forEach(([p, s, t]) => {
+        tl.fromTo(p, { y: 520 }, { y: 0, duration: 0.6, ease: "power3.out" }, t);
+        tl.fromTo(s, { opacity: 0, scaleX: 0.4 }, { opacity: 1, scaleX: 1, duration: 0.5, ease: "power3.out" }, t + 0.25);
+      });
+      up("#sl-head", 32.3);
+      out("#sl-head", 33.4); up("#sl-head2", 33.6);
+      out("#sl-head2", 34.75);
+      tl.fromTo("#sl-logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 35.0);
+      tl.fromTo("#sl-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "expo.out" }, 35.3);
+      tl.fromTo("#sl-tag", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 35.5);
+      tl.fromTo("#sl-handle", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 35.75);
+      fade("#sl-price", 36.0, 1, 0.5);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
