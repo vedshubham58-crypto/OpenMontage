@@ -123,4 +123,5 @@ def reel3():  # Pick Your Pour: groovy 100 BPM
     m.add(chime(0.12),10.3)
     m.save('series/reel3.wav')
 
-for f in sys.argv[1:]: globals()[f](); print('ok',f)
+if __name__ == "__main__":
+    for f in sys.argv[1:]: globals()[f](); print("ok", f)
