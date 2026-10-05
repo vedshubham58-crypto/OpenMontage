@@ -45,12 +45,8 @@
       .foot i { display: block; font-style: normal; font-family: var(--label); font-size: 22px; letter-spacing: 12px; margin-top: 16px; color: rgba(245,240,234,0.5); }
       .note { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--label); font-size: 22px; letter-spacing: 12px; color: rgba(245,240,234,0.5); }
 
-      /* S2 — macro bowl */
-      #bowl { position: absolute; left: -100px; top: 0; width: 1280px; height: 1920px; transform-origin: 68% 52%; }
-      #bowl-shade { background: linear-gradient(180deg, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.35) 30%, rgba(10,10,10,0) 45%, rgba(10,10,10,0) 70%, rgba(10,10,10,0.85) 100%); }
-      #s2-logo { position: absolute; left: 50%; top: 190px; width: 300px; height: 292px; margin-left: -150px; display: block; }
-      #s2-eb { top: 1716px; color: var(--mustard); }
-      #s2-rule { position: absolute; left: 490px; top: 1676px; width: 100px; height: 3px; background: var(--mustard); }
+      #s2-eb { top: 1500px; color: var(--mustard); }
+      #s2-rule { position: absolute; left: 490px; top: 1460px; width: 100px; height: 3px; background: var(--mustard); }
 
       /* S3 — hero pack */
       #hero-wrap { position: absolute; left: 305px; top: 566px; width: 470px; height: 674px; }
@@ -99,10 +95,10 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="40" data-fps="30">
+    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="31" data-fps="30">
 
       <!-- S1 0–3.2 · HOOK: the three glasses, waiting -->
-      <section id="s1" class="clip" style="z-index: 1" data-start="0" data-duration="3.2" data-track-index="1">
+      <section id="s1" class="clip" style="z-index: 1" data-start="0" data-duration="2.5" data-track-index="1">
         <div class="fill" style="background: var(--deep)"></div><div class="pat"></div><div class="fill spot"></div>
         <div class="stage" id="s1-stage"></div>
         <div class="head" id="h1a"><span class="mask"><span class="ln">Every good drink</span></span><span class="mask"><span class="ln">needs a wingman.</span></span></div>
@@ -110,38 +106,32 @@
         <div class="head" id="h1b"><span class="mask"><span class="ln">Yours has been</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">slacking.</span></span></div>
       </section>
 
-      <!-- S2 3.2–6.2 · MEET YOURS: macro bowl -->
-      <section id="s2" class="clip" style="z-index: 2" data-start="3.2" data-duration="3.0" data-track-index="2">
-        <div class="fill" style="background: #0c0c0e"></div>
-        <img id="bowl" src="assets/bowl-hero.jpg" alt="" />
-        <div class="fill" id="bowl-shade"></div>
-        <div class="head" id="h2" style="top: 300px; font-size: 150px"><span class="mask"><span class="ln">Meet yours.</span></span></div>
-        <img id="s2-logo" src="assets/logo.svg" alt="DrinksBite" />
-        <div id="s2-rule"></div>
-        <div class="eyebrow" id="s2-eb">India's first drink-pairing chakna</div>
-      </section>
-
-      <!-- S3 6.0–11.3 · HERO PACK -->
-      <section id="s3" class="clip" style="z-index: 3" data-start="6.0" data-duration="5.3" data-track-index="3">
+      <!-- S2 2.5–7.6 · PACK REVEAL + STORY -->
+      <section id="s3" class="clip" style="z-index: 3" data-start="2.5" data-duration="5.1" data-track-index="3">
         <div class="fill" style="background: var(--deep)"></div><div class="pat"></div><div class="fill spot"></div>
         <div class="stage" id="s3-stage">
           <div class="glow" id="hero-glow" style="left: 190px; top: 520px; width: 700px; height: 820px; background: radial-gradient(ellipse at 50% 60%, rgba(247,183,51,0.22) 0%, rgba(0,0,0,0) 70%)"></div>
-          <div class="counter" style="left: 200px; top: 1240px"></div>
+          <div class="counter" id="hero-counter" style="left: 200px; top: 1240px"></div>
           <div id="hero-refl"><img id="hero-refl-img" src="assets/pack-beer.png" alt="" /></div>
           <div id="hero-wrap"><img id="hero" src="assets/pack-beer.png" alt="" /><div id="hero-sweep"></div></div>
         </div>
+        <div class="head" id="h2" style="font-size: 150px"><span class="mask"><span class="ln">Meet yours.</span></span></div>
+        <div id="s2-rule"></div>
+        <div class="eyebrow" id="s2-eb">India's first drink-pairing chakna</div>
         <div class="head" id="h3a"><span class="mask"><span class="ln">Chakna was always</span></span><span class="mask"><span class="ln">an afterthought.</span></span></div>
         <div class="head" id="h3b"><span class="mask"><span class="ln">So we made it the</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">main character.</span></span></div>
         <div class="note" id="n3" style="top: 1500px">Born in Pune · Raised on good company</div>
       </section>
 
-      <!-- S4 11.0–17.0 · THE PUFF -->
-      <section id="s4" class="clip" style="z-index: 4" data-start="11.0" data-duration="6.0" data-track-index="4">
+      <!-- S4 7.5–12.1 · THE PUFF -->
+      <section id="s4" class="clip" style="z-index: 4" data-start="7.5" data-duration="4.6" data-track-index="4">
         <div class="fill" style="background: var(--deep)"></div><div class="pat"></div><div class="fill spot"></div>
         <div class="stage" id="s4-stage">
           <div id="disc-sh"></div>
           <div id="disc-wrap"><img id="disc" src="assets/disc-beer.png" alt="" /></div>
         </div>
+        <div class="fill" id="s4-shade" style="background: linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.4) 22%, rgba(10,10,10,0) 38%)"></div>
+        <div class="head" id="h4a" style="font-size: 150px"><span class="mask"><span class="ln">Small puff.</span></span></div>
         <div class="head" id="h4"><span class="mask"><span class="ln">Small puff.</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">Big personality.</span></span></div>
         <div class="row" id="r1"><span class="mask"><b>Made with jowar</b></span><i>An ancient grain with a new social life</i></div>
         <div class="row" id="r2"><span class="mask"><b>Popped, not fried</b></span><i>Light on oil · loud on crunch</i></div>
@@ -150,14 +140,14 @@
       </section>
 
       <!-- TW 17.0–18.7 · THE TWIST -->
-      <section id="tw" class="clip" style="z-index: 5" data-start="17.0" data-duration="1.7" data-track-index="5">
+      <section id="tw" class="clip" style="z-index: 5" data-start="12.0" data-duration="1.6" data-track-index="5">
         <div class="fill" style="background: var(--deep)"></div><div class="pat"></div>
         <div class="eyebrow" id="tw-eb">Here's the twist</div>
         <div class="head" id="tw-head"><span class="mask"><span class="ln">Every bite is</span></span><span class="mask"><span class="ln">seasoned for</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">a drink.</span></span></div>
       </section>
 
       <!-- PAIRS 18.5–32.3 -->
-      <section id="pp" class="clip" style="z-index: 6" data-start="18.5" data-duration="13.8" data-track-index="6">
+      <section id="pp" class="clip" style="z-index: 6" data-start="13.5" data-duration="10.8" data-track-index="6">
         <div class="fill" style="background: var(--deep)"></div><div class="pat"></div><div class="fill spot"></div>
         <div class="stage" id="pp-stage"><div id="cam"></div></div>
         <div class="eyebrow" id="eA" style="color: var(--mustard)">01 — For beer</div>
@@ -172,7 +162,7 @@
       </section>
 
       <!-- END 32.0–40.0 -->
-      <section id="cE" class="clip" style="z-index: 7" data-start="32.0" data-duration="8.0" data-track-index="7">
+      <section id="cE" class="clip" style="z-index: 7" data-start="24.0" data-duration="7.0" data-track-index="7">
         <div class="fill" id="sl-bg"></div><div id="sl-pat"></div>
         <div id="sl-stage">
           <div class="head" id="sl-head"><span class="mask"><span class="ln">Three drinks.</span></span><span class="mask"><span class="ln" style="color: var(--mustard)">Three bites.</span></span></div>
@@ -194,8 +184,8 @@
         </div>
       </section>
 
-      <section id="fx" class="clip" style="z-index: 20" data-start="0" data-duration="40" data-track-index="9"><div class="fill" id="vig"></div><div id="grain"></div></section>
-      <audio id="bgm" src="assets/soundtrack.wav" data-start="0" data-duration="40" data-track-index="10" data-volume="1"></audio>
+      <section id="fx" class="clip" style="z-index: 20" data-start="0" data-duration="31" data-track-index="9"><div class="fill" id="vig"></div><div id="grain"></div></section>
+      <audio id="bgm" src="assets/soundtrack.wav" data-start="0" data-duration="31" data-track-index="10" data-volume="1"></audio>
     </div>
 
     <script>
@@ -240,7 +230,7 @@
 
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
-      for (let k = 0, f = 0; f < 40; k++, f += 1 / 12) tl.set("#grain", { x: ((k * 137) % 200) - 100, y: ((k * 89) % 200) - 100 }, f);
+      for (let k = 0, f = 0; f < 31; k++, f += 1 / 12) tl.set("#grain", { x: ((k * 137) % 200) - 100, y: ((k * 89) % 200) - 100 }, f);
 
       const up = (sel, t, d = 0.6) => tl.fromTo(sel + " .ln", { yPercent: 115 }, { yPercent: 0, duration: d, stagger: 0.08, ease: "expo.out" }, t);
       const out = (sel, t) => tl.to(sel + " .ln", { yPercent: -115, duration: 0.3, stagger: 0.04, ease: "power3.in" }, t);
@@ -250,109 +240,104 @@
         tl.fromTo(img, { yPercent: -100 }, { yPercent: 0, duration: d, ease: "power3.out" }, t);
       };
 
-      /* ===== S1 HOOK (0–3.2): glasses rise in a heartbeat rhythm, bubbles waiting ===== */
-      tl.fromTo("#s1-stage", { scale: 1.0 }, { scale: 1.06, duration: 3.2, ease: "none", transformOrigin: "50% 70%" }, 0);
+      /* ===== S1 HOOK (0–2.5): glasses rise on the heartbeat ===== */
+      tl.fromTo("#s1-stage", { scale: 1.0 }, { scale: 1.07, duration: 2.5, ease: "none", transformOrigin: "50% 70%" }, 0);
       G1.forEach((g, i) => {
-        const k = i + 1, t = 0.15 + i * 0.16;
-        rise("#g1l" + k, "#g1i" + k, t);
-        fade("#g1w" + k, t + 0.2, 1, 0.9);
-        tl.fromTo("#g1f" + k, { y: 0 }, { y: -g.sh * 0.5, duration: 3.2, ease: "none" }, 0);
+        const k = i + 1, t = 0.05 + i * 0.12;
+        rise("#g1l" + k, "#g1i" + k, t, 0.6);
+        fade("#g1w" + k, t + 0.15, 1, 0.6);
+        tl.fromTo("#g1f" + k, { y: 0 }, { y: -g.sh * 0.5, duration: 2.5, ease: "none" }, 0);
       });
-      fade("#g1r", 0.6, 1, 0.8);
-      up("#h1a", 0.35, 0.7); fade("#n1", 0.9, 1, 0.5); fade("#n1", 2.7, 0, 0.3);
-      out("#h1a", 1.7); up("#h1b", 1.85);
-      tl.to("#s1-stage", { opacity: 0.35, duration: 0.5, ease: "power2.in" }, 2.7);
+      fade("#g1r", 0.4, 1, 0.6);
+      up("#h1a", 0.15, 0.55); fade("#n1", 0.6, 1, 0.4); fade("#n1", 2.1, 0, 0.2);
+      out("#h1a", 1.15); up("#h1b", 1.28, 0.5);
 
-      /* ===== S2 MEET YOURS (3.2–6.2): hard cut on the crunch to a real macro ===== */
-      tl.fromTo("#bowl", { scale: 1.18 }, { scale: 1.0, duration: 3.0, ease: "power2.out" }, 3.2);
-      tl.fromTo("#bowl", { x: 30 }, { x: -10, duration: 3.0, ease: "none" }, 3.2);
-      up("#h2", 3.28, 0.5);
-      out("#h2", 4.45);
-      tl.fromTo("#s2-logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 4.6);
-      tl.fromTo("#s2-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "expo.out" }, 4.75);
-      tl.fromTo("#s2-eb", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 4.85);
+      /* ===== S2 PACK REVEAL + STORY (2.5–7.6): hard cut, punch-in, punch-out ===== */
+      tl.fromTo("#hero-wrap", { scale: 1.3, opacity: 0, filter: "brightness(0.2)" }, { scale: 1, opacity: 1, filter: "brightness(1)", duration: 0.55, ease: "expo.out" }, 2.5);
+      tl.fromTo("#hero-wrap", { rotationY: -14, transformPerspective: 1400 }, { rotationY: 10, duration: 5.1, ease: "sine.inOut", transformPerspective: 1400 }, 2.5);
+      tl.fromTo("#hero-refl-img", { rotationY: -14, transformPerspective: 1400 }, { rotationY: 10, duration: 5.1, ease: "sine.inOut", transformPerspective: 1400 }, 2.5);
+      fade("#hero-refl", 2.75, 1, 0.5); fade("#hero-glow", 2.6, 1, 0.6);
+      tl.fromTo("#hero-sweep", { backgroundPosition: "100% 0" }, { backgroundPosition: "0% 0", duration: 0.8, ease: "power2.inOut" }, 2.75);
+      up("#h2", 2.55, 0.45);
+      tl.fromTo("#s2-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "expo.out" }, 3.0);
+      tl.fromTo("#s2-eb", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 3.05);
+      out("#h2", 3.85);
+      // 4.0 punch-in: tight crop of the pack, framed low
+      tl.set("#s3-stage", { scale: 1.5, transformOrigin: "50% 0%", y: 60 }, 4.0);
+      tl.to("#s3-stage", { y: 0, scale: 1.56, duration: 1.5, ease: "none" }, 4.0);
+      tl.set(["#s2-eb", "#s2-rule"], { opacity: 0 }, 4.0);
+      up("#h3a", 4.02, 0.5);
+      tl.fromTo("#hero-sweep", { backgroundPosition: "100% 0" }, { backgroundPosition: "0% 0", duration: 0.9, ease: "power2.inOut", immediateRender: false }, 4.3);
+      out("#h3a", 5.35);
+      // 5.5 punch-out: wide hero again
+      tl.set("#s3-stage", { scale: 1.08, y: 0, transformOrigin: "50% 60%" }, 5.5);
+      tl.to("#s3-stage", { scale: 1.0, duration: 0.7, ease: "power3.out" }, 5.5);
+      up("#h3b", 5.52, 0.5); fade("#n3", 5.9, 1, 0.35);
+      out("#h3b", 7.15); fade("#n3", 7.15, 0, 0.2);
+      tl.to("#hero-wrap", { scale: 1.15, opacity: 0, duration: 0.35, ease: "power2.in" }, 7.2);
+      fade("#hero-refl", 7.2, 0, 0.25);
 
-      /* ===== S3 HERO PACK (6.0–11.3): slow turntable, light sweep ===== */
-      fade("#s3", 6.0, 1, 0.35);
-      tl.fromTo("#s3-stage", { scale: 1.0 }, { scale: 1.05, duration: 5.3, ease: "none", transformOrigin: "50% 60%" }, 6.0);
-      tl.fromTo("#hero-wrap", { y: 90, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 6.05);
-      tl.fromTo("#hero-wrap", { rotationY: -16, transformPerspective: 1400 }, { rotationY: 10, duration: 5.2, ease: "sine.inOut", transformPerspective: 1400 }, 6.05);
-      tl.fromTo("#hero-refl-img", { rotationY: -16, transformPerspective: 1400 }, { rotationY: 10, duration: 5.2, ease: "sine.inOut", transformPerspective: 1400 }, 6.05);
-      fade("#hero-refl", 6.6, 1, 0.8);
-      fade("#hero-glow", 6.4, 1, 1.0);
-      tl.fromTo("#hero-sweep", { backgroundPosition: "100% 0" }, { backgroundPosition: "0% 0", duration: 1.2, ease: "power2.inOut" }, 6.8);
-      tl.to("#hero-sweep", { backgroundPosition: "100% 0", duration: 0.01 }, 8.2);
-      tl.fromTo("#hero-sweep", { backgroundPosition: "100% 0" }, { backgroundPosition: "0% 0", duration: 1.0, ease: "power2.inOut", immediateRender: false }, 8.3);
-      up("#h3a", 6.3);
-      out("#h3a", 8.05); up("#h3b", 8.3);
-      fade("#n3", 8.8);
-      out("#h3b", 10.75); fade("#n3", 10.75, 0, 0.25);
-      tl.to("#hero-wrap", { scale: 1.12, opacity: 0, duration: 0.5, ease: "power2.in" }, 10.8);
-      fade("#hero-refl", 10.8, 0, 0.3);
-
-      /* ===== S4 THE PUFF (11.0–17.0): macro pull-back on the real bowl, slow spin ===== */
-      fade("#s4", 11.0, 1, 0.3);
-      tl.fromTo("#disc-wrap", { scale: 2.1 }, { scale: 1.0, duration: 1.4, ease: "power3.inOut" }, 11.0);
-      tl.fromTo("#disc", { rotation: -10 }, { rotation: 22, duration: 6.0, ease: "none" }, 11.0);
-      tl.fromTo("#disc-sh", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 11.9);
-      tl.fromTo("#s4-stage", { y: 0 }, { y: -20, duration: 6.0, ease: "none" }, 11.0);
-      up("#h4", 11.5);
-      [["#r1", "#d1", 11.8], ["#r2", "#d2", 13.2], ["#r3", "#d3", 14.6]].forEach(([r, d, t], i) => {
-        tl.fromTo(r + " b", { yPercent: 115 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, t);
-        tl.fromTo(r + " i", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, t + 0.12);
-        tl.fromTo(d, { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "none" }, t);
-        const e = i < 2 ? t + 1.25 : 16.55;
-        tl.to(r + " b", { yPercent: -115, duration: 0.25, ease: "power3.in" }, e);
-        tl.to(r + " i", { opacity: 0, duration: 0.2 }, e);
+      /* ===== S3 THE PUFF (7.5–12.1): extreme macro, then pull back to the bowl ===== */
+      tl.fromTo("#disc-wrap", { scale: 2.6 }, { scale: 2.3, duration: 1.0, ease: "none" }, 7.5);
+      tl.to("#disc-wrap", { scale: 1.0, duration: 0.7, ease: "expo.inOut" }, 8.5);
+      tl.fromTo("#disc", { rotation: -10 }, { rotation: 20, duration: 4.6, ease: "none" }, 7.5);
+      tl.fromTo("#disc-sh", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 9.0);
+      up("#h4a", 7.55, 0.45); tl.to("#s4-shade", { opacity: 0, duration: 0.5 }, 8.5); out("#h4a", 8.4);
+      up("#h4", 8.55, 0.5);
+      [["#r1", "#d1", 9.05], ["#r2", "#d2", 10.0], ["#r3", "#d3", 10.95]].forEach(([r, d, t], i) => {
+        tl.fromTo(r + " b", { yPercent: 115 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, t);
+        tl.fromTo(r + " i", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, t + 0.08);
+        tl.fromTo(d, { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "none" }, t);
+        const e = i < 2 ? t + 0.75 : 11.65;
+        tl.to(r + " b", { yPercent: -115, duration: 0.2, ease: "power3.in" }, e);
+        tl.to(r + " i", { opacity: 0, duration: 0.15 }, e);
       });
-      fade("#dots", 11.8, 1, 0.4);
-      out("#h4", 16.55); fade("#dots", 16.55, 0, 0.25);
-      tl.to("#s4-stage", { opacity: 0, duration: 0.35, ease: "power2.in" }, 16.6);
+      fade("#dots", 9.05, 1, 0.3);
+      out("#h4", 11.65); fade("#dots", 11.65, 0, 0.2);
+      tl.to("#s4-stage", { opacity: 0, duration: 0.3, ease: "power2.in" }, 11.7);
 
-      /* ===== TW THE TWIST (17.0–18.7): music drops, one idea on screen ===== */
-      fade("#tw-eb", 17.05, 1, 0.4);
-      up("#tw-head", 17.15, 0.65);
-      out("#tw-head", 18.2); fade("#tw-eb", 18.2, 0, 0.25);
+      /* ===== TW THE TWIST (12.0–13.6): music drops, one idea ===== */
+      fade("#tw-eb", 12.02, 1, 0.3);
+      up("#tw-head", 12.08, 0.55);
+      out("#tw-head", 13.2); fade("#tw-eb", 13.2, 0, 0.2);
 
-      /* ===== PAIRS (18.5–32.3) ===== */
-      fade("#pp", 18.5, 1, 0.3);
-      tl.set("#cam", { x: 20 }, 18.5);
-      tl.to("#cam", { x: -20, duration: 4.1, ease: "none" }, 18.5);
-      [[22.6, 1], [27.1, 2]].forEach(([t, i]) => {
-        tl.to("#cam", { x: -1080 * i + 20, duration: 0.8, ease: "power3.inOut" }, t);
-        tl.to("#cam", { x: -1080 * i - 20, duration: i === 1 ? 3.7 : 4.4, ease: "none" }, t + 0.8);
+      /* ===== PAIRS (13.5–24.3) ===== */
+      tl.set("#cam", { x: 20 }, 13.5);
+      tl.to("#cam", { x: -20, duration: 3.1, ease: "none" }, 13.5);
+      [[16.6, 1], [20.1, 2]].forEach(([t, i]) => {
+        tl.to("#cam", { x: -1080 * i + 20, duration: 0.6, ease: "power3.inOut" }, t);
+        tl.to("#cam", { x: -1080 * i - 20, duration: i === 1 ? 2.9 : 3.6, ease: "none" }, t + 0.6);
       });
-      PAIRS.forEach((p, i) => tl.fromTo("#fl" + (i + 1), { y: 0 }, { y: -p.sh * 0.9, duration: 13.8, ease: "none" }, 18.5));
+      PAIRS.forEach((p, i) => tl.fromTo("#fl" + (i + 1), { y: 0 }, { y: -p.sh * 0.9, duration: 10.8, ease: "none" }, 13.5));
       const arrive = (k, t) => {
-        rise("#lg" + k, "#lgi" + k, t);
-        tl.fromTo("#gw" + k, { opacity: 0 }, { opacity: 1, duration: 0.9 }, t + 0.2);
-        tl.fromTo("#rf" + k, { opacity: 0 }, { opacity: 1, duration: 0.8 }, t + 0.4);
+        rise("#lg" + k, "#lgi" + k, t, 0.6);
+        tl.fromTo("#gw" + k, { opacity: 0 }, { opacity: 1, duration: 0.7 }, t + 0.15);
+        tl.fromTo("#rf" + k, { opacity: 0 }, { opacity: 1, duration: 0.6 }, t + 0.3);
       };
       const setDown = (k, t) => {
-        tl.fromTo("#pk" + k, { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, t);
-        tl.fromTo("#rfp" + k, { opacity: 0 }, { opacity: 1, duration: 0.45 }, t);
+        tl.fromTo("#pk" + k, { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, t);
+        tl.fromTo("#rfp" + k, { opacity: 0 }, { opacity: 1, duration: 0.35 }, t);
       };
-      [["A", 1, 18.55, 22.45], ["B", 2, 23.1, 26.95], ["C", 3, 27.6, 31.65]].forEach(([s, k, t, e]) => {
-        arrive(k, t); fade("#e" + s, t + 0.2); up("#h" + s, t + 0.25); setDown(k, t + 0.35); fade("#f" + s, t + 0.75);
-        out("#h" + s, e); fade("#f" + s, e, 0, 0.25); fade("#e" + s, e, 0, 0.25);
+      [["A", 1, 13.5, 16.45], ["B", 2, 17.05, 19.95], ["C", 3, 20.55, 23.6]].forEach(([s, k, t, e]) => {
+        arrive(k, t); fade("#e" + s, t + 0.1, 1, 0.35); up("#h" + s, t + 0.15, 0.5); setDown(k, t + 0.25); fade("#f" + s, t + 0.5, 1, 0.35);
+        out("#h" + s, e); fade("#f" + s, e, 0, 0.2); fade("#e" + s, e, 0, 0.2);
       });
-      tl.to("#pp-stage", { opacity: 0, duration: 0.4, ease: "power2.in" }, 31.75);
+      tl.to("#pp-stage", { opacity: 0, duration: 0.3, ease: "power2.in" }, 23.7);
 
-      /* ===== END (32.0–40.0) ===== */
-      fade("#cE", 32.0, 1, 0.3);
-      tl.fromTo("#sl-stage", { scale: 1.0 }, { scale: 1.035, duration: 8.0, ease: "none" }, 32.0);
-      [["#sp-w", "#ss1", 32.15], ["#sp-b", "#ss2", 32.27], ["#sp-r", "#ss3", 32.39]].forEach(([p, s, t]) => {
-        tl.fromTo(p, { y: 520 }, { y: 0, duration: 0.6, ease: "power3.out" }, t);
-        tl.fromTo(s, { opacity: 0, scaleX: 0.4 }, { opacity: 1, scaleX: 1, duration: 0.5, ease: "power3.out" }, t + 0.25);
+      /* ===== END (24.0–31.0) ===== */
+      tl.fromTo("#sl-stage", { scale: 1.0 }, { scale: 1.035, duration: 7.0, ease: "none" }, 24.0);
+      [["#sp-w", "#ss1", 24.05], ["#sp-b", "#ss2", 24.15], ["#sp-r", "#ss3", 24.25]].forEach(([p, s, t]) => {
+        tl.fromTo(p, { y: 520 }, { y: 0, duration: 0.5, ease: "power3.out" }, t);
+        tl.fromTo(s, { opacity: 0, scaleX: 0.4 }, { opacity: 1, scaleX: 1, duration: 0.4, ease: "power3.out" }, t + 0.2);
       });
-      up("#sl-head", 32.3);
-      out("#sl-head", 33.4); up("#sl-head2", 33.6);
-      out("#sl-head2", 34.75);
-      tl.fromTo("#sl-logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 35.0);
-      tl.fromTo("#sl-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "expo.out" }, 35.3);
-      tl.fromTo("#sl-tag", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 35.5);
-      tl.fromTo("#sl-handle", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 35.75);
-      fade("#sl-price", 36.0, 1, 0.5);
+      up("#sl-head", 24.2, 0.5);
+      out("#sl-head", 25.25); up("#sl-head2", 25.4, 0.5);
+      out("#sl-head2", 26.3);
+      tl.fromTo("#sl-logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 26.5);
+      tl.fromTo("#sl-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "expo.out" }, 26.75);
+      tl.fromTo("#sl-tag", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 26.95);
+      tl.fromTo("#sl-handle", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 27.15);
+      fade("#sl-price", 27.35, 1, 0.45);
 
       window.__timelines["main"] = tl;
     </script>
