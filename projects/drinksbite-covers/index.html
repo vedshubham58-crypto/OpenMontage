@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>DrinksBite — Reel Covers</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+      html, body { margin: 0; padding: 0; background: #111; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #f5f0ea; text-transform: uppercase; }
+      .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; background: #131313; }
+      .fill { position: absolute; inset: 0; }
+      .pat { position: absolute; inset: -100px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.1; }
+      .spot { background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(245,240,234,0.08) 0%, rgba(245,240,234,0) 70%); }
+      .glow { position: absolute; left: 90px; top: 520px; width: 900px; height: 980px; border-radius: 50%; }
+      .logo { position: absolute; left: 50%; top: 300px; width: 620px; height: auto; margin-left: -297px; }
+      .pack { position: absolute; left: 270px; width: 540px; height: auto; }
+      .floor { position: absolute; left: 0; right: 0; top: 1364px; height: 556px; background: linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0) 45%); }
+      .counter { position: absolute; left: 200px; top: 1364px; width: 680px; height: 2px; background: linear-gradient(90deg, rgba(245,240,234,0) 0%, rgba(245,240,234,0.35) 20%, rgba(245,240,234,0.35) 80%, rgba(245,240,234,0) 100%); }
+      .shadow { position: absolute; left: 300px; top: 1340px; width: 480px; height: 52px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 70%); }
+      .refl { position: absolute; left: 270px; top: 1366px; width: 540px; height: 230px; overflow: hidden;
+        -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0) 75%); mask-image: linear-gradient(180deg, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0) 75%); }
+      .refl img { position: absolute; left: 0; width: 540px; height: auto; transform: scaleY(-1); }
+      .rule { position: absolute; left: 500px; top: 1440px; width: 80px; height: 4px; }
+      .flav { position: absolute; left: 0; right: 0; top: 1474px; text-align: center; font-family: "Bernard MT Condensed", serif; font-size: 100px; line-height: 1; letter-spacing: 1px; }
+      .sub { position: absolute; left: 0; right: 0; top: 1600px; text-align: center; font-family: "Berlin Sans FB", sans-serif; font-size: 28px; letter-spacing: 14px; color: rgba(245,240,234,0.7); }
+      .tag { position: absolute; left: 0; right: 0; top: 548px; text-align: center; font-family: "Berlin Sans FB", sans-serif; font-size: 22px; letter-spacing: 12px; color: rgba(245,240,234,0.55); }
+      #grain { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; background-image: url("assets/grain.png"); background-size: 512px 512px; opacity: 0.05; mix-blend-mode: overlay; }
+      .vig { background: radial-gradient(ellipse 85% 70% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.5) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="3" data-fps="30"></div>
+    <script>
+      const SKU = [
+        { n: "beer",    name: "Cheddar &amp; Herbs",      drink: "beer",    c: "#f7b733", glow: "rgba(247,183,51,0.22)", w: 628, h: 900 },
+        { n: "whiskey", name: "Toasted Sesame Umami", drink: "whiskey", c: "#b48fd0", glow: "rgba(138,91,170,0.32)", w: 641, h: 909 },
+        { n: "rum",     name: "Coconut &amp; Spices",     drink: "rum",     c: "#8cc152", glow: "rgba(102,153,51,0.32)", w: 625, h: 863 },
+      ];
+      const root = document.getElementById("root");
+      SKU.forEach((s, i) => {
+        const ph = Math.round(540 * s.h / s.w), top = 1364 - ph;
+        const sec = document.createElement("section");
+        sec.className = "clip"; sec.id = "c" + i;
+        sec.setAttribute("data-start", String(i)); sec.setAttribute("data-duration", "1"); sec.setAttribute("data-track-index", String(i + 1));
+        sec.style.zIndex = String(i + 1);
+        sec.innerHTML =
+          `<div class="pat"></div><div class="fill spot"></div>` +
+          `<div class="glow" style="background:radial-gradient(ellipse at 50% 55%, ${s.glow} 0%, rgba(0,0,0,0) 65%)"></div>` +
+          `<img class="logo" src="assets/logo-h.png" alt="DrinksBite"/>` +
+          `<div class="tag">India's first drink-pairing chakna</div>` +
+          `<div class="floor"></div><div class="shadow"></div><div class="counter"></div>` +
+          `<div class="refl"><img src="assets/pack-${s.n}.png" style="top:0" alt=""/></div>` +
+          `<img class="pack" src="assets/pack-${s.n}.png" style="top:${top}px" alt=""/>` +
+          `<div class="rule" style="background:${s.c}"></div>` +
+          `<div class="flav" style="color:${s.c}">${s.name}</div>` +
+          `<div class="sub">Best paired with ${s.drink}</div>` +
+          `<div class="fill vig"></div>`;
+        root.appendChild(sec);
+      });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
