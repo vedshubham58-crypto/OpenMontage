@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=2160, height=3840" />
+    <title>DrinksBite — Range Story</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+      html, body { margin: 0; padding: 0; background: #121212; }
+      #root { position: relative; width: 2160px; height: 3840px; overflow: hidden; }
+      /* design at 1080×1350, rendered at 2× */
+      #art { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+        background: radial-gradient(ellipse 80% 55% at 50% 62%, #1d1c1b 0%, #141414 55%, #0e0e0e 100%); color: #f5f0ea; text-transform: uppercase; }
+      .abs { position: absolute; }
+      .pat { position: absolute; inset: -60px; background-image: url("assets/pattern.png"); background-size: 300px 155px; opacity: 0.09; }
+      .spot { position: absolute; inset: 0; background: radial-gradient(ellipse 55% 30% at 50% 0%, rgba(245,240,234,0.09) 0%, rgba(245,240,234,0) 70%); }
+      .frame { position: absolute; left: 30px; top: 30px; right: 30px; bottom: 30px; border: 1px solid rgba(245,240,234,0.16); }
+      .tick { position: absolute; width: 18px; height: 18px; border-color: rgba(245,240,234,0.55); border-style: solid; }
+      .lbl { font-family: "Berlin Sans FB", sans-serif; }
+      .eyebrow { left: 0; right: 0; text-align: center; font-family: "Berlin Sans FB", sans-serif; letter-spacing: 12px; }
+      .head { left: 0; right: 0; text-align: center; font-family: "Geometr706 BlkCn", sans-serif; line-height: 0.95; }
+      .tri { display: flex; gap: 5px; }
+      .tri span { flex: 1; height: 3px; }
+      .glow { position: absolute; border-radius: 50%; }
+      .glass { position: absolute; opacity: 0.22; }
+      .pk { position: absolute; height: auto; filter: drop-shadow(0 18px 22px rgba(0,0,0,0.55)); }
+      .refl { position: absolute; top: 1362px; height: 130px; overflow: hidden;
+        -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0) 85%); mask-image: linear-gradient(180deg, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0) 85%); }
+      .refl img { position: absolute; left: 0; top: 0; width: 100%; height: auto; transform: scaleY(-1); }
+      .col { position: absolute; top: 1396px; width: 340px; text-align: center; }
+      .col b { display: block; font-family: "Bernard MT Condensed", serif; font-weight: normal; font-size: 50px; line-height: 0.98; letter-spacing: 0.5px; }
+      .col i { display: block; font-style: normal; font-family: "Berlin Sans FB", sans-serif; font-size: 16px; letter-spacing: 6px; color: rgba(245,240,234,0.7); margin-top: 18px; }
+      .col u { display: block; text-decoration: none; font-family: "Geometr706 BlkCn", sans-serif; font-size: 68px; line-height: 0.95; letter-spacing: 2px; margin-top: 6px; color: #f5f0ea; }
+      .col em { display: block; font-style: normal; width: 34px; height: 3px; margin: 0 auto 16px; }
+      .vr { position: absolute; top: 1048px; width: 1px; height: 120px; background: linear-gradient(180deg, rgba(245,240,234,0) 0%, rgba(245,240,234,0.22) 50%, rgba(245,240,234,0) 100%); }
+      .grain { position: absolute; inset: 0; background-image: url("assets/grain.png"); background-size: 256px 256px; opacity: 0.055; mix-blend-mode: overlay; }
+      .vig { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 75% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.5) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="2160" data-height="3840" data-duration="1" data-fps="30">
+      <section id="p" class="abs" style="inset: 0" data-start="0" data-duration="1" data-track-index="1">
+        <div id="art">
+          <div class="pat"></div><div class="spot"></div>
+          <img class="abs" src="assets/logo-h.png" alt="DrinksBite" style="left: 50%; top: 262px; width: 300px; margin-left: -144px" />
+          <div class="abs eyebrow" style="top: 388px; font-size: 15px; letter-spacing: 4px; text-transform: none; color: rgba(245,240,234,0.55)">@drinksbite_official &nbsp;·&nbsp; drinksbite.com</div>
+          <div class="abs eyebrow" style="top: 486px; font-size: 26px; letter-spacing: 17px">India's first</div>
+          <div class="abs head" style="top: 528px; font-size: 140px">Drink-pairing</div>
+          <div class="abs head" style="top: 654px; font-size: 196px; letter-spacing: 5px">Chakna</div>
+          <div class="glow" style="left: 20px; top: 880px; width: 360px; height: 560px; background: radial-gradient(ellipse at 50% 55%, rgba(247,183,51,0.13) 0%, rgba(0,0,0,0) 65%)"></div>
+          <div class="glow" style="left: 360px; top: 880px; width: 360px; height: 560px; background: radial-gradient(ellipse at 50% 55%, rgba(138,91,170,0.18) 0%, rgba(0,0,0,0) 65%)"></div>
+          <div class="glow" style="left: 700px; top: 880px; width: 360px; height: 560px; background: radial-gradient(ellipse at 50% 55%, rgba(102,153,51,0.17) 0%, rgba(0,0,0,0) 65%)"></div>
+          <img class="glass" src="assets/la-glass-beer.png"    alt="" style="left: 236px; top: 880px; width: 150px; height: 293px" />
+          <img class="glass" src="assets/la-glass-whiskey.png" alt="" style="left: 584px; top: 1010px; width: 142px; height: 163px" />
+          <img class="glass" src="assets/la-glass-rum.png"     alt="" style="left: 914px; top: 970px; width: 150px; height: 197px" />
+          <div class="abs" style="left: 50px; right: 50px; top: 1360px; height: 2px; background: linear-gradient(90deg, rgba(245,240,234,0) 0%, rgba(245,240,234,0.38) 15%, rgba(245,240,234,0.38) 85%, rgba(245,240,234,0) 100%)"></div>
+          <div class="abs" style="left: 0; right: 0; top: 1361px; height: 559px; background: linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0) 35%)"></div>
+          <div class="refl" style="left: 45px; width: 310px"><img src="assets/pack-beer.png" alt="" /></div>
+          <div class="refl" style="left: 385px; width: 310px"><img src="assets/pack-whiskey.png" alt="" /></div>
+          <div class="refl" style="left: 725px; width: 310px"><img src="assets/pack-rum.png" alt="" /></div>
+          <img class="pk" src="assets/pack-beer.png" alt="" style="left: 45px; top: 916px; width: 310px" />
+          <img class="pk" src="assets/pack-whiskey.png" alt="" style="left: 385px; top: 920px; width: 310px" />
+          <img class="pk" src="assets/pack-rum.png" alt="" style="left: 725px; top: 932px; width: 310px" />
+          <div class="col" style="left: 30px"><b style="color: #f7b733">Cheddar<br />&amp; Herbs</b><i>Best paired with</i><u>beer</u></div>
+          <div class="col" style="left: 370px"><b style="color: #b48fd0">Toasted Sesame<br />Umami</b><i>Best paired with</i><u>whiskey</u></div>
+          <div class="col" style="left: 710px"><b style="color: #8cc152">Coconut<br />&amp; Spices</b><i>Best paired with</i><u>rum</u></div>
+          <div class="abs eyebrow" style="top: 1648px; font-size: 24px; letter-spacing: 12px">Pair <span style="color: #f7b733">·</span> Sip <span style="color: #b48fd0">·</span> Repeat</div>
+          <div class="abs eyebrow" style="top: 1694px; font-size: 12px; letter-spacing: 6px; color: rgba(245,240,234,0.42)">Not fried · Not baked · It's popped · Made with jowar</div>
+          <div class="vig"></div><div class="grain"></div>
+        </div>
+      </section>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
