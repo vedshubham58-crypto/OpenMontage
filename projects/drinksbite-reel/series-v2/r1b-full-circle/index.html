@@ -32,7 +32,7 @@
 
       /* STAGE: centred brand system */
       .unit { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
-      .counter { position: absolute; left: 200px; top: 1180px; width: 680px; height: 2px;
+      .counter { position: absolute; left: 140px; top: 1300px; width: 800px; height: 2px;
         background: linear-gradient(90deg, rgba(245,240,234,0) 0%, rgba(245,240,234,0.35) 20%, rgba(245,240,234,0.35) 80%, rgba(245,240,234,0) 100%); }
       .glow { position: absolute; border-radius: 50%; }
       .ls { position: absolute; overflow: hidden; -webkit-mask-image: linear-gradient(to top, transparent 0px, black 70px, black 55%, transparent 100%); mask-image: linear-gradient(to top, transparent 0px, black 70px, black 55%, transparent 100%); }
@@ -41,12 +41,12 @@
       .lg { position: absolute; overflow: hidden; }
       .lg img { position: absolute; left: 0; top: 0; display: block; }
       .pk { position: absolute; display: block; height: auto; }
-      .refl { position: absolute; left: 0; top: 1182px; width: 1080px; height: 300px; overflow: hidden;
+      .refl { position: absolute; left: 0; top: 1302px; width: 1080px; height: 300px; overflow: hidden;
         -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 80%); mask-image: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 80%); }
       .refl img { position: absolute; top: 0; display: block; transform: scaleY(-1); transform-origin: 50% 0%; }
       .eyebrow { position: absolute; left: 0; right: 0; top: 236px; text-align: center; font-family: var(--label); font-size: 24px; letter-spacing: 14px; }
       .head { position: absolute; left: 0; right: 0; top: 284px; text-align: center; font-family: var(--display); font-size: 100px; line-height: 0.98; }
-      .foot { position: absolute; left: 0; right: 0; top: 1440px; text-align: center; }
+      .foot { position: absolute; left: 0; right: 0; top: 1452px; text-align: center; }
       .foot b { display: block; font-family: var(--flavour); font-weight: normal; font-size: 84px; line-height: 1; letter-spacing: 1px; }
       .foot i { display: block; font-style: normal; font-family: var(--label); font-size: 26px; letter-spacing: 12px; margin-top: 20px; color: rgba(245,240,234,0.55); }
 
@@ -108,13 +108,13 @@
           <img id="sl-logo" src="assets/logo.svg" alt="DrinksBite" />
           <div id="sl-rule"></div>
           <div id="sl-floor"></div>
-          <div class="sl-sh" id="ss1" style="left: 80px; width: 320px"></div>
-          <div class="sl-sh" id="ss2" style="left: 360px; width: 360px"></div>
-          <div class="sl-sh" id="ss3" style="left: 680px; width: 320px"></div>
+          <div class="sl-sh" id="ss1" style="left: 30px; width: 340px"></div>
+          <div class="sl-sh" id="ss2" style="left: 370px; width: 340px"></div>
+          <div class="sl-sh" id="ss3" style="left: 710px; width: 340px"></div>
           <div id="sl-row">
-            <img class="sl-pk" id="sp-w" src="assets/pack-whiskey.png" alt="" style="left: 95px; top: 1002px; width: 300px" />
-            <img class="sl-pk" id="sp-r" src="assets/pack-rum.png" alt="" style="left: 685px; top: 1016px; width: 300px" />
-            <img class="sl-pk" id="sp-b" src="assets/pack-beer.png" alt="" style="left: 370px; top: 942px; width: 340px" />
+            <img class="sl-pk" id="sp-w" src="assets/pack-whiskey-tight.png" alt="" style="left: 40px; top: 847px; width: 320px" />
+            <img class="sl-pk" id="sp-r" src="assets/pack-rum-tight.png" alt="" style="left: 720px; top: 847px; width: 320px" />
+            <img class="sl-pk" id="sp-b" src="assets/pack-beer-tight.png" alt="" style="left: 380px; top: 847px; width: 320px" />
           </div>
           <div id="sl-tag">Pair · Sip · Repeat</div>
           <div id="sl-handle">@drinksbite_official</div>
@@ -129,9 +129,9 @@
       /* ---------- build the three centred product units ---------- */
       const ST = 470;
       const PAIRS = [
-        { n: "beer",    glass: [256, 632, 280, 548], sh: 570, pack: [525, 693, 340, 487], glow: "rgba(247,183,51,0.20)" },
-        { n: "whiskey", glass: [273, 897, 246, 283], sh: 835, pack: [508, 698, 340, 482], glow: "rgba(138,91,170,0.30)" },
-        { n: "rum",     glass: [264, 832, 265, 348], sh: 770, pack: [518, 711, 340, 469], glow: "rgba(102,153,51,0.30)" },
+        { n: "beer",    glass: [170, 655, 330, 645], sh: 670, pack: [530, 608, 380, 692], glow: "rgba(247,183,51,0.20)" },
+        { n: "whiskey", glass: [190, 967, 290, 333], sh: 982, pack: [510, 608, 380, 692], glow: "rgba(138,91,170,0.30)" },
+        { n: "rum",     glass: [179, 891, 312, 409], sh: 906, pack: [521, 608, 380, 692], glow: "rgba(102,153,51,0.30)" },
       ];
       const holder = document.getElementById("units");
       PAIRS.forEach((p, i) => {
@@ -142,8 +142,8 @@
           `<div class="counter"></div>` +
           `<div class="ls" style="left:${gx}px;top:${ST}px;width:${gw}px;height:${cH}px"><div class="flow" id="fl${k}"><img src="assets/la-stream-${p.n}.png" style="top:${cH - p.sh}px;width:${gw}px;height:${p.sh}px" alt=""/><img src="assets/la-stream-${p.n}.png" style="top:${cH}px;width:${gw}px;height:${p.sh}px" alt=""/></div></div>` +
           `<div class="lg" id="lg${k}" style="left:${gx}px;top:${gy}px;width:${gw}px;height:${gh}px"><img id="lgi${k}" src="assets/la-glass-${p.n}.png" style="width:${gw}px;height:${gh}px" alt=""/></div>` +
-          `<img class="pk" id="pk${k}" src="assets/pack-${p.n}.png" style="left:${px}px;top:${py}px;width:${pw}px" alt=""/>` +
-          `<div class="refl"><img src="assets/la-glass-${p.n}.png" style="left:${gx}px;width:${gw}px;height:${gh}px" alt=""/><img src="assets/pack-${p.n}.png" style="left:${px}px;width:${pw}px;height:${ph}px" alt=""/></div>`;
+          `<img class="pk" id="pk${k}" src="assets/pack-${p.n}-tight.png" style="left:${px}px;top:${py}px;width:${pw}px" alt=""/>` +
+          `<div class="refl"><img src="assets/la-glass-${p.n}.png" style="left:${gx}px;width:${gw}px;height:${gh}px" alt=""/><img src="assets/pack-${p.n}-tight.png" style="left:${px}px;width:${pw}px;height:${ph}px" alt=""/></div>`;
         holder.appendChild(u);
       });
 
