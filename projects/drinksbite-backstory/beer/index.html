@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>DrinksBite — Backstory (beer)</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+      :root { --c: #f7b733; --cl: #f7b733; --ink: #171717; --cream: #f5f0ea; }
+      html, body { margin: 0; padding: 0; background: #111; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: var(--cream); text-transform: uppercase; }
+      .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; }
+      .fill { position: absolute; inset: 0; }
+      .abs { position: absolute; }
+      .pat { position: absolute; inset: -100px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.1; }
+      .spot { background: radial-gradient(ellipse 65% 40% at 50% 0%, rgba(245,240,234,0.08) 0%, rgba(245,240,234,0) 70%); }
+      .mask { display: block; overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+      .ln { display: block; }
+      .head { position: absolute; left: 0; right: 0; text-align: center; font-family: "Geometr706 BlkCn", sans-serif; line-height: 0.96; }
+      .eyebrow { position: absolute; left: 0; right: 0; text-align: center; font-family: "Berlin Sans FB", sans-serif; letter-spacing: 14px; }
+
+      #cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+      #glow { position: absolute; left: 90px; top: 380px; width: 900px; height: 1180px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(247,183,51,0.22) 0%, rgba(0,0,0,0) 62%); }
+      #shadow { position: absolute; left: 300px; top: 1440px; width: 480px; height: 60px; border-radius: 50%; background: radial-gradient(ellipse, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 70%); }
+      #flip { position: absolute; left: 260px; top: 450px; width: 560px; height: 1022px; transform-style: preserve-3d; }
+      .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+      #front { width: 560px; height: 1022px; }
+      #back { transform: rotateY(180deg); background: #161616; overflow: hidden; border-radius: 10px 10px 10px 10px / 6px 6px 6px 6px;
+        box-shadow: 0 30px 50px rgba(0,0,0,0.55); }
+      #back .bpat { position: absolute; inset: 0; background-image: url("assets/pattern.png"); background-size: 260px 134px; opacity: 0.14; }
+      #back .sheen { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(255,255,255,0.05) 22%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0.04) 78%, rgba(0,0,0,0.55) 100%); }
+      #back .crimp { position: absolute; left: 0; right: 0; height: 30px; background: repeating-linear-gradient(90deg, #0d0d0d 0px, #0d0d0d 3px, #242424 3px, #242424 6px); }
+      #back .ribbon { position: absolute; right: 34px; top: 30px; width: 46px; height: 170px; background: var(--c); clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%); }
+      #back .ribbon span { position: absolute; left: 0; right: 0; text-align: center; font-family: "Geometr706 BlkCn", sans-serif; font-size: 12px; line-height: 1.5; color: var(--ink); top: 18px; }
+      .lbl { position: absolute; font-family: "Berlin Sans FB", sans-serif; }
+      .btitle { position: absolute; left: 40px; top: 94px; width: 380px; font-family: "Bernard MT Condensed", serif; font-size: 27px; line-height: 1; color: var(--cl); }
+      .sent { position: absolute; left: 40px; width: 340px; font-family: "Berlin Sans FB", sans-serif; font-size: 12px; line-height: 1.42; letter-spacing: 0.4px; color: rgba(245,240,234,0.88); }
+      .hl { background-image: linear-gradient(var(--c), var(--c)); background-repeat: no-repeat; background-size: 0% 100%; background-position: 0 0; padding: 0 2px; border-radius: 2px; }
+      .hl.on { color: var(--ink); }
+
+      .puff { position: absolute; left: 0; top: 0; height: auto; }
+      .dust { position: absolute; left: 0; top: 0; border-radius: 50%; }
+      .sticker { position: absolute; left: 50%; top: 250px; white-space: nowrap; padding: 18px 34px 14px; background: var(--c); color: var(--ink);
+        font-family: "Geometr706 BlkCn", sans-serif; font-size: 58px; line-height: 1; letter-spacing: 1px; border-radius: 6px; box-shadow: 0 14px 30px rgba(0,0,0,0.5); }
+      #pop { position: absolute; left: 640px; top: 300px; font-family: "Geometr706 BlkCn", sans-serif; font-size: 190px; color: var(--cl); transform-origin: 50% 60%; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+      #flash { background: #fff; opacity: 0; }
+      .grain { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; background-image: url("assets/grain.png"); background-size: 512px 512px; opacity: 0.05; mix-blend-mode: overlay; }
+      .vig { background: radial-gradient(ellipse 85% 70% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="16" data-fps="30">
+      <section id="main" class="clip" style="z-index: 1; background: #101010" data-start="0" data-duration="14.1" data-track-index="1">
+        <div class="pat"></div><div class="fill spot"></div>
+        <div id="cam">
+          <div id="glow"></div><div id="shadow"></div>
+          <div id="flip">
+            <img class="face" id="front" src="assets/pack-beer-tight.png" alt="" />
+            <div class="face" id="back">
+              <div class="bpat"></div>
+              <div class="crimp" style="top: 0"></div><div class="crimp" style="bottom: 0"></div>
+              <div class="ribbon"><span>PAIR.<br />SIP.<br />REPEAT.</span></div>
+              <div class="lbl" style="left: 40px; top: 70px; font-size: 10px; letter-spacing: 3px; color: rgba(245,240,234,0.6)">The flavour story</div>
+              <div class="btitle" id="btitle">Smoky Cheddar &amp; Herb</div>
+              <div class="lbl" style="left: 40px; top: 128px; font-size: 11px; letter-spacing: 3px; color: var(--cl)">Beer-inspired</div>
+              <div class="sent" id="s0" style="top:152px">Crisp jowar puffs hit you with a <span class="hl">bright, tangy crunch</span> that rolls right into <span class="hl">savory garlic, herbs</span>, and a low-key <span class="hl">malty depth</span>.</div><div class="sent" id="s1" style="top:236px">Vibe-check them with a crisp, <span class="hl">hop-forward</span> drink profile full of refreshing <span class="hl">bitter-sweet</span> notes.</div><div class="sent" id="s2" style="top:320px">The sharp tang cuts straight through the fizz while the herby, malty notes match the drink's energy for an absolute <span class="hl">match made in heaven</span>.</div>
+              <div class="lbl" style="left: 0; right: 0; top: 470px; text-align: center; font-size: 13px; letter-spacing: 5px; color: rgba(245,240,234,0.7)">Best paired with</div>
+              <div class="lbl" style="left: 0; right: 0; top: 492px; text-align: center; font-family: 'Geometr706 BlkCn', sans-serif; font-size: 64px; color: var(--cl)">beer</div>
+              <img src="assets/logo-h.png" alt="" style="position: absolute; left: 50%; top: 640px; width: 280px; margin-left: -134px" />
+              <div class="lbl" style="left: 0; right: 0; top: 760px; text-align: center; font-size: 11px; letter-spacing: 4px; color: rgba(245,240,234,0.65)">Not fried · Not baked · It's popped</div>
+              <div class="lbl" style="left: 0; right: 0; top: 784px; text-align: center; font-size: 11px; letter-spacing: 4px; color: rgba(245,240,234,0.65)">Made with jowar · Trans fat free</div>
+              <div class="lbl" style="left: 0; right: 0; top: 900px; text-align: center; font-size: 10px; letter-spacing: 3px; color: rgba(245,240,234,0.4)">India's first drink-pairing chakna</div>
+              <div class="sheen"></div>
+            </div>
+          </div>
+          <div id="burst"></div>
+        </div>
+
+        <div class="head" id="hk" style="top: 150px; font-size: 84px"><span class="mask"><span class="ln">Psst.</span></span><span class="mask"><span class="ln">This pack has</span></span><span class="mask"><span class="ln" style="color: var(--cl)">a backstory.</span></span></div>
+        <div id="pop">POP!</div>
+        <div class="eyebrow" id="eb" style="top: 300px; font-size: 26px; color: var(--cl)">Flip it. Read it.</div>
+        <div class="sticker" id="st0">Vibe check: passed.</div>
+        <div class="sticker" id="st1">10/10 would pair again</div>
+        <div class="head" id="fname" style="top: 250px; font-family: 'Bernard MT Condensed', serif; font-size: 96px; color: var(--cl)"><span class="mask"><span class="ln">Cheddar &amp; Herbs</span></span></div>
+        <div class="eyebrow" id="bpw" style="top: 1540px; font-size: 26px; letter-spacing: 12px">Best paired with</div>
+        <div class="head" id="bpd" style="top: 1580px; font-size: 110px"><span class="mask"><span class="ln">beer</span></span></div>
+        <div class="fill" id="flash"></div>
+      </section>
+
+      <section id="end" class="clip" style="z-index: 2; background: #141414" data-start="14" data-duration="2" data-track-index="2">
+        <div class="pat" style="opacity: 0.16"></div><div class="fill spot"></div>
+        <img id="eLogo" src="assets/logo-h.png" alt="DrinksBite" style="position: absolute; left: 50%; top: 700px; width: 760px; margin-left: -362px" />
+        <div class="abs" id="eTri" style="left: 441px; top: 990px; width: 198px; height: 4px; display: flex; gap: 6px"><span style="flex: 1; background: #f7b733"></span><span style="flex: 1; background: #8a5baa"></span><span style="flex: 1; background: #669933"></span></div>
+        <div class="eyebrow" id="eClaim" style="top: 1030px; font-size: 26px; letter-spacing: 12px">India's first drink-pairing chakna</div>
+        <div class="eyebrow" id="eTag" style="top: 1300px; font-size: 38px; letter-spacing: 16px">Pair <span style="color: #f7b733">·</span> Sip <span style="color: #b48fd0">·</span> Repeat</div>
+        <div class="eyebrow" id="eH" style="top: 1376px; font-size: 28px; letter-spacing: 4px; text-transform: none; color: rgba(245,240,234,0.6)">@drinksbite_official</div>
+      </section>
+
+      <section id="fx" class="clip" style="z-index: 20" data-start="0" data-duration="16" data-track-index="9"><div class="fill vig"></div><div class="grain" id="grain"></div></section>
+      <audio id="bgm" src="assets/soundtrack-beer.wav" data-start="0" data-duration="16" data-track-index="10" data-volume="1"></audio>
+    </div>
+
+    <script>
+      let seed = 4242; const R = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296), rr = (a, b) => a + (b - a) * R();
+      const S = 2.55, CAM = {"title": [-658.5, -573.5], "s0": [-658.5, -741.8], "s1": [-658.5, -945.8], "s2": [-658.5, -1175.3]};
+      const tl = gsap.timeline({ paused: true });
+      for (let k = 0, f = 0; f < 16; k++, f += 1 / 12) tl.set("#grain", { x: ((k * 137) % 200) - 100, y: ((k * 89) % 200) - 100 }, f);
+      const up = (sel, t, d = 0.5) => tl.fromTo(sel + " .ln", { yPercent: 115 }, { yPercent: 0, duration: d, stagger: 0.07, ease: "expo.out" }, t);
+      const out = (sel, t) => tl.to(sel + " .ln", { yPercent: -115, duration: 0.22, stagger: 0.03, ease: "power3.in" }, t);
+      const camTo = (k, t, d, ease = "expo.inOut") => tl.to("#cam", { scale: S, x: CAM[k][0], y: CAM[k][1], duration: d, ease }, t);
+      const stick = (id, t, outT) => {
+        tl.fromTo(id, { scale: 0, rotation: -18, xPercent: -50 }, { scale: 1, rotation: -5, xPercent: -50, duration: 0.45, ease: "back.out(3)" }, t);
+        tl.to(id, { scale: 0, rotation: 8, duration: 0.2, ease: "power3.in" }, outT);
+      };
+      const shake = (t) => { [6, -5, 4, -2, 0].forEach((v, i) => tl.to("#cam", { rotation: v * 0.15, duration: 0.04, ease: "none" }, t + i * 0.04)); };
+      tl.set(["#st0", "#st1"], { xPercent: -50, scale: 0 }, 0);
+      tl.set("#pop", { scale: 0 }, 0);
+
+      /* 0 – drop in, hook */
+      tl.fromTo("#flip", { y: -1500, rotation: -8 }, { y: 0, rotation: 0, duration: 0.55, ease: "back.out(1.4)" }, 0.0);
+      tl.fromTo(["#glow", "#shadow"], { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.35);
+      up("#hk", 0.3, 0.5);
+      /* wobble + inflate: it's about to burst */
+      [[-4, 0.62], [4, 0.78], [-3, 0.92], [3, 1.05], [-2, 1.18], [2, 1.3], [0, 1.42]].forEach(([r, t]) => tl.to("#flip", { rotation: r, duration: 0.13, ease: "sine.inOut" }, t));
+      tl.to("#flip", { scaleX: 1.07, scaleY: 1.03, duration: 0.85, ease: "power1.in" }, 0.62);
+      out("#hk", 1.28);
+      /* 1.55 – POP */
+      tl.to("#flip", { scaleX: 0.94, scaleY: 1.08, y: -40, duration: 0.09, ease: "power2.out" }, 1.55);
+      tl.to("#flip", { scaleX: 1, scaleY: 1, y: 0, duration: 0.5, ease: "elastic.out(1.1, 0.4)" }, 1.64);
+      tl.fromTo("#flash", { opacity: 0.35 }, { opacity: 0, duration: 0.25, immediateRender: false }, 1.55);
+      tl.fromTo("#pop", { scale: 0, rotation: -20 }, { scale: 1, rotation: 8, duration: 0.3, ease: "back.out(3)" }, 1.56);
+      tl.to("#pop", { scale: 0, duration: 0.18, ease: "power3.in" }, 2.15);
+      const burst = document.getElementById("burst");
+      for (let i = 0; i < 16; i++) {
+        const p = document.createElement("img"); p.className = "puff"; p.src = `assets/puff${[0, 4, 5][i % 3]}.png`;
+        const w = rr(70, 120); p.style.width = w + "px"; burst.appendChild(p);
+        const x0 = rr(440, 640) - w / 2, y0 = 470, vx = rr(-420, 420), vy = rr(-520, -260);
+        tl.set(p, { opacity: 0 }, 0);
+        tl.fromTo(p, { x: x0, y: y0, rotation: 0, opacity: 1, scale: 0.4 }, { x: x0 + vx * 0.6, y: y0 + vy, rotation: rr(-220, 220), scale: 1, duration: 0.5, ease: "power2.out", immediateRender: false }, 1.56 + rr(0, 0.06));
+        tl.to(p, { x: x0 + vx, y: 2100, rotation: `+=${rr(-200, 200)}`, duration: 0.9, ease: "power2.in" }, 2.06);
+      }
+      for (let i = 0; i < 60; i++) {
+        const d = document.createElement("div"); d.className = "dust"; const w = rr(3, 9);
+        d.style.cssText = `width:${w}px;height:${w}px;background:radial-gradient(circle, #f7b733 0%, rgba(0,0,0,0) 70%)`; burst.appendChild(d);
+        const a = rr(-Math.PI, 0), r = rr(120, 520);
+        tl.set(d, { opacity: 0 }, 0);
+        tl.fromTo(d, { x: 540, y: 470, opacity: 1 }, { x: 540 + Math.cos(a) * r, y: 470 + Math.sin(a) * r * 0.8, opacity: 0, duration: rr(0.8, 1.4), ease: "expo.out", immediateRender: false }, 1.56);
+      }
+      /* 2.2 – flip to the back */
+      tl.to("#flip", { rotationY: 180, transformPerspective: 1800, duration: 0.8, ease: "power3.inOut" }, 2.2);
+      tl.to("#flip", { scale: 0.9, duration: 0.4, ease: "power2.out", yoyo: true, repeat: 1 }, 2.2);
+      tl.fromTo("#eb", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35 }, 2.9);
+      tl.to("#eb", { opacity: 0, duration: 0.2 }, 3.35);
+      /* 3.4 – zoom into the story (top-left) */
+      tl.to(["#glow", "#shadow"], { opacity: 0, duration: 0.4 }, 3.4);
+      camTo("title", 3.4, 0.8);
+      tl.fromTo("#btitle", { scale: 1 }, { scale: 1.06, duration: 0.25, yoyo: true, repeat: 1, transformOrigin: "0 50%" }, 4.25);
+      const marks = (i, t0, t1) => {
+        const hs = document.querySelectorAll(`#s${i} .hl`);
+        hs.forEach((h, j) => {
+          const t = t0 + (t1 - t0) * (hs.length > 1 ? j / (hs.length - 1) : 0);
+          tl.to(h, { backgroundSize: "100% 100%", duration: 0.35, ease: "power2.out" }, t);
+          tl.set(h, { className: "hl on" }, t + 0.12);
+        });
+      };
+      camTo("s0", 4.7, 0.5, "power3.inOut"); marks(0, 5.05, 6.2);
+      camTo("s1", 6.6, 0.45, "power3.inOut"); marks(1, 6.95, 7.5);
+      stick("#st0", 7.75, 8.6); shake(7.75);
+      camTo("s2", 8.75, 0.45, "power3.inOut"); marks(2, 9.15, 9.6);
+      stick("#st1", 9.95, 10.9); shake(9.95);
+      /* 11.0 – zoom out, spin back to the front */
+      tl.to("#cam", { scale: 1, x: 0, y: 0, rotation: 0, duration: 0.6, ease: "expo.inOut" }, 11.0);
+      tl.to(["#glow", "#shadow"], { opacity: 1, duration: 0.4 }, 11.3);
+      tl.to("#flip", { rotationY: 360, transformPerspective: 1800, duration: 0.75, ease: "back.out(1.2)" }, 11.65);
+      up("#fname", 12.3); tl.fromTo("#bpw", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 12.55); up("#bpd", 12.6);
+      tl.to("#cam", { scale: 1.04, duration: 1.6, ease: "none", transformOrigin: "50% 50%" }, 12.4);
+      /* 14 – end card */
+      tl.fromTo("#eLogo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 14.05);
+      tl.fromTo("#eTri span", { scaleX: 0 }, { scaleX: 1, duration: 0.3, stagger: 0.07, ease: "expo.out", transformOrigin: "0 50%" }, 14.3);
+      tl.fromTo("#eClaim", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 14.4);
+      tl.fromTo("#eTag", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35 }, 14.6);
+      tl.fromTo("#eH", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 14.75);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
