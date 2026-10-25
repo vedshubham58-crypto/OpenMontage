@@ -22,7 +22,7 @@
       .flav { font-family: "Bernard MT Condensed", serif; line-height: 1; letter-spacing: 1px; }
       .disp { font-family: "Geometr706 BlkCn", sans-serif; line-height: 0.95; }
       .glow { position: absolute; border-radius: 50%; }
-      .refl { position: absolute; top: 1012px; left: 0; width: 1080px; height: 110px; overflow: hidden;
+      .refl { position: absolute; top: 1006px; left: 0; width: 1080px; height: 110px; overflow: hidden;
         -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 85%); mask-image: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 85%); }
       .refl img { position: absolute; top: 0; transform: scaleY(-1); transform-origin: 50% 0; }
       .pk { position: absolute; filter: drop-shadow(0 18px 22px rgba(0,0,0,0.55)); }
@@ -34,39 +34,41 @@
     <div id="root" data-composition-id="main" data-width="2160" data-height="2700" data-duration="3" data-fps="30"></div>
     <script>
       const SKU = [
-        { n: "beer", name: "Cheddar &amp; Herbs", fs: 108, drink: "Beer", c: "#f7b733", cl: "#f7b733", glow: "rgba(247,183,51,0.16)",
-          notes: "Bright, tangy crunch · Savory garlic &amp; herbs · Malty depth", glass: [270, 528] },
-        { n: "whiskey", name: "Toasted Sesame Umami", fs: 92, drink: "Whiskey", c: "#8a5baa", cl: "#b48fd0", glow: "rgba(138,91,170,0.22)",
-          notes: "Deep roasted flavour · Pure umami · Toasted-oak warmth", glass: [270, 310] },
-        { n: "rum", name: "Coconut &amp; Spices", fs: 108, drink: "Rum", c: "#669933", cl: "#8cc152", glow: "rgba(102,153,51,0.22)",
-          notes: "Soft sweetness · Warm spice · Zesty citrus pop", glass: [272, 357] },
+        { n: "beer", name: "Cheddar &amp; Herbs", fs: 116, drink: "Beer", c: "#f7b733", cl: "#f7b733", glow: "rgba(247,183,51,0.20)", gi: [49, 96],
+          notes: [["Bright,", "tangy crunch"], ["Savory garlic", "&amp; herbs"], ["Low-key", "malty depth"]] },
+        { n: "whiskey", name: "Toasted Sesame Umami", fs: 96, drink: "Whiskey", c: "#8a5baa", cl: "#b48fd0", glow: "rgba(138,91,170,0.26)", gi: [84, 96],
+          notes: [["Deep roasted", "flavour"], ["Pure", "umami"], ["Toasted-oak", "warmth"]] },
+        { n: "rum", name: "Coconut &amp; Spices", fs: 116, drink: "Rum", c: "#669933", cl: "#8cc152", glow: "rgba(102,153,51,0.26)", gi: [73, 96],
+          notes: [["Soft", "sweetness"], ["Warm spice &amp;", "subtle smoke"], ["Zesty", "citrus pop"]] },
       ];
       const root = document.getElementById("root");
       SKU.forEach((s, i) => {
-        const PW = 330, PH = Math.round(PW * 1.825), FLOOR = 1010, GAP = 26;
-        const [gw, gh] = s.glass, total = gw + GAP + PW, x0 = (1080 - total) / 2;
-        const gx = x0, px = x0 + gw + GAP;
+        const PW = 360, PH = Math.round(PW * 1.825), FLOOR = 1004, PX = 540 - PW / 2, PY = FLOOR - PH;
+        // callouts: two on the left, one on the right, vertically balanced around the pack
+        const call = (txt, side, y) => side === "L"
+          ? `<div class="abs lbl" style="left:70px;width:250px;top:${y}px;text-align:right;font-size:18px;letter-spacing:3px;line-height:1.35;color:rgba(245,240,234,0.9)">${txt[0]}<br/>${txt[1]}<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${s.c};margin-left:14px;vertical-align:2px"></span></div>`
+          : `<div class="abs lbl" style="left:760px;width:250px;top:${y}px;text-align:left;font-size:18px;letter-spacing:3px;line-height:1.35;color:rgba(245,240,234,0.9)"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${s.c};margin-right:14px;vertical-align:2px"></span>${txt[0]}<br/><span style="margin-left:23px">${txt[1]}</span></div>`;
         const sec = document.createElement("section");
         sec.className = "clip"; sec.style.zIndex = String(i + 1);
         sec.setAttribute("data-start", String(i)); sec.setAttribute("data-duration", "1"); sec.setAttribute("data-track-index", String(i + 1));
         sec.innerHTML = `<div class="art">
           <div class="pat"></div><div class="spot"></div>
-          <img class="abs" src="assets/logo-h.png" alt="DrinksBite" style="left:50%;top:62px;width:230px;margin-left:-110px"/>
-          <div class="abs c lbl" style="top:160px;font-size:15px;letter-spacing:8px;color:rgba(245,240,234,0.6)">India's first drink-pairing chakna</div>
-          <div class="abs c flav" style="top:206px;font-size:${s.fs}px;color:${s.cl}">${s.name}</div>
-          <div class="abs c lbl" style="top:${206 + s.fs + 22}px;font-size:15px;letter-spacing:4px;color:rgba(245,240,234,0.78)">${s.notes}</div>
-          <div class="glow" style="left:140px;top:380px;width:800px;height:720px;background:radial-gradient(ellipse at 50% 60%, ${s.glow} 0%, rgba(0,0,0,0) 65%)"></div>
-          <div class="abs" style="left:110px;right:110px;top:${FLOOR}px;height:2px;background:linear-gradient(90deg, rgba(245,240,234,0) 0%, rgba(245,240,234,0.38) 15%, rgba(245,240,234,0.38) 85%, rgba(245,240,234,0) 100%)"></div>
-          <div class="abs" style="left:0;right:0;top:${FLOOR + 1}px;height:339px;background:linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0) 40%)"></div>
-          <div class="refl"><img src="assets/la-glass-${s.n}.png" style="left:${gx}px;width:${gw}px;height:${gh}px" alt=""/><img src="assets/pack-${s.n}-tight.png" style="left:${px}px;width:${PW}px;height:${PH}px" alt=""/></div>
-          <img class="abs" src="assets/la-glass-${s.n}.png" alt="" style="left:${gx}px;top:${FLOOR - gh}px;width:${gw}px;height:${gh}px"/>
-          <img class="pk" src="assets/pack-${s.n}-tight.png" alt="" style="left:${px}px;top:${FLOOR - PH}px;width:${PW}px;height:${PH}px"/>
-          <div class="abs c lbl" style="top:1056px;font-size:17px;letter-spacing:7px;color:rgba(245,240,234,0.72)">Best paired with</div>
-          <div class="abs c disp" style="top:1082px;font-size:104px;color:#f5f0ea;letter-spacing:2px">${s.drink}</div>
-          <div class="abs lbl" style="left:64px;top:1268px;font-size:13px;letter-spacing:3px;color:rgba(245,240,234,0.55);text-transform:none">@drinksbite_official</div>
-          <div class="abs c lbl" style="top:1264px;font-size:20px;letter-spacing:10px">Pair <span style="color:#f7b733">·</span> Sip <span style="color:#b48fd0">·</span> Repeat</div>
-          <div class="abs lbl" style="right:64px;top:1268px;font-size:13px;letter-spacing:3px;color:rgba(245,240,234,0.55)">drinksbite.com</div>
-          <div class="abs c lbl" style="top:1302px;font-size:11px;letter-spacing:6px;color:rgba(245,240,234,0.4)">Not fried · Not baked · It's popped · Made with jowar</div>
+          <img class="abs" src="assets/logo-h.png" alt="DrinksBite" style="left:50%;top:58px;width:210px;margin-left:-100px"/>
+          <div class="abs c lbl" style="top:146px;font-size:14px;letter-spacing:9px;color:rgba(245,240,234,0.6)">India's first drink-pairing chakna</div>
+          <div class="abs c flav" style="top:${262 - s.fs * 0.62}px;font-size:${s.fs}px;color:${s.cl}">${s.name}</div>
+          <div class="glow" style="left:190px;top:330px;width:700px;height:760px;background:radial-gradient(ellipse at 50% 55%, ${s.glow} 0%, rgba(0,0,0,0) 64%)"></div>
+          <div class="abs" style="left:150px;right:150px;top:${FLOOR}px;height:2px;background:linear-gradient(90deg, rgba(245,240,234,0) 0%, rgba(245,240,234,0.35) 20%, rgba(245,240,234,0.35) 80%, rgba(245,240,234,0) 100%)"></div>
+          <div class="abs" style="left:${PX - 30}px;top:${FLOOR - 22}px;width:${PW + 60}px;height:44px;border-radius:50%;background:radial-gradient(ellipse, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 70%)"></div>
+          <div class="refl"><img src="assets/pack-${s.n}-tight.png" style="left:${PX}px;width:${PW}px;height:${PH}px" alt=""/></div>
+          <img class="pk" src="assets/pack-${s.n}-tight.png" alt="" style="left:${PX}px;top:${PY}px;width:${PW}px;height:${PH}px"/>
+          ${call(s.notes[0], "L", 470)}${call(s.notes[1], "R", 640)}${call(s.notes[2], "L", 810)}
+          <div class="abs c lbl" style="top:1046px;font-size:16px;letter-spacing:8px;color:rgba(245,240,234,0.7)">Best paired with</div>
+          <div class="abs" style="left:0;right:0;top:1078px;display:flex;justify-content:center;align-items:center;gap:22px">
+            <img src="assets/la-glass-${s.n}.png" alt="" style="width:${s.gi[0]}px;height:${s.gi[1]}px"/>
+            <span class="disp" style="font-size:108px;letter-spacing:3px;color:#f5f0ea;line-height:1;padding-top:8px">${s.drink}</span>
+          </div>
+          <div class="abs c lbl" style="top:1240px;font-size:18px;letter-spacing:12px">Pair <span style="color:#f7b733">·</span> Sip <span style="color:#b48fd0">·</span> Repeat</div>
+          <div class="abs c lbl" style="top:1278px;font-size:12px;letter-spacing:4px;color:rgba(245,240,234,0.5);text-transform:none">@drinksbite_official &nbsp;·&nbsp; drinksbite.com</div>
           <div class="vig"></div><div class="grain"></div></div>`;
         root.appendChild(sec);
       });
