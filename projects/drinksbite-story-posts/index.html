@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=2160, height=2700" />
+    <title>DrinksBite — Flavour Story Posts</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+      html, body { margin: 0; padding: 0; background: #121212; }
+      #root { position: relative; width: 2160px; height: 2700px; overflow: hidden; }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      .art { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+        background: radial-gradient(ellipse 70% 60% at 78% 55%, #22201e 0%, #151515 55%, #0e0e0e 100%); color: #f5f0ea; text-transform: uppercase; }
+      .abs { position: absolute; }
+      .pat { position: absolute; inset: -60px; background-image: url("assets/pattern.png"); background-size: 300px 155px; opacity: 0.09; }
+      .lbl { font-family: "Berlin Sans FB", sans-serif; }
+      .flav { font-family: "Bernard MT Condensed", serif; line-height: 0.98; letter-spacing: 1px; }
+      .story { font-family: "Berlin Sans FB", sans-serif; font-size: 27px; line-height: 1.6; letter-spacing: 0.6px; color: rgba(245,240,234,0.86); }
+      .grain { position: absolute; inset: 0; background-image: url("assets/grain.png"); background-size: 256px 256px; opacity: 0.055; mix-blend-mode: overlay; }
+      .vig { position: absolute; inset: 0; background: radial-gradient(ellipse 85% 80% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.5) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="2160" data-height="2700" data-duration="3" data-fps="30"></div>
+    <script>
+      const SKU = [
+        { n: "beer", l1: "Cheddar &amp;", l2: "Herbs", drink: "beer", c: "#f7b733", cl: "#f7b733", glow: "rgba(247,183,51,0.20)", gw: 330, gh: 645,
+          story: "Crisp jowar puffs with a bright, tangy hit of cheddar and herbs, rolling into a low-key malty depth. Built for a hop-forward pour — the tang cuts straight through the fizz, the herby malt keeps pace with the drink." },
+        { n: "rum", l1: "Coconut &amp;", l2: "Spices", drink: "rum", c: "#669933", cl: "#8cc152", glow: "rgba(102,153,51,0.26)", gw: 312, gh: 409,
+          story: "Airy jowar puffs with soft sweetness, warm spice, and a zesty citrus finish. Made to sit alongside rum's caramel and vanilla notes without fighting them — light crunch, big flavour, balanced all the way through." },
+        { n: "whiskey", l1: "Toasted Sesame", l2: "Umami", drink: "whiskey", fs: 88, c: "#8a5baa", cl: "#b48fd0", glow: "rgba(138,91,170,0.28)", gw: 290, gh: 333,
+          story: "Super-crisp jowar puffs loaded with roasted garlic, onion, and deep umami, finishing on a toasted-oak warmth. Built for whiskey's smoky, caramelised side — bold seasoning, clean crunch, nothing that competes with your glass." },
+      ];
+      const root = document.getElementById("root");
+      SKU.forEach((s, i) => {
+        const PW = 460, PH = Math.round(PW * 1.825), PX = 590, PY = 330, gs = 1.25;
+        const sec = document.createElement("section");
+        sec.className = "clip"; sec.style.zIndex = String(i + 1);
+        sec.setAttribute("data-start", String(i)); sec.setAttribute("data-duration", "1"); sec.setAttribute("data-track-index", String(i + 1));
+        sec.innerHTML = `<div class="art">
+          <div class="pat"></div>
+          <div class="abs" style="left:520px;top:240px;width:640px;height:1000px;border-radius:50%;background:radial-gradient(ellipse at 50% 50%, ${s.glow} 0%, rgba(0,0,0,0) 65%)"></div>
+          <img class="abs" src="assets/la-glass-${s.n}.png" alt="" style="left:${PX + PW / 2 - s.gw * gs / 2 + 40}px;top:${PY + PH - 40 - s.gh * gs}px;width:${s.gw * gs}px;height:${s.gh * gs}px;opacity:0.18"/>
+          <img class="abs" src="assets/pack-${s.n}-tight.png" alt="" style="left:${PX}px;top:${PY}px;width:${PW}px;height:${PH}px;transform:rotate(6deg);transform-origin:50% 60%;filter:drop-shadow(-18px 30px 34px rgba(0,0,0,0.65))"/>
+
+          <img class="abs" src="assets/logo-h.png" alt="DrinksBite" style="left:64px;top:60px;width:190px"/>
+          <div class="abs lbl" style="right:64px;top:78px;font-size:14px;letter-spacing:7px;color:rgba(245,240,234,0.55)">The flavour story</div>
+
+          <div class="abs lbl" style="left:64px;top:214px;font-size:22px;letter-spacing:5px">Flavour</div>
+          <div class="abs flav" style="left:64px;top:250px;width:620px;white-space:nowrap;font-size:${s.fs || 104}px;color:${s.cl}">${s.l1}<br/>${s.l2}</div>
+          <div class="abs lbl" style="left:64px;top:478px;font-size:20px;letter-spacing:5px;color:${s.cl}"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${s.cl};margin-right:14px;vertical-align:2px"></span>Best paired with ${s.drink}</div>
+          <div class="abs story" style="left:64px;top:548px;width:510px">${s.story}</div>
+          <div class="abs lbl" style="left:64px;top:985px;width:520px;font-size:17px;letter-spacing:5px;line-height:1.9;color:${s.cl}">Popped, never fried · Made with jowar · Trans-fat free</div>
+
+          <div class="abs lbl" style="left:64px;top:1268px;font-size:18px;letter-spacing:10px">Pair <span style="color:#f7b733">·</span> Sip <span style="color:#b48fd0">·</span> Repeat</div>
+          <div class="abs lbl" style="right:64px;top:1270px;font-size:13px;letter-spacing:3px;color:rgba(245,240,234,0.55);text-transform:none">@drinksbite_official &nbsp;·&nbsp; drinksbite.com</div>
+          <div class="vig"></div><div class="grain"></div></div>`;
+        root.appendChild(sec);
+      });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
