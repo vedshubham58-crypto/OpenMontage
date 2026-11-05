@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>DrinksBite — Diwali End Slate</title>
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Bernard MT Condensed"; src: url("assets/bernard.ttf") format("truetype"); font-display: block; }
+      @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+      html, body { margin: 0; padding: 0; background: #0e0c0a; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #f5f0ea; text-transform: uppercase; }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      .fill { position: absolute; inset: 0; }
+      .abs { position: absolute; }
+      .bg { background: radial-gradient(ellipse 90% 45% at 50% 100%, rgba(232,150,40,0.20) 0%, rgba(232,150,40,0) 70%),
+                        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(245,220,170,0.08) 0%, rgba(0,0,0,0) 70%), #110f0d; }
+      .pat { position: absolute; inset: -100px; background-image: url("assets/pattern.png"); background-size: 378px 195px; opacity: 0.12; }
+      .mask { display: block; overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+      .ln { display: block; }
+      .q { position: absolute; left: 0; right: 0; text-align: center; font-family: "Geometr706 BlkCn", sans-serif; line-height: 0.98; }
+      .eyebrow { position: absolute; left: 0; right: 0; text-align: center; font-family: "Berlin Sans FB", sans-serif; }
+      .bok { position: absolute; left: 0; top: 0; border-radius: 50%; }
+      .spk { position: absolute; left: 0; top: 0; width: 6px; height: 6px; }
+      .spk::before, .spk::after { content: ""; position: absolute; left: 50%; top: 50%; background: #ffe7b0; border-radius: 2px; transform: translate(-50%, -50%); }
+      .spk::before { width: 22px; height: 2px; } .spk::after { width: 2px; height: 22px; }
+      .pk { position: absolute; height: auto; }
+      .sh { position: absolute; top: 1478px; height: 46px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 70%); }
+      .grain { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; background-image: url("assets/grain.png"); background-size: 512px 512px; opacity: 0.05; mix-blend-mode: overlay; }
+      .vig { background: radial-gradient(ellipse 85% 70% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-duration="7" data-fps="30">
+      <section id="s" class="clip" style="z-index: 1" data-start="0" data-duration="7" data-track-index="1">
+        <div class="fill bg"></div><div class="pat"></div>
+        <div class="fill" id="bokeh"></div>
+        <div id="stage" class="fill">
+          <div class="q" id="q1" style="top: 230px; font-size: 92px"><span class="mask"><span class="ln">You deserve a</span></span><span class="mask"><span class="ln">compatible partner.</span></span></div>
+          <div class="q" id="q2" style="top: 430px; font-size: 92px; color: #f7b733"><span class="mask"><span class="ln">So does your drink.</span></span></div>
+
+          <img id="logo" src="assets/logo-h.png" alt="DrinksBite" style="position: absolute; left: 50%; top: 640px; width: 620px; margin-left: -295px" />
+          <div class="abs" id="tri" style="left: 441px; top: 876px; width: 198px; height: 4px; display: flex; gap: 6px"><span style="flex: 1; background: #f7b733"></span><span style="flex: 1; background: #8a5baa"></span><span style="flex: 1; background: #669933"></span></div>
+          <div class="eyebrow" id="claim" style="top: 910px; font-size: 22px; letter-spacing: 11px; color: rgba(245,240,234,0.75)">India's first drink-pairing chakna</div>
+
+          <div class="abs" style="left: 0; right: 0; top: 1490px; height: 430px; background: linear-gradient(180deg, rgba(255,220,170,0.06) 0%, rgba(0,0,0,0) 45%)"></div>
+          <div class="sh" id="sh1" style="left: 50px; width: 320px"></div>
+          <div class="sh" id="sh2" style="left: 380px; width: 320px"></div>
+          <div class="sh" id="sh3" style="left: 710px; width: 320px"></div>
+          <div class="abs" style="left: 0; top: 0; width: 1080px; height: 1500px; overflow: hidden">
+            <img class="pk" id="p1" src="assets/pack-whiskey-tight.png" alt="" style="left: 60px; top: 952px; width: 300px" />
+            <img class="pk" id="p2" src="assets/pack-beer-tight.png" alt="" style="left: 390px; top: 952px; width: 300px" />
+            <img class="pk" id="p3" src="assets/pack-rum-tight.png" alt="" style="left: 720px; top: 952px; width: 300px" />
+          </div>
+
+          <div class="eyebrow" id="tag" style="top: 1572px; font-size: 36px; letter-spacing: 16px">Pair <span style="color: #f7b733">·</span> Sip <span style="color: #b48fd0">·</span> Repeat</div>
+          <div class="eyebrow" id="diwali" style="top: 1640px; font-size: 22px; letter-spacing: 10px; color: #f7c766">Happy Diwali from DrinksBite</div>
+          <div class="eyebrow" id="handle" style="top: 1690px; font-size: 26px; letter-spacing: 4px; text-transform: none; color: rgba(245,240,234,0.6)">@drinksbite_official</div>
+        </div>
+        <div class="fill" id="sparkles"></div>
+      </section>
+      <section id="fx" class="clip" style="z-index: 20" data-start="0" data-duration="7" data-track-index="9"><div class="fill vig"></div><div class="grain" id="grain"></div></section>
+      <audio id="bgm" src="assets/soundtrack.wav" data-start="0" data-duration="7" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script>
+      let seed = 1111; const R = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296), rr = (a, b) => a + (b - a) * R();
+      const tl = gsap.timeline({ paused: true });
+      for (let k = 0, f = 0; f < 7; k++, f += 1 / 12) tl.set("#grain", { x: ((k * 137) % 200) - 100, y: ((k * 89) % 200) - 100 }, f);
+
+      /* festive bokeh: warm diya-gold out-of-focus lights drifting upward */
+      const bk = document.getElementById("bokeh");
+      for (let i = 0; i < 26; i++) {
+        const d = document.createElement("div"); d.className = "bok"; const w = rr(30, 120), hue = ["255,190,90", "255,160,60", "255,215,150", "247,183,51"][i % 4];
+        d.style.cssText = `width:${w}px;height:${w}px;background:radial-gradient(circle, rgba(${hue},${rr(0.18, 0.4)}) 0%, rgba(${hue},${rr(0.06, 0.14)}) 55%, rgba(${hue},0) 70%);filter:blur(${rr(1, 5)}px)`;
+        bk.appendChild(d);
+        const x = rr(-40, 1080), y = rr(0, 1920);
+        tl.fromTo(d, { x, y, opacity: 0 }, { x: x + rr(-40, 40), y: y - rr(120, 300), opacity: 1, duration: 7, ease: "none" }, 0);
+        tl.to(d, { opacity: rr(0.4, 1), duration: 1.2, yoyo: true, repeat: 4, ease: "sine.inOut" }, rr(0.5, 1.5));
+      }
+      /* twinkling sparkles */
+      const sp = document.getElementById("sparkles");
+      for (let i = 0; i < 18; i++) {
+        const d = document.createElement("div"); d.className = "spk"; sp.appendChild(d);
+        const t = rr(0.4, 6.3), s = rr(0.4, 1.0);
+        tl.set(d, { x: rr(40, 1040), y: rr(120, 1800), scale: 0, rotation: 0 }, 0);
+        tl.to(d, { scale: s, rotation: 45, duration: 0.35, ease: "power2.out" }, t);
+        tl.to(d, { scale: 0, rotation: 90, duration: 0.45, ease: "power2.in" }, t + 0.35);
+      }
+      const up = (sel, t, d = 0.6) => tl.fromTo(sel + " .ln", { yPercent: 115 }, { yPercent: 0, duration: d, stagger: 0.12, ease: "expo.out" }, t);
+
+      tl.fromTo("#stage", { scale: 1.0 }, { scale: 1.03, duration: 7, ease: "none", transformOrigin: "50% 50%" }, 0);
+      up("#q1", 0.3, 0.7);
+      up("#q2", 1.5, 0.7);
+      tl.fromTo("#logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 2.4);
+      tl.fromTo("#tri span", { scaleX: 0 }, { scaleX: 1, duration: 0.35, stagger: 0.08, ease: "expo.out", transformOrigin: "0 50%" }, 2.75);
+      tl.fromTo("#claim", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45 }, 2.9);
+      [["#p1", "#sh1", 3.0], ["#p2", "#sh2", 3.12], ["#p3", "#sh3", 3.24]].forEach(([p, s, t]) => {
+        tl.fromTo(p, { y: 600 }, { y: 0, duration: 0.7, ease: "power3.out" }, t);
+        tl.fromTo(s, { opacity: 0, scaleX: 0.4 }, { opacity: 1, scaleX: 1, duration: 0.5, ease: "power3.out" }, t + 0.3);
+      });
+      tl.fromTo("#tag", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, 3.8);
+      tl.fromTo("#diwali", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 }, 4.05);
+      tl.fromTo("#handle", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 4.25);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
