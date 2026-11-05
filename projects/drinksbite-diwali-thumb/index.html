@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=2160, height=3840" />
+<title>DrinksBite — Diwali Thumbnail</title><script src="assets/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Geometr706 BlkCn"; src: url("assets/geometr.ttf") format("truetype"); font-display: block; }
+  @font-face { font-family: "Berlin Sans FB"; src: url("assets/berlin.ttf") format("truetype"); font-display: block; }
+  html, body { margin: 0; background: #111; }
+  #root { position: relative; width: 2160px; height: 3840px; overflow: hidden; }
+  #art { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden; text-transform: uppercase; color: #f5f0ea; }
+  .ph { position: absolute; left: 0; top: -5px; width: 1080px; height: 1930px; object-fit: cover; }
+  .shade { position: absolute; left: 0; right: 0; top: 0; height: 640px; background: linear-gradient(180deg, rgba(20,10,4,0.78) 0%, rgba(20,10,4,0.5) 45%, rgba(20,10,4,0) 100%); }
+  .c { position: absolute; left: 0; right: 0; text-align: center; }
+  .eb { font-family: "Berlin Sans FB", sans-serif; font-size: 26px; letter-spacing: 14px; color: rgba(255,236,200,0.9); text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+  .t1 { font-family: "Geometr706 BlkCn", sans-serif; font-size: 236px; line-height: 0.9; letter-spacing: 6px;
+        text-shadow: 0 0 30px rgba(255,190,90,0.55), 0 0 80px rgba(255,150,40,0.35), 0 8px 24px rgba(0,0,0,0.55); }
+  .t2 { font-family: "Geometr706 BlkCn", sans-serif; font-size: 104px; line-height: 1; letter-spacing: 18px; color: #f7b733;
+        text-shadow: 0 0 24px rgba(247,183,51,0.45), 0 6px 18px rgba(0,0,0,0.6); }
+  .rule { position: absolute; left: 50%; width: 160px; height: 3px; margin-left: -80px; background: #f7b733; box-shadow: 0 0 12px rgba(247,183,51,0.6); }
+  .foot { position: absolute; left: 0; right: 0; bottom: 0; height: 300px; background: linear-gradient(0deg, rgba(20,10,4,0.6) 0%, rgba(20,10,4,0) 100%); }
+</style></head>
+<body><div id="root" data-composition-id="main" data-width="2160" data-height="3840" data-duration="1" data-fps="30">
+<section data-start="0" data-duration="1" data-track-index="1" style="position:absolute;inset:0"><div id="art">
+  <img class="ph" src="assets/photo.jpg" alt="" />
+  <div class="shade"></div><div class="foot"></div>
+  <div class="c eb" style="top: 262px">DrinksBite presents</div>
+  <div class="c t1" style="top: 300px">Diwali</div>
+  <div class="rule" style="top: 520px"></div>
+  <div class="c t2" style="top: 538px">House party</div>
+  <img src="assets/logo-h.png" alt="" style="position:absolute;left:50%;top:1760px;width:300px;margin-left:-145px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.6))" />
+</div></section></div>
+<script>window.__timelines = window.__timelines || {}; window.__timelines["main"] = gsap.timeline({ paused: true });</script>
+</body></html>
